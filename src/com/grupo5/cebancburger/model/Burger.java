@@ -1,36 +1,49 @@
 package com.grupo5.cebancburger.model;
 
 public class Burger {
-
-	//Las variables tamano, tipo_carne y tipo_burger guarda la posición del array de values/String
-	private int cantidad, tamano, tipo_carne, tipo_burger;
+	
+	private final String TAMANO_NORMAL = "Normal";
+	private final String TAMANO_WHOPPER = "Whopper";
+	
+	private final String CARNE_BUEY = "Buey";
+	private final String CARNE_POLLO = "Pollo";
+	private final String CARNE_TERNERA = "Ternera";
+	
+	private final String TIPO_CLASICA = "Clásica";
+	private final String TIPO_CLASICA_QUESO = "Clásica con queso";
+	private final String TIPO_DOBLE_QUESO = "Doble con queso";
+	private final String TIPO_VEGETAL = "Vegetal";
+	private final String TIPO_ESPECIAL = "Especial";
+	
+	private String tamano, tipo_carne, tipo_burger;
+	private int cantidad;
 	private double precio;
 
-	public Burger(int tamano, int tipo_carne,int tipo_burger, int cantidad){
+	public Burger(String tamano, String tipo_carne,String tipo_burger, int cantidad){
 		this.tamano = tamano;
 		this.tipo_carne = tipo_carne;
 		this.tipo_burger = tipo_burger;
 		this.cantidad = cantidad;
 	}
 
-	public void setTamano(int tamano){
+	public void setTamano(String tamano){
 		this.tamano = tamano;
 	}
-	public int getTamano(){
+	public String getTamano(){
 		return tamano;
 	}
 
-	public void setTipoCarne(int tipo_carne){
+	public void setTipoCarne(String tipo_carne){
 		this.tipo_carne = tipo_carne;
 	}
-	public int getTipoCarne(){
+	public String getTipoCarne(){
 		return tipo_carne;
 	}
 
-	public void setTipoBurger(int tipo_burger){
+	public void setTipoBurger(String tipo_burger){
 		this.tipo_burger = tipo_burger;
 	}
-	public int getTipoBurger(){
+	public String getTipoBurger(){
 		return tipo_burger;
 	}
 
@@ -45,31 +58,28 @@ public class Burger {
 		
 		precio = 0;
 
-		//Decidir precios a sumar por cada tipo
-		switch(tamano){
-
-		case 0: break;
-		case 1: break;
-
-		}
-
-		switch(tipo_carne){
-
-		case 0: break;
-		case 1: break;
-		case 3: break;
-
-		}
-
-		switch(tipo_burger){
-
-		case 0: break;
-		case 1: break;
-		case 2: break;
-		case 3: break;
-		case 4: break;
-
-		}
+		if (tamano.equalsIgnoreCase(TAMANO_NORMAL))
+			precio += 4.50;
+		else if (tipo_carne.equalsIgnoreCase(TAMANO_WHOPPER))
+			precio += 5.00;
+		
+		if (tipo_carne.equalsIgnoreCase(CARNE_BUEY))
+			precio += 1.50;
+		else if (tipo_carne.equalsIgnoreCase(CARNE_POLLO))
+			precio += 0.80;
+		else if (tipo_carne.equalsIgnoreCase(CARNE_TERNERA))
+			precio += 1.00;
+		
+		if (tipo_burger.equalsIgnoreCase(TIPO_CLASICA))
+			precio += 1.00;
+		else if (tipo_burger.equalsIgnoreCase(TIPO_CLASICA_QUESO))
+			precio += 1.20;
+		else if (tipo_burger.equalsIgnoreCase(TIPO_DOBLE_QUESO))
+			precio += 2.50;
+		else if (tipo_burger.equalsIgnoreCase(TIPO_VEGETAL))
+			precio += 1.00;
+		else if (tipo_burger.equalsIgnoreCase(TIPO_ESPECIAL))
+			precio += 2.00;
 		
 	}
 	public double getPrecio(){

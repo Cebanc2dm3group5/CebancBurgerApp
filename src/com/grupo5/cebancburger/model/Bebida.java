@@ -2,20 +2,27 @@ package com.grupo5.cebancburger.model;
 
 public class Bebida {
 	
-	//La variable tipo guarda la posición del array de values/String
-	private int cantidad, tipo;
+	private final String TIPO_COLA = "Cola";
+	private final String TIPO_LIMON = "Limón";
+	private final String TIPO_NARANJA = "Naranja";
+	private final String TIPO_NESTEA = "Nestea";
+	private final String TIPO_CERVEZA = "Cerveza";
+	private final String TIPO_AGUA = "Agua";
+	
+	private String tipo;
+	private int cantidad;
 	private double precio;
 	
-	public Bebida(int tipo, int cantidad, double precio){
+	public Bebida(String tipo, int cantidad, double precio){
 		this.tipo = tipo;
 		this.cantidad = cantidad;
 		this.precio = precio;	
 	}
 	
-	public void setTipo(int tipo){
+	public void setTipo(String tipo){
 		this.tipo = tipo;
 	}
-	public int getTipo(){
+	public String getTipo(){
 		return tipo;
 	}
 	
