@@ -4,5 +4,11 @@
     <string name="app_name">CebancBurger</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="titulo_cliente">Escriba sus datos</string>
+    <string name="escribe_nombre">Su nombre...</string>
+    <string name="escribe_direccion">su dirección...</string>
+    <string name="escribe_telefono">y su teléfono.</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="salir">Salir</string>
 
 </resources>
