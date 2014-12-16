@@ -11,5 +11,7 @@
     <string name="siguiente">Siguiente</string>
     <string name="salir">Salir</string>
     <string name="title_activity_order_revision">CebancBurger</string>
+    <string name="titulo_pedido">Revise su pedido</string>
+    <string name="precio_final">Precio final:</string>
 
 </resources>
