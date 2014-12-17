@@ -17,5 +17,6 @@
     <string name="title_activity_order_revision">CebancBurger</string>
     <string name="titulo_pedido">Revise su pedido</string>
     <string name="precio_final">Precio final:</string>
+    <string name="regalos">Regalos:</string>
 
 </resources>
