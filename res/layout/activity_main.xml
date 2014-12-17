@@ -10,83 +10,97 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.grupo5.cebancburger.activities.MainActivity" >
 
-    <TextView
-        android:id="@+id/lblTitleBurger"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="@string/titulo_cliente"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/escribe_nombre"
-        android:gravity="center_horizontal"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/edtAddress"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/escribe_direccion"
-        android:gravity="center_horizontal"
-        android:inputType="textPostalAddress" />
-
-    <EditText
-        android:id="@+id/edtPhone"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/escribe_telefono"
-        android:gravity="center_horizontal"
-        android:inputType="phone" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black"
-        android:layout_marginTop="145dp" />
-    
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/lblTitleBurger"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/titulo_cliente"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/escribe_nombre"
+            android:inputType="textPersonName" >
+
+            <requestFocus android:layout_width="wrap_content" />
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/escribe_direccion"
+            android:inputType="textPostalAddress" />
+
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/escribe_telefono"
+            android:inputType="phone" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btnNext"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.5"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/siguiente" />
+            android:layout_marginTop="5dp" >
 
-        <Button
-            android:id="@+id/btnExit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.5"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/salir" />
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/siguiente" />
 
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/salir" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
