@@ -26,6 +26,8 @@
             android:name=".OrderRevisionActivity"
             android:label="@string/title_activity_order_revision" >
         </activity>
+        <activity android:name=".BurgerSelectActivity"></activity>
+        <activity android:name=".BebidaSelectActivity"></activity>
     </application>
 
 </manifest>
