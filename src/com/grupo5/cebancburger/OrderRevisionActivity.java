@@ -1,10 +1,14 @@
 package com.grupo5.cebancburger;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -17,6 +21,7 @@ public class OrderRevisionActivity extends Activity {
 	private static final String TAG = "CardListActivity";
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
+	private ArrayList<String> arr = new ArrayList<String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,17 +32,28 @@ public class OrderRevisionActivity extends Activity {
 		listView.addHeaderView(new View(this));
 		listView.addFooterView(new View(this));
 
+		arr.add("one");
+		arr.add("two");
+		arr.add("thre");
+
 		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
 				R.layout.list_item_card);
 
-		for (int i = 0; i < 10; i++) {
-			Card card = new Card("Card " + (i + 1) + " Line 1", "Card "
-					+ (i + 1) + " Line 2", i*10);
-			cardArrayAdapter.add(card);
-		}
+		loadCardListData();
 		listView.setAdapter(cardArrayAdapter);
-		
-		
+
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				arr.remove(position - 1);
+				loadCardListData();
+				cardArrayAdapter.notifyDataSetChanged();
+				return false;
+			}
+		});
+
 		btnExit = (Button) findViewById(R.id.btnExit);
 		btnExit.setOnClickListener(new OnClickListener() {
 
@@ -49,4 +65,14 @@ public class OrderRevisionActivity extends Activity {
 			}
 		});
 	}
+	
+	private void loadCardListData(){
+		cardArrayAdapter.clear();
+		for (int i = 0; i < arr.size(); i++) {
+			Card card = new Card("Card " + arr.get(i) + " Line 1", "Card "
+					+ (i + 1) + " Line 2", i * 10);
+			cardArrayAdapter.add(card);
+		}
+	}
+
 }

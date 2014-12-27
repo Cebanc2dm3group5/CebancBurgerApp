@@ -24,6 +24,10 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
 		TextView line2;
 		TextView price;
 	}
+	
+	public void clear(){
+		cardList.clear();
+	}
 
 	public CardArrayAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);

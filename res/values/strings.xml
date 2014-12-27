@@ -20,5 +20,6 @@
     <string name="regalos">Regalos:</string>
     <string name="atras">Atrás</string>
     <string name="enviar">Enviar pedido</string>
-
+    <string name="delete_instructions">Mantén pulsada una tarjeta para eliminarla del pedido.</string>
+    
 </resources>

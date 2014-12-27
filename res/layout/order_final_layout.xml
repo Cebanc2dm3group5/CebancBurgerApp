@@ -26,6 +26,13 @@
             android:text="@string/titulo_pedido"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/delete_instructions" />
+
         <ListView
             android:id="@+id/card_listView"
             android:layout_width="match_parent"
