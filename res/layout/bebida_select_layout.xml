@@ -80,6 +80,15 @@
             android:layout_marginTop="10dp" >
 
             <Button
+                android:id="@+id/btnExit3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/atras" />
+
+            <Button
                 android:id="@+id/btnNext3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -87,15 +96,6 @@
                 android:layout_weight="0.5"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/siguiente" />
-
-            <Button
-                android:id="@+id/btnExit3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="0.5"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="@string/salir" />
         </LinearLayout>
     </LinearLayout>
 

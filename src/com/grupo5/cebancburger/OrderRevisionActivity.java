@@ -1,14 +1,18 @@
 package com.grupo5.cebancburger;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class OrderRevisionActivity extends Activity {
+	Button btnExit, btnSend;
 
 	private static final String TAG = "CardListActivity";
 	private CardArrayAdapter cardArrayAdapter;
@@ -32,5 +36,17 @@ public class OrderRevisionActivity extends Activity {
 			cardArrayAdapter.add(card);
 		}
 		listView.setAdapter(cardArrayAdapter);
+		
+		
+		btnExit = (Button) findViewById(R.id.btnExit);
+		btnExit.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent returnIntent = new Intent();
+				setResult(RESULT_CANCELED, returnIntent);
+				finish();
+			}
+		});
 	}
 }

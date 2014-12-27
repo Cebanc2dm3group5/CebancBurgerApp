@@ -18,5 +18,7 @@
     <string name="titulo_pedido">Revise su pedido</string>
     <string name="precio_final">Precio final:</string>
     <string name="regalos">Regalos:</string>
+    <string name="atras">Atrás</string>
+    <string name="enviar">Enviar pedido</string>
 
 </resources>
