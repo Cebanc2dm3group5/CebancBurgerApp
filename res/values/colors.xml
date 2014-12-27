@@ -3,4 +3,5 @@
         <color name="second_grey">#999</color>
         <color name="card_white">#ffffffff</color>
         <color name="card_shadow">#8c666666</color>
+        <color name="main_orange">#FFA500</color>
 </resources>
