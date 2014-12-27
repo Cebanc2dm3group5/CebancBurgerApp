@@ -21,7 +21,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:text="@string/titulo_pedido"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -94,7 +94,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/black" />
+            android:background="@color/main_orange" />
 
         <LinearLayout
             android:layout_width="match_parent"
