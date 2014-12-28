@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 public class BebidaSelectActivity extends Activity {
 
 	Button btnNext, btnExit;
+	private String tipo_bebida = "";
+	ArrayAdapter<CharSequence> adaptadorTipoBebida;
 
 	// Pedido pedido;
 
@@ -43,5 +48,22 @@ public class BebidaSelectActivity extends Activity {
 				startActivityForResult(intent, 2);
 			}
 		});
+		
+		adaptadorTipoBebida = ArrayAdapter.createFromResource(this, R.array.tipo_bebida, android.R.layout.simple_spinner_item);
+		Spinner spnTipoBebida = (Spinner) findViewById(R.id.spnBebidaType); 
+
+		adaptadorTipoBebida.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+		spnTipoBebida.setAdapter(adaptadorTipoBebida); 
+
+		spnTipoBebida.setOnItemSelectedListener( 
+				new AdapterView.OnItemSelectedListener() { 
+					public void onItemSelected(AdapterView<?> parent, 
+							android.view.View v, int position, long id) { 
+						tipo_bebida = adaptadorTipoBebida.getItem(position).toString(); 
+					} 
+					public void onNothingSelected(AdapterView<?> parent) { 
+						tipo_bebida = ""; 
+					} 
+				});
 	}
 }

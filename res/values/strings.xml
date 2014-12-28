@@ -21,5 +21,29 @@
     <string name="atras">Atrás</string>
     <string name="enviar">Enviar pedido</string>
     <string name="delete_instructions">Mantén pulsada una tarjeta para eliminarla del pedido.</string>
+    <string-array name="tipo_bebida">
+        <item>Cola</item>
+        <item>Limón</item>
+        <item>Naranja</item>
+        <item>Nestea</item>
+        <item>Cerveza</item>
+        <item>Agua</item>
+    </string-array>
+    <string-array name="tamano_burger">
+        <item>Normal</item>
+        <item>Whopper</item>
+    </string-array>
+    <string-array name="tipo_carne">
+        <item>Buey</item>
+        <item>Pollo</item>
+        <item>Ternera</item>
+    </string-array>
+    <string-array name="tipo_burger">
+        <item>Clásica</item>
+        <item>Clásica con queso</item>
+        <item>Doble con queso</item>
+        <item>Vegetal</item>
+        <item>Especial</item>
+    </string-array>
     
 </resources>
