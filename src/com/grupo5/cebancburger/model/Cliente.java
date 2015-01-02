@@ -1,6 +1,9 @@
 package com.grupo5.cebancburger.model;
 
-public class Cliente {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Cliente implements Serializable {
 
 	private String nombre, direccion, telefono;
 

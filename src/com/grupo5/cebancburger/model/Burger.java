@@ -1,6 +1,10 @@
 package com.grupo5.cebancburger.model;
 
-public class Burger {
+import java.io.Serializable;
+
+
+@SuppressWarnings("serial")
+public class Burger implements Serializable {
 	
 	private final String TAMANO_NORMAL = "Normal";
 	private final String TAMANO_WHOPPER = "Whopper";

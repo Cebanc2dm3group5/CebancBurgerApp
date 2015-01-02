@@ -1,6 +1,9 @@
 package com.grupo5.cebancburger.model;
 
-public class Bebida {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Bebida implements Serializable {
 
 	private final String TIPO_COLA = "Cola";
 	private final String TIPO_LIMON = "Limón";
