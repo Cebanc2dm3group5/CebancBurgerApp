@@ -22,7 +22,8 @@ public class BurgerSelectActivity extends Activity {
 	EditText edtBurgerNum;
 	TextView lblTitleBurger;
 
-	private String tamano = "", tipo_carne = "", tipo_burger = "";
+	private String tamano = "Normal", tipo_carne = "Buey",
+			tipo_burger = "Clásica";
 	ArrayAdapter<CharSequence> adaptadorTamanoBurger, adaptadorTipoCarne,
 			adaptadorTipoBurger;
 	Pedido pedido;
@@ -121,7 +122,6 @@ public class BurgerSelectActivity extends Activity {
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
-						tamano = "";
 					}
 				});
 
@@ -142,7 +142,6 @@ public class BurgerSelectActivity extends Activity {
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
-						tipo_carne = "";
 					}
 				});
 
@@ -163,7 +162,6 @@ public class BurgerSelectActivity extends Activity {
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
-						tipo_burger = "";
 					}
 				});
 

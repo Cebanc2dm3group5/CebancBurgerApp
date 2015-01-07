@@ -5,10 +5,10 @@ public class Card {
 	private String line2;
 	private String price;
 
-	public Card(String line1, String line2, int price) {
+	public Card(String line1, String line2, double price) {
 		this.line1 = line1;
 		this.line2 = line2;
-		this.price = Integer.toString(price);
+		this.price = Double.toString(price);
 	}
 
 	public String getLine1() {

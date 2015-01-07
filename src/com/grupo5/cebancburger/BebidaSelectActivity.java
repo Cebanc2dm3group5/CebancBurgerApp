@@ -8,12 +8,18 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.grupo5.cebancburger.model.Bebida;
+import com.grupo5.cebancburger.model.Pedido;
 
 public class BebidaSelectActivity extends Activity {
-
-	Button btnNext, btnExit;
-	private String tipo_bebida = "";
+	Pedido pedido;
+	Button btnNext, btnExit, btnAddBebida;
+	EditText edtBebidaNum;
+	private String tipo_bebida = "Cola";
 	ArrayAdapter<CharSequence> adaptadorTipoBebida;
 
 	// Pedido pedido;
@@ -24,8 +30,44 @@ public class BebidaSelectActivity extends Activity {
 		setContentView(R.layout.bebida_select_layout);
 		// recogemos datos del intent
 		Intent intent = getIntent();
-		// pedido = intent.getSerializableExtra("pedido");
-		
+		pedido = (Pedido) intent.getSerializableExtra("pedido");
+
+		edtBebidaNum = (EditText) findViewById(R.id.edtBebidaNumber);
+		edtBebidaNum.setText("1");
+
+		btnAddBebida = (Button) findViewById(R.id.btnAddBebida);
+		btnAddBebida.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!(edtBebidaNum.getText().toString().equals(""))) {
+					try {
+						int cantidad = Integer.parseInt(edtBebidaNum.getText()
+								.toString());
+
+						Bebida bebida = new Bebida(tipo_bebida, cantidad);
+						pedido.setBebida(bebida);
+
+						Toast.makeText(getApplicationContext(),
+								"Bebida guardada", Toast.LENGTH_SHORT).show();
+
+						edtBebidaNum.setText("1");
+
+					} catch (Exception e) {
+						Toast.makeText(getApplicationContext(),
+								"Se ha producido un error", Toast.LENGTH_SHORT)
+								.show();
+					}
+
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Debe indicar una cantidad", Toast.LENGTH_SHORT)
+							.show();
+				}
+
+			}
+		});
+
 		btnExit = (Button) findViewById(R.id.btnExit3);
 		btnExit.setOnClickListener(new OnClickListener() {
 
@@ -44,26 +86,31 @@ public class BebidaSelectActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(),
 						OrderRevisionActivity.class);
-				// TODO - send pedido object
+				// add data to intent
+				intent.putExtra("pedido", pedido);
 				startActivityForResult(intent, 2);
 			}
 		});
-		
-		adaptadorTipoBebida = ArrayAdapter.createFromResource(this, R.array.tipo_bebida, android.R.layout.simple_spinner_item);
-		Spinner spnTipoBebida = (Spinner) findViewById(R.id.spnBebidaType); 
 
-		adaptadorTipoBebida.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
-		spnTipoBebida.setAdapter(adaptadorTipoBebida); 
+		adaptadorTipoBebida = ArrayAdapter.createFromResource(this,
+				R.array.tipo_bebida, android.R.layout.simple_spinner_item);
+		Spinner spnTipoBebida = (Spinner) findViewById(R.id.spnBebidaType);
 
-		spnTipoBebida.setOnItemSelectedListener( 
-				new AdapterView.OnItemSelectedListener() { 
-					public void onItemSelected(AdapterView<?> parent, 
-							android.view.View v, int position, long id) { 
-						tipo_bebida = adaptadorTipoBebida.getItem(position).toString(); 
-					} 
-					public void onNothingSelected(AdapterView<?> parent) { 
-						tipo_bebida = ""; 
-					} 
+		adaptadorTipoBebida
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spnTipoBebida.setAdapter(adaptadorTipoBebida);
+
+		spnTipoBebida
+				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> parent,
+							android.view.View v, int position, long id) {
+						tipo_bebida = adaptadorTipoBebida.getItem(position)
+								.toString();
+					}
+
+					public void onNothingSelected(AdapterView<?> parent) {
+						tipo_bebida = "";
+					}
 				});
 	}
 }

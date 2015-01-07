@@ -13,33 +13,47 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
+import com.grupo5.cebancburger.model.Bebida;
+import com.grupo5.cebancburger.model.Burger;
+import com.grupo5.cebancburger.model.Pedido;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class OrderRevisionActivity extends Activity {
 	Button btnExit, btnSend;
+	Pedido pedido;
+	ArrayList<Burger> arrBurger;
+	ArrayList<Bebida> arrBebida;
+	TextView lblPrecio;
 
 	private static final String TAG = "CardListActivity";
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
-	private ArrayList<String> arr = new ArrayList<String>();
 	AlertDialog.Builder builder;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.order_final_layout);
+
+		// recogemos datos del intent
+		Intent intent = getIntent();
+		pedido = (Pedido) intent.getSerializableExtra("pedido");
+
+		lblPrecio = (TextView) findViewById(R.id.lblPrecio);
+		String precioText = String.valueOf(pedido.getPrecio());
+		lblPrecio.setText(precioText);
+
 		builder = new AlertDialog.Builder(this);
 		listView = (ListView) findViewById(R.id.card_listView);
 
 		listView.addHeaderView(new View(this));
 		listView.addFooterView(new View(this));
 
-		arr.add("one");
-		arr.add("two");
-		arr.add("thre");
+		arrBurger = pedido.getBurger();
+		arrBebida = pedido.getBebida();
 
 		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
 				R.layout.list_item_card);
@@ -67,30 +81,41 @@ public class OrderRevisionActivity extends Activity {
 				finish();
 			}
 		});
-		
+
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				setSendYesNo("Confirmar pedido", "¿Desea confirmar el pedido?\nUna vez confirmado, no podrá deshacerlo.");
-				
+				setSendYesNo("Confirmar pedido",
+						"¿Desea confirmar el pedido?\nUna vez confirmado, no podrá deshacerlo.");
+
 			}
 		});
 	}
 
 	private void loadCardListData() {
 		cardArrayAdapter.clear();
-		for (int i = 0; i < arr.size(); i++) {
-			Card card = new Card("Card " + arr.get(i) + " Line 1", "Card "
-					+ (i + 1) + " Line 2", i * 10);
+		for (int i = 0; i < arrBurger.size(); i++) {
+			Card card = new Card(arrBurger.get(i).getCantidad() + " x "
+					+ arrBurger.get(i).getTipoBurger() + " de "
+					+ arrBurger.get(i).getTipoCarne(), "Tamaño: "
+					+ arrBurger.get(i).getTamano(), arrBurger.get(i)
+					.getPrecio());
+			cardArrayAdapter.add(card);
+		}
+		for (int i = 0; i < arrBebida.size(); i++) {
+			Card card = new Card(arrBebida.get(i).getCantidad() + " x "
+					+ arrBebida.get(i).getTipo(), "", arrBebida.get(i)
+					.getPrecio());
 			cardArrayAdapter.add(card);
 		}
 	}
 
 	private void setCardYesNo(final int position) {
 		// Put up the Yes/No message box
-		builder.setTitle("Eliminar " + arr.get(position - 1))
+
+		builder.setTitle("Eliminar item")
 				.setMessage("¿Estás seguro?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setPositiveButton("Eliminar",
@@ -98,9 +123,20 @@ public class OrderRevisionActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// Yes button clicked, do something
-								arr.remove(position - 1);
+								int realPos = position - 1;
+
+								if (position <= arrBurger.size()) {
+									arrBurger.remove(position - 1);
+								} else {
+									arrBebida.remove(position - 1);
+								}
+
 								loadCardListData();
 								cardArrayAdapter.notifyDataSetChanged();
+								String precioText = String.valueOf(pedido
+										.getPrecio());
+								lblPrecio.setText(precioText);
+
 							}
 						}).setNegativeButton("No", null) // Do nothing on no
 				.show();
@@ -116,7 +152,8 @@ public class OrderRevisionActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// Yes button clicked, do something
-								// TODO - Send the order
+								pedido.setFinalPrice();
+								// TODO - Send the order to REST API
 							}
 						}).setNegativeButton("No enviar", null) // Do nothing on
 																// no
