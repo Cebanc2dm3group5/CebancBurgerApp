@@ -11,11 +11,11 @@
     <string name="siguiente">Siguiente</string>
     <string name="salir">Salir</string>
     <string name="titulo_burger">Elige tu Burger</string>
-    <string name="titulo_bebida">Elige tu Bebida</string>
+    <string name="titulo_bebida">¿Y para acompañar?</string>
     <string name="anadir">Añadir</string>
     <string name="cantidad">Cantidad</string>
     <string name="title_activity_order_revision">CebancBurger</string>
-    <string name="titulo_pedido">Revise su pedido</string>
+    <string name="titulo_pedido">Revisa que no se nos haya escapado nada</string>
     <string name="precio_final">Precio final:</string>
     <string name="regalos">Regalos:</string>
     <string name="atras">Atrás</string>
