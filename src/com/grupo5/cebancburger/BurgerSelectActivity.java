@@ -9,13 +9,19 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.grupo5.cebancburger.model.Burger;
 import com.grupo5.cebancburger.model.Pedido;
 
 public class BurgerSelectActivity extends Activity {
-	Button btnNext, btnExit;
+	Button btnNext, btnExit, btnAddBurger;
+	EditText edtBurgerNum;
+	TextView lblTitleBurger;
+
 	private String tamano = "", tipo_carne = "", tipo_burger = "";
 	ArrayAdapter<CharSequence> adaptadorTamanoBurger, adaptadorTipoCarne,
 			adaptadorTipoBurger;
@@ -26,11 +32,50 @@ public class BurgerSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.burgers_select_layout);
 
+		lblTitleBurger = (TextView) findViewById(R.id.lblTitleBurger);
+
 		// recogemos datos del intent
 		Intent intent = getIntent();
 		pedido = (Pedido) intent.getSerializableExtra("pedido");
-		Toast.makeText(getApplicationContext(),
-				pedido.getCliente().getNombre(), Toast.LENGTH_SHORT).show();
+		lblTitleBurger.setText("Hola " + pedido.getCliente().getNombre()
+				+ ", ¿qué te apetece?");
+		edtBurgerNum = (EditText) findViewById(R.id.edtBurgerNumber);
+		edtBurgerNum.setText("1");
+
+		btnAddBurger = (Button) findViewById(R.id.btnAddBurger);
+		btnAddBurger.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!(edtBurgerNum.getText().toString().equals(""))) {
+					try {
+						int cantidad = Integer.parseInt(edtBurgerNum.getText()
+								.toString());
+
+						Burger burger = new Burger(tamano, tipo_carne,
+								tipo_burger, cantidad);
+
+						pedido.setBurger(burger);
+
+						Toast.makeText(getApplicationContext(),
+								"Burger guardada", Toast.LENGTH_SHORT).show();
+
+						edtBurgerNum.setText("1");
+
+					} catch (Exception e) {
+						Toast.makeText(getApplicationContext(),
+								"Se ha producido un error", Toast.LENGTH_SHORT)
+								.show();
+					}
+
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Debe indicar una cantidad", Toast.LENGTH_SHORT)
+							.show();
+				}
+
+			}
+		});
 
 		btnExit = (Button) findViewById(R.id.btnExit2);
 		btnExit.setOnClickListener(new OnClickListener() {
@@ -51,7 +96,10 @@ public class BurgerSelectActivity extends Activity {
 				// on first activity
 				Intent intent = new Intent(getApplicationContext(),
 						BebidaSelectActivity.class);
-				// TODO - send pedido object
+				// add data to intent
+				intent.putExtra("pedido", pedido);
+
+				// start activity
 				startActivityForResult(intent, 2);
 			}
 		});
