@@ -52,9 +52,6 @@ public class OrderRevisionActivity extends Activity {
 		listView.addHeaderView(new View(this));
 		listView.addFooterView(new View(this));
 
-		arrBurger = pedido.getBurger();
-		arrBebida = pedido.getBebida();
-
 		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
 				R.layout.list_item_card);
 
@@ -95,6 +92,9 @@ public class OrderRevisionActivity extends Activity {
 	}
 
 	private void loadCardListData() {
+		arrBurger = pedido.getBurger();
+		arrBebida = pedido.getBebida();
+
 		cardArrayAdapter.clear();
 		for (int i = 0; i < arrBurger.size(); i++) {
 			Card card = new Card(arrBurger.get(i).getCantidad() + " x "
@@ -126,9 +126,9 @@ public class OrderRevisionActivity extends Activity {
 								int realPos = position - 1;
 
 								if (position <= arrBurger.size()) {
-									arrBurger.remove(position - 1);
+									pedido.getBurger().remove(position - 1);
 								} else {
-									arrBebida.remove(position - 1);
+									pedido.getBebida().remove(position - arrBurger.size() - 1);
 								}
 
 								loadCardListData();
