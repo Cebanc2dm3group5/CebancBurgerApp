@@ -109,23 +109,7 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				builder.setTitle("Atras")
-				.setMessage("Si vuelves atras perderas las bebidas seleccionadas ¿Estás seguro?")
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Sí",
-						new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int which) {
-						// Yes button clicked, do something
-
-						Intent returnIntent = new Intent();
-						setResult(RESULT_CANCELED, returnIntent);
-						finish();
-
-					}
-				}).setNegativeButton("No", null) // Do nothing on no
-				.show();
-
+				goBack();
 			}
 		});
 
@@ -134,20 +118,23 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (pedido.getBebida().size() < 1){
-					builder.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
-	            	.setMessage("Selecciona por lo menos una bebida")
-	            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	                    public void onClick(DialogInterface dialog, int id) {
-	                        //do nothing
-	                    }})
-	            	.show();
-				}else{
+				if (pedido.getBebida().size() < 1) {
+					builder.setTitle(
+							"¡CUIDADO " + pedido.getCliente().getNombre() + "!")
+							.setMessage("Selecciona por lo menos una bebida")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											// do nothing
+										}
+									}).show();
+				} else {
 					Intent intent = new Intent(getApplicationContext(),
 							OrderRevisionActivity.class);
 					// add data to intent
 					intent.putExtra("pedido", pedido);
-					startActivityForResult(intent, 2);
+					startActivityForResult(intent, 3);
 				}
 			}
 		});
@@ -209,5 +196,28 @@ public class BebidaSelectActivity extends Activity {
 							}
 						}).setNegativeButton("No", null) // Do nothing on no
 				.show();
+	}
+
+	private void goBack() {
+		builder.setTitle("Atrás")
+				.setMessage(
+						"Si vuelves atrás perderás las bebidas seleccionadas ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Yes button clicked, do something
+
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
+
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
+	}
+
+	@Override
+	public void onBackPressed() {
+		goBack();
 	}
 }

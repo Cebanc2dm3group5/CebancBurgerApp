@@ -39,15 +39,16 @@ public class Bebida implements Serializable {
 	}
 
 	public void setPrecio() {
+		precio = 0;
 		for (int i = 0; i < this.cantidad; i++) {
 			if (tipo.equalsIgnoreCase(TIPO_COLA)
 					|| tipo.equalsIgnoreCase(TIPO_LIMON)
 					|| tipo.equalsIgnoreCase(TIPO_NARANJA)
 					|| tipo.equalsIgnoreCase(TIPO_NESTEA)
 					|| tipo.equalsIgnoreCase(TIPO_CERVEZA))
-				precio = 1.50;
+				precio += 1.50;
 			else if (tipo.equalsIgnoreCase(TIPO_AGUA))
-				precio = 1.00;
+				precio += 1.00;
 		}
 	}
 

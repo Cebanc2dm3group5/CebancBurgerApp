@@ -73,24 +73,9 @@ public class OrderRevisionActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				builder.setTitle("Atras")
-				.setMessage("Si vuelves atras perderas los cambios ¿Estás seguro?")
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Sí",
-						new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int which) {
-						// Yes button clicked, do something
-
-						Intent returnIntent = new Intent();
-						setResult(RESULT_CANCELED, returnIntent);
-						finish();
-
-
-					}
-				}).setNegativeButton("No", null) // Do nothing on no
-				.show();
-			}});
+				goBack();
+			}
+		});
 
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new OnClickListener() {
@@ -141,7 +126,8 @@ public class OrderRevisionActivity extends Activity {
 								if (position <= arrBurger.size()) {
 									pedido.getBurger().remove(position - 1);
 								} else {
-									pedido.getBebida().remove(position - arrBurger.size() - 1);
+									pedido.getBebida().remove(
+											position - arrBurger.size() - 1);
 								}
 
 								loadCardListData();
@@ -167,9 +153,42 @@ public class OrderRevisionActivity extends Activity {
 								// Yes button clicked, do something
 								pedido.setFinalPrice();
 								// TODO - Send the order to REST API
+
+								// open last activity
+								Intent intent = new Intent(
+										getApplicationContext(),
+										FinalActivity.class);
+								// add data to intent
+								startActivity(intent);
+								
 							}
 						}).setNegativeButton("No enviar", null) // Do nothing on
 																// no
 				.show();
+	}
+	
+	private void goBack(){
+		builder.setTitle("Atras")
+		.setMessage(
+				"Si vuelves atras perderas los cambios ¿Estás seguro?")
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setPositiveButton("Sí",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// Yes button clicked, do something
+
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
+
+					}
+				}).setNegativeButton("No", null) // Do nothing
+													// on no
+		.show();
+	}
+	@Override
+	public void onBackPressed() {
+		goBack();
 	}
 }

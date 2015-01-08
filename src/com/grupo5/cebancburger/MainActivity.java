@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,9 +24,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		alert = new AlertDialog.Builder(this);
-		
+
 		edtName = (EditText) findViewById(R.id.edtName);
 		edtAddress = (EditText) findViewById(R.id.edtAddress);
 		edtPhone = (EditText) findViewById(R.id.edtPhone);
@@ -35,7 +36,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				finish();
+				closeApp();
 			}
 		});
 
@@ -49,17 +50,19 @@ public class MainActivity extends Activity {
 				String name = edtName.getText().toString();
 				String address = edtAddress.getText().toString();
 				String phone = edtPhone.getText().toString();
-				
-				if (name.equals("") || address.equals("") || phone.equals("")){
-					
-		            alert.setTitle("¡CUIDADO!")
-		            	.setMessage("Introduce todos tus datos")
-		            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-		                    public void onClick(DialogInterface dialog, int id) {
-		                        //do things
-		                    }})
-		            	.show();
-				}else{
+
+				if (name.equals("") || address.equals("") || phone.equals("")) {
+
+					alert.setTitle("¡CUIDADO!")
+							.setMessage("Introduce todos tus datos")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											// do things
+										}
+									}).show();
+				} else {
 					Cliente cliente = new Cliente(name, address, phone);
 					pedido.setCliente(cliente);
 					// create intent
@@ -67,12 +70,20 @@ public class MainActivity extends Activity {
 							BurgerSelectActivity.class);
 					// add data to intent
 					intent.putExtra("pedido", pedido);
-					
+
 					// start activity
 					startActivityForResult(intent, 1);
 				}
 			}
 		});
+	}
+
+	@Override
+	public void onBackPressed() {
+	}
+	
+	private void closeApp(){
+		ActivityCompat.finishAffinity(this);
 	}
 
 }
