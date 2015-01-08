@@ -1,6 +1,8 @@
 package com.grupo5.cebancburger;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ public class BurgerSelectActivity extends Activity {
 	Button btnNext, btnExit, btnAddBurger;
 	EditText edtBurgerNum;
 	TextView lblTitleBurger;
+	AlertDialog.Builder alert;
 
 	private String tamano = "Normal", tipo_carne = "Buey",
 			tipo_burger = "Clásica";
@@ -83,9 +86,22 @@ public class BurgerSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent returnIntent = new Intent();
-				setResult(RESULT_CANCELED, returnIntent);
-				finish();
+				alert.setTitle("Atras")
+				.setMessage("Si vuelves atras perderas los burgers seleccionadss ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// Yes button clicked, do something
+
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
+
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
 			}
 		});
 
@@ -94,14 +110,25 @@ public class BurgerSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// on first activity
-				Intent intent = new Intent(getApplicationContext(),
-						BebidaSelectActivity.class);
-				// add data to intent
-				intent.putExtra("pedido", pedido);
-
-				// start activity
-				startActivityForResult(intent, 2);
+				
+				if (pedido.getBurger().size() < 1){
+					alert.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
+	            	.setMessage("Selecciona por lo menos un burger")
+	            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	                    public void onClick(DialogInterface dialog, int id) {
+	                        //do nothing
+	                    }})
+	            	.show();
+				}else{
+					// on first activity
+					Intent intent = new Intent(getApplicationContext(),
+							BebidaSelectActivity.class);
+					// add data to intent
+					intent.putExtra("pedido", pedido);
+	
+					// start activity
+					startActivityForResult(intent, 2);
+				}
 			}
 		});
 
