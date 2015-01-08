@@ -29,7 +29,6 @@ public class BebidaSelectActivity extends Activity {
 	EditText edtBebidaNum;
 	private String tipo_bebida = "Cola";
 	ArrayAdapter<CharSequence> adaptadorTipoBebida;
-	AlertDialog.Builder alert;
 
 	ArrayList<Bebida> arrBebida;
 
@@ -110,7 +109,7 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				alert.setTitle("Atras")
+				builder.setTitle("Atras")
 				.setMessage("Si vuelves atras perderas las bebidas seleccionadas ¿Estás seguro?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setPositiveButton("Sí",
@@ -136,7 +135,7 @@ public class BebidaSelectActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if (pedido.getBebida().size() < 1){
-					alert.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
+					builder.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
 	            	.setMessage("Selecciona por lo menos una bebida")
 	            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 	                    public void onClick(DialogInterface dialog, int id) {
