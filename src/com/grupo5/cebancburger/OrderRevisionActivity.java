@@ -26,7 +26,7 @@ public class OrderRevisionActivity extends Activity {
 	Pedido pedido;
 	ArrayList<Burger> arrBurger;
 	ArrayList<Bebida> arrBebida;
-	TextView lblPrecio;
+	TextView lblPrecio, lblRegalo;
 
 	private static final String TAG = "CardListActivity";
 	private CardArrayAdapter cardArrayAdapter;
@@ -46,6 +46,10 @@ public class OrderRevisionActivity extends Activity {
 		String precioText = String.valueOf(pedido.getPrecio());
 		lblPrecio.setText(precioText);
 
+		lblRegalo = (TextView) findViewById(R.id.lblRegalo);
+		String regaloText = pedido.getRegalo();
+		lblRegalo.setText(regaloText);
+		
 		builder = new AlertDialog.Builder(this);
 		listView = (ListView) findViewById(R.id.card_listView);
 

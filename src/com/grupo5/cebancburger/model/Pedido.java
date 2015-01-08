@@ -61,7 +61,8 @@ public class Pedido implements Serializable {
 			regalo = "Peluche de android";
 		else if (getPrecio() > 25)
 			regalo = "Peluche de android y vale para comer en Cebanc";
-		
+		else
+			regalo = "Ninguno";
 		return regalo;
 
 	}
