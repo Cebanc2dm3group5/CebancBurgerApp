@@ -73,11 +73,24 @@ public class OrderRevisionActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent returnIntent = new Intent();
-				setResult(RESULT_CANCELED, returnIntent);
-				finish();
-			}
-		});
+				builder.setTitle("Atras")
+				.setMessage("Si vuelves atras perderas los cambios ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// Yes button clicked, do something
+
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
+
+
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
+			}});
 
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new OnClickListener() {

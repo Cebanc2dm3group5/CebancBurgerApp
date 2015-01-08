@@ -29,6 +29,7 @@ public class BebidaSelectActivity extends Activity {
 	EditText edtBebidaNum;
 	private String tipo_bebida = "Cola";
 	ArrayAdapter<CharSequence> adaptadorTipoBebida;
+	AlertDialog.Builder alert;
 
 	ArrayList<Bebida> arrBebida;
 
@@ -109,9 +110,23 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent returnIntent = new Intent();
-				setResult(RESULT_CANCELED, returnIntent);
-				finish();
+				alert.setTitle("Atras")
+				.setMessage("Si vuelves atras perderas las bebidas seleccionadas ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// Yes button clicked, do something
+
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
+
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
+
 			}
 		});
 
@@ -120,11 +135,21 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),
-						OrderRevisionActivity.class);
-				// add data to intent
-				intent.putExtra("pedido", pedido);
-				startActivityForResult(intent, 2);
+				if (pedido.getBebida().size() < 1){
+					alert.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
+	            	.setMessage("Selecciona por lo menos una bebida")
+	            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	                    public void onClick(DialogInterface dialog, int id) {
+	                        //do nothing
+	                    }})
+	            	.show();
+				}else{
+					Intent intent = new Intent(getApplicationContext(),
+							OrderRevisionActivity.class);
+					// add data to intent
+					intent.putExtra("pedido", pedido);
+					startActivityForResult(intent, 2);
+				}
 			}
 		});
 
