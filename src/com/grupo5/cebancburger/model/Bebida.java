@@ -46,7 +46,7 @@ public class Bebida implements Serializable {
 					|| tipo.equalsIgnoreCase(TIPO_NESTEA)
 					|| tipo.equalsIgnoreCase(TIPO_CERVEZA))
 				precio = 1.50;
-			else if (tipo.equalsIgnoreCase(TIPO_CERVEZA))
+			else if (tipo.equalsIgnoreCase(TIPO_AGUA))
 				precio = 1.00;
 		}
 	}
