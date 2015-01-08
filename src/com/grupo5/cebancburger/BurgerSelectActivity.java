@@ -1,21 +1,28 @@
 package com.grupo5.cebancburger;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.model.Burger;
 import com.grupo5.cebancburger.model.Pedido;
+import com.grupo5.cebancburger.viewmodels.Card;
 
 public class BurgerSelectActivity extends Activity {
 	Button btnNext, btnExit, btnAddBurger;
@@ -27,6 +34,11 @@ public class BurgerSelectActivity extends Activity {
 	ArrayAdapter<CharSequence> adaptadorTamanoBurger, adaptadorTipoCarne,
 			adaptadorTipoBurger;
 	Pedido pedido;
+	ArrayList<Burger> arrBurger;
+
+	private CardArrayAdapter cardArrayAdapter;
+	private ListView listView;
+	AlertDialog.Builder builder;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,28 @@ public class BurgerSelectActivity extends Activity {
 				+ ", ¿qué te apetece?");
 		edtBurgerNum = (EditText) findViewById(R.id.edtBurgerNumber);
 		edtBurgerNum.setText("1");
+
+		builder = new AlertDialog.Builder(this);
+		listView = (ListView) findViewById(R.id.card_burger_listView);
+
+		listView.addHeaderView(new View(this));
+		listView.addFooterView(new View(this));
+
+		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
+				R.layout.list_item_card);
+
+		loadCardListData();
+		listView.setAdapter(cardArrayAdapter);
+
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				setCardYesNo(position);
+				return false;
+			}
+		});
 
 		btnAddBurger = (Button) findViewById(R.id.btnAddBurger);
 		btnAddBurger.setOnClickListener(new OnClickListener() {
@@ -60,6 +94,8 @@ public class BurgerSelectActivity extends Activity {
 
 						Toast.makeText(getApplicationContext(),
 								"Burger guardada", Toast.LENGTH_SHORT).show();
+						loadCardListData();
+						cardArrayAdapter.notifyDataSetChanged();
 
 						edtBurgerNum.setText("1");
 
@@ -165,5 +201,43 @@ public class BurgerSelectActivity extends Activity {
 					}
 				});
 
+	}
+
+	private void loadCardListData() {
+		arrBurger = pedido.getBurger();
+
+		cardArrayAdapter.clear();
+		for (int i = 0; i < arrBurger.size(); i++) {
+			Card card = new Card(arrBurger.get(i).getCantidad() + " x "
+					+ arrBurger.get(i).getTipoBurger() + " de "
+					+ arrBurger.get(i).getTipoCarne(), "Tamaño: "
+					+ arrBurger.get(i).getTamano(), arrBurger.get(i)
+					.getPrecio());
+			cardArrayAdapter.add(card);
+		}
+
+	}
+
+	private void setCardYesNo(final int position) {
+		// Put up the Yes/No message box
+
+		builder.setTitle("Eliminar item")
+				.setMessage("¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Eliminar",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// Yes button clicked, do something
+								if (position <= arrBurger.size()) {
+									pedido.getBurger().remove(position - 1);
+								}
+
+								loadCardListData();
+								cardArrayAdapter.notifyDataSetChanged();
+
+							}
+						}).setNegativeButton("No", null) // Do nothing on no
+				.show();
 	}
 }
