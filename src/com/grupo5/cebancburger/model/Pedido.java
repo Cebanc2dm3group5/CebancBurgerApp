@@ -55,14 +55,13 @@ public class Pedido implements Serializable {
 
 	}
 
-	public void setRegalo(String regalo) {
-
-		this.regalo = regalo;
-
-	}
-
 	public String getRegalo() {
 
+		if (getPrecio() > 15 && getPrecio() <= 25)
+			regalo = "Peluche de android";
+		else if (getPrecio() > 25)
+			regalo = "Peluche de android y vale para comer en Cebanc";
+		
 		return regalo;
 
 	}
