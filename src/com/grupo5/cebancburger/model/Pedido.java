@@ -1,6 +1,7 @@
 package com.grupo5.cebancburger.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Pedido implements Serializable {
@@ -10,7 +11,7 @@ public class Pedido implements Serializable {
 	private ArrayList<Burger> alBurger = null;
 	private ArrayList<Bebida> alBebida = null;
 	private String regalo = "";
-	private double precio = 0;
+	private double precio;
 
 	public Pedido() {
 
@@ -77,11 +78,25 @@ public class Pedido implements Serializable {
 			price += alBebida.get(i).getPrecio();
 		}
 
-		return price;
+		return Double.valueOf(truncateDecimal(price, 2).toString());
 	}
-	
-	public void setFinalPrice(){
+
+	public void setFinalPrice() {
 		this.precio = getPrecio();
+	}
+
+	public double getFinalPrecio() {
+		return this.precio;
+	}
+
+	private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
+		if (x > 0) {
+			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
+					BigDecimal.ROUND_FLOOR);
+		} else {
+			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
+					BigDecimal.ROUND_CEILING);
+		}
 	}
 
 }

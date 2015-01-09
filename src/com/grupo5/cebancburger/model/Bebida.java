@@ -1,6 +1,7 @@
 package com.grupo5.cebancburger.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @SuppressWarnings("serial")
 public class Bebida implements Serializable {
@@ -53,7 +54,17 @@ public class Bebida implements Serializable {
 	}
 
 	public double getPrecio() {
-		return precio;
+		return Double.valueOf(truncateDecimal(this.precio, 2).toString());
+	}
+
+	private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
+		if (x > 0) {
+			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
+					BigDecimal.ROUND_FLOOR);
+		} else {
+			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
+					BigDecimal.ROUND_CEILING);
+		}
 	}
 
 }

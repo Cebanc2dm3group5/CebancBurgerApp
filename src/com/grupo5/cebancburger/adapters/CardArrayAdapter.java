@@ -16,7 +16,6 @@ import com.grupo5.cebancburger.R;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class CardArrayAdapter extends ArrayAdapter<Card> {
-	private static final String TAG = "CardArrayAdapter";
 	private List<Card> cardList = new ArrayList<Card>();
 
 	static class CardViewHolder {

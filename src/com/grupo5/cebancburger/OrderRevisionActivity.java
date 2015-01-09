@@ -28,7 +28,6 @@ public class OrderRevisionActivity extends Activity {
 	ArrayList<Bebida> arrBebida;
 	TextView lblPrecio, lblRegalo;
 
-	private static final String TAG = "CardListActivity";
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
 	AlertDialog.Builder builder;
@@ -49,7 +48,7 @@ public class OrderRevisionActivity extends Activity {
 		lblRegalo = (TextView) findViewById(R.id.lblRegalo);
 		String regaloText = pedido.getRegalo();
 		lblRegalo.setText(regaloText);
-		
+
 		builder = new AlertDialog.Builder(this);
 		listView = (ListView) findViewById(R.id.card_listView);
 
@@ -125,8 +124,6 @@ public class OrderRevisionActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// Yes button clicked, do something
-								int realPos = position - 1;
-
 								if (position <= arrBurger.size()) {
 									pedido.getBurger().remove(position - 1);
 								} else {
@@ -164,22 +161,20 @@ public class OrderRevisionActivity extends Activity {
 										FinalActivity.class);
 								// add data to intent
 								startActivity(intent);
-								
+
 							}
 						}).setNegativeButton("No enviar", null) // Do nothing on
 																// no
 				.show();
 	}
-	
-	private void goBack(){
+
+	private void goBack() {
 		builder.setTitle("Atras")
-		.setMessage(
-				"Si vuelves atras perderas los cambios ¿Estás seguro?")
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setPositiveButton("Sí",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int which) {
+				.setMessage(
+						"Si vuelves atras perderas los cambios ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
 						// Yes button clicked, do something
 
 						Intent returnIntent = new Intent();
@@ -189,8 +184,9 @@ public class OrderRevisionActivity extends Activity {
 					}
 				}).setNegativeButton("No", null) // Do nothing
 													// on no
-		.show();
+				.show();
 	}
+
 	@Override
 	public void onBackPressed() {
 		goBack();
