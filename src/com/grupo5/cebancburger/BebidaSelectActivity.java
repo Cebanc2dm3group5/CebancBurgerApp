@@ -200,22 +200,30 @@ public class BebidaSelectActivity extends Activity {
 	}
 
 	private void goBack() {
-		newBuilder();
-		builder.setTitle("Atrás")
-				.setMessage(
-						"Si vuelves atrás perderás las bebidas seleccionadas ¿Estás seguro?")
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						// Yes button clicked, do something
+		if (pedido.getBebida().size() != 0) {
+			newBuilder();
+			builder.setTitle("Atrás")
+					.setMessage(
+							"Si vuelves atrás perderás las bebidas seleccionadas ¿Estás seguro?")
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setPositiveButton("Sí",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Yes button clicked, do something
 
-						Intent returnIntent = new Intent();
-						setResult(RESULT_CANCELED, returnIntent);
-						finish();
+									Intent returnIntent = new Intent();
+									setResult(RESULT_CANCELED, returnIntent);
+									finish();
 
-					}
-				}).setNegativeButton("No", null) // Do nothing on no
-				.show();
+								}
+							}).setNegativeButton("No", null) // Do nothing on no
+					.show();
+		} else {
+			Intent returnIntent = new Intent();
+			setResult(RESULT_CANCELED, returnIntent);
+			finish();
+		}
 	}
 
 	@Override
