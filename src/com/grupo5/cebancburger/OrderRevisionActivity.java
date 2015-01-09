@@ -49,7 +49,6 @@ public class OrderRevisionActivity extends Activity {
 		String regaloText = pedido.getRegalo();
 		lblRegalo.setText(regaloText);
 
-		builder = new AlertDialog.Builder(this);
 		listView = (ListView) findViewById(R.id.card_listView);
 
 		listView.addHeaderView(new View(this));
@@ -115,7 +114,7 @@ public class OrderRevisionActivity extends Activity {
 
 	private void setCardYesNo(final int position) {
 		// Put up the Yes/No message box
-
+		newBuilder();
 		builder.setTitle("Eliminar item")
 				.setMessage("¿Estás seguro?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
@@ -136,6 +135,8 @@ public class OrderRevisionActivity extends Activity {
 								String precioText = String.valueOf(pedido
 										.getPrecio());
 								lblPrecio.setText(precioText);
+								String regaloText = pedido.getRegalo();
+								lblRegalo.setText(regaloText);
 
 							}
 						}).setNegativeButton("No", null) // Do nothing on no
@@ -144,31 +145,49 @@ public class OrderRevisionActivity extends Activity {
 
 	private void setSendYesNo(String title, String msg) {
 		// Put up the Yes/No message box
-		builder.setTitle(title)
-				.setMessage(msg)
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Enviar",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Yes button clicked, do something
-								pedido.setFinalPrice();
-								// TODO - Send the order to REST API
+		newBuilder();
+		if ((pedido.getBurger().size() != 0)
+				&& (pedido.getBebida().size() != 0)) {
+			builder.setTitle(title)
+					.setMessage(msg)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setPositiveButton("Enviar",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Yes button clicked, do something
+									pedido.setFinalPrice();
+									// TODO - Send the order to REST API
 
-								// open last activity
-								Intent intent = new Intent(
-										getApplicationContext(),
-										FinalActivity.class);
-								// add data to intent
-								startActivity(intent);
+									// open last activity
+									Intent intent = new Intent(
+											getApplicationContext(),
+											FinalActivity.class);
+									// add data to intent
+									startActivity(intent);
 
-							}
-						}).setNegativeButton("No enviar", null) // Do nothing on
-																// no
-				.show();
+								}
+							}).setNegativeButton("No enviar", null) // Do
+																	// nothing
+																	// on
+																	// no
+					.show();
+		} else {
+			builder.setTitle("Pedido vacío")
+					.setMessage(
+							"Debes pedir como mínimo una bebida y un burger")
+					.setNeutralButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									// do nothing
+								}
+							}).show();
+		}
 	}
 
 	private void goBack() {
+		newBuilder();
 		builder.setTitle("Atras")
 				.setMessage(
 						"Si vuelves atras perderas los cambios ¿Estás seguro?")
@@ -190,5 +209,10 @@ public class OrderRevisionActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		goBack();
+	}
+
+	public void newBuilder() {
+		builder = new AlertDialog.Builder(this);
+
 	}
 }

@@ -119,6 +119,7 @@ public class BebidaSelectActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if (pedido.getBebida().size() < 1) {
+					newBuilder();
 					builder.setTitle(
 							"¡CUIDADO " + pedido.getCliente().getNombre() + "!")
 							.setMessage("Selecciona por lo menos una bebida")
@@ -177,7 +178,7 @@ public class BebidaSelectActivity extends Activity {
 
 	private void setCardYesNo(final int position) {
 		// Put up the Yes/No message box
-
+		newBuilder();
 		builder.setTitle("Eliminar item")
 				.setMessage("¿Estás seguro?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
@@ -199,6 +200,7 @@ public class BebidaSelectActivity extends Activity {
 	}
 
 	private void goBack() {
+		newBuilder();
 		builder.setTitle("Atrás")
 				.setMessage(
 						"Si vuelves atrás perderás las bebidas seleccionadas ¿Estás seguro?")
@@ -219,5 +221,10 @@ public class BebidaSelectActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		goBack();
+	}
+
+	public void newBuilder() {
+		builder = new AlertDialog.Builder(this);
+
 	}
 }

@@ -60,6 +60,7 @@
                 android:id="@+id/lblPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:gravity="center_horizontal" />
         </LinearLayout>
 
@@ -80,6 +81,7 @@
                 android:id="@+id/lblRegalo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:gravity="center_horizontal" />
         </LinearLayout>
     </LinearLayout>

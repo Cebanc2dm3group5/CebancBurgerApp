@@ -128,22 +128,26 @@ public class BurgerSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				
-				if (pedido.getBurger().size() < 1){
-					builder.setTitle("¡CUIDADO " + pedido.getCliente().getNombre() + "!")
-	            	.setMessage("Selecciona por lo menos un burger")
-	            	.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	                    public void onClick(DialogInterface dialog, int id) {
-	                        //do nothing
-	                    }})
-	            	.show();
-				}else{
+
+				if (pedido.getBurger().size() < 1) {
+					newBuilder();
+					builder.setTitle(
+							"¡CUIDADO " + pedido.getCliente().getNombre() + "!")
+							.setMessage("Selecciona por lo menos un burger")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											// do nothing
+										}
+									}).show();
+				} else {
 					// on first activity
 					Intent intent = new Intent(getApplicationContext(),
 							BebidaSelectActivity.class);
 					// add data to intent
 					intent.putExtra("pedido", pedido);
-	
+
 					// start activity
 					startActivityForResult(intent, 2);
 				}
@@ -229,7 +233,7 @@ public class BurgerSelectActivity extends Activity {
 
 	private void setCardYesNo(final int position) {
 		// Put up the Yes/No message box
-
+		newBuilder();
 		builder.setTitle("Eliminar item")
 				.setMessage("¿Estás seguro?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
@@ -249,28 +253,33 @@ public class BurgerSelectActivity extends Activity {
 						}).setNegativeButton("No", null) // Do nothing on no
 				.show();
 	}
-	
-	public void goBack(){
+
+	public void goBack() {
+		newBuilder();
 		builder.setTitle("Atrás")
-		.setMessage("Si vuelves atrás perderás las burgers seleccionadas ¿Estás seguro?")
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setPositiveButton("Sí",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,
-					int which) {
-				// Yes button clicked, do something
+				.setMessage(
+						"Si vuelves atrás perderás las burgers seleccionadas ¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Yes button clicked, do something
 
-				Intent returnIntent = new Intent();
-				setResult(RESULT_CANCELED, returnIntent);
-				finish();
+						Intent returnIntent = new Intent();
+						setResult(RESULT_CANCELED, returnIntent);
+						finish();
 
-			}
-		}).setNegativeButton("No", null) // Do nothing on no
-		.show();
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		goBack();
+	}
+
+	public void newBuilder() {
+		builder = new AlertDialog.Builder(this);
+
 	}
 }
