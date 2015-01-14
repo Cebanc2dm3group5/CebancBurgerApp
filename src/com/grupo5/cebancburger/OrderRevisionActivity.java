@@ -27,6 +27,7 @@ public class OrderRevisionActivity extends Activity {
 	ArrayList<Burger> arrBurger;
 	ArrayList<Bebida> arrBebida;
 	TextView lblPrecio, lblRegalo;
+	boolean modified = false;
 
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
@@ -129,6 +130,7 @@ public class OrderRevisionActivity extends Activity {
 									pedido.getBebida().remove(
 											position - arrBurger.size() - 1);
 								}
+								modified = true;
 
 								loadCardListData();
 								cardArrayAdapter.notifyDataSetChanged();
@@ -187,23 +189,31 @@ public class OrderRevisionActivity extends Activity {
 	}
 
 	private void goBack() {
-		newBuilder();
-		builder.setTitle("Atras")
-				.setMessage(
-						"Si vuelves atras perderas los cambios ¿Estás seguro?")
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						// Yes button clicked, do something
+		if (modified) {
+			newBuilder();
+			builder.setTitle("Atras")
+					.setMessage(
+							"Si vuelves atras perderas los cambios ¿Estás seguro?")
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setPositiveButton("Sí",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Yes button clicked, do something
 
-						Intent returnIntent = new Intent();
-						setResult(RESULT_CANCELED, returnIntent);
-						finish();
+									Intent returnIntent = new Intent();
+									setResult(RESULT_CANCELED, returnIntent);
+									finish();
 
-					}
-				}).setNegativeButton("No", null) // Do nothing
-													// on no
-				.show();
+								}
+							}).setNegativeButton("No", null) // Do nothing
+																// on no
+					.show();
+		} else {
+			Intent returnIntent = new Intent();
+			setResult(RESULT_CANCELED, returnIntent);
+			finish();
+		}
 	}
 
 	@Override

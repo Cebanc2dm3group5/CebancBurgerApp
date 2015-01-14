@@ -82,7 +82,7 @@ public class BurgerSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (!(edtBurgerNum.getText().toString().equals(""))) {
+				if (!(edtBurgerNum.getText().toString().equals("")) && (!(edtBurgerNum.getText().toString().equals("0")))) {
 					try {
 						int cantidad = Integer.parseInt(edtBurgerNum.getText()
 								.toString());
@@ -178,7 +178,7 @@ public class BurgerSelectActivity extends Activity {
 				R.array.tipo_carne, android.R.layout.simple_spinner_item);
 		Spinner spnTipoCarne = (Spinner) findViewById(R.id.spnMeatType);
 
-		adaptadorTamanoBurger
+		adaptadorTipoCarne
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spnTipoCarne.setAdapter(adaptadorTipoCarne);
 

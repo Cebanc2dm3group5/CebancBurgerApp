@@ -74,7 +74,8 @@ public class BebidaSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (!(edtBebidaNum.getText().toString().equals(""))) {
+				if (!(edtBebidaNum.getText().toString().equals(""))
+						&& (!(edtBebidaNum.getText().toString().equals("0")))) {
 					try {
 						int cantidad = Integer.parseInt(edtBebidaNum.getText()
 								.toString());
@@ -157,7 +158,6 @@ public class BebidaSelectActivity extends Activity {
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
-						tipo_bebida = "";
 					}
 				});
 	}
@@ -172,7 +172,6 @@ public class BebidaSelectActivity extends Activity {
 					+ arrBebida.get(i).getTipo(), "", arrBebida.get(i)
 					.getPrecio());
 			cardArrayAdapter.add(card);
-
 		}
 	}
 
