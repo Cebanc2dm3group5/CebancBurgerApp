@@ -2,13 +2,13 @@ package com.grupo5.cebancburger.ddbbrepo.tables;
 
 public class OrderTable {
 
-	String sqlCreate = "CREATE TABLE Order (OrderID INTEGER NOT NULL, "
+	String sqlCreate = "CREATE TABLE Orders (OrderID INTEGER NOT NULL, "
 			+ "UserID INTEGER NOT NULL, " + "CustomerID INTEGER NOT NULL, "
 			+ "Date DATE, " + "Time TIME, " + "Price DECIMAL(4,2), "
-			+ "PRIMARY KEY (CustomerID), "
+			+ "PRIMARY KEY (OrderID), "
 			+ "FOREIGN KEY(UserID) REFERENCES User(UserID), "
 			+ "FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID))";
-	String sqlUpdate = "DROP TABLE IF EXISTS Order";
+	String sqlUpdate = "DROP TABLE IF EXISTS Orders";
 
 	public OrderTable() {
 	}

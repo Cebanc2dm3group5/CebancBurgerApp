@@ -9,7 +9,7 @@ public class DDBBSQLite {
 		boolean success = false;
 		// Abrimos la base de datos 'DBUsuarios' en modo escritura
 		BurgerAppSQLiteHelper dbHelper = new BurgerAppSQLiteHelper(activ,
-				"DBUsuarios", null, 7);
+				"DBUsuarios", null, 13);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 		// Si hemos abierto correctamente la base de datos
