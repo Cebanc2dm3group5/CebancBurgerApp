@@ -1,10 +1,9 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
 public class BurgerTypeTable {
-	String sqlCreate = "CREATE TABLE User (UserID INTEGER NOT NULL, "
-			+ "UserName VARCHAR(20), " + "Password VARCHAR(20), "
-			+ "Admin BOOLEAN)";
-	String sqlUpdate = "DROP TABLE IF EXISTS User";
+	String sqlCreate = "CREATE TABLE BurgerType (BurgerTypeID INTEGER NOT NULL, "
+			+ "Description VARCHAR(20), " + "Price DECIMAL(4,2))";
+	String sqlUpdate = "DROP TABLE IF EXISTS BurgerType";
 
 	public BurgerTypeTable() {}
 

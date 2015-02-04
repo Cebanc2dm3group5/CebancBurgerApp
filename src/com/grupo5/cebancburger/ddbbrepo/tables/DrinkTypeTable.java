@@ -1,25 +1,26 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
-public class UserTable {
-	
-	String sqlCreate = "CREATE TABLE User (UserID INTEGER NOT NULL, "
-			+ "UserName VARCHAR(20), " + "Password VARCHAR(20), "
-			+ "Admin BOOLEAN)";
-	String sqlUpdate = "DROP TABLE IF EXISTS User";
-	
+public class DrinkTypeTable {
+	String sqlCreate = "CREATE TABLE DrinkType (DrinkTypeID INTEGER NOT NULL, "
+			+ "Description VARCHAR(20), " + "Price DECIMAL(4,2))";
+	String sqlUpdate = "DROP TABLE IF EXISTS DrinkType";
+
+	public DrinkTypeTable() {}
+
 	public String getSqlCreate() {
 		return this.sqlCreate;
 	}
+
 	public void setSqlCreate(String sqlCreate) {
 		this.sqlCreate = sqlCreate;
 	}
+
 	public String getSqlUpdate() {
 		return this.sqlUpdate;
 	}
+
 	public void setSqlUpdate(String sqlUpdate) {
 		this.sqlUpdate = sqlUpdate;
 	}
-
-	
 
 }
