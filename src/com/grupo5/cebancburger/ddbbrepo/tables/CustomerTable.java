@@ -1,9 +1,9 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
 public class CustomerTable {
-	String sqlCreate = "CREATE TABLE Customer (CustomerID INTEGER NOT NULL, "
+	String sqlCreate = "CREATE TABLE Customer (CustomerID INTEGER NOT NULL PRIMARY KEY, "
 			+ "Name VARCHAR(20), " + "Address VARCHAR(20), "
-			+ "IDChar VARCHAR(1))" + "Phone VARCHAR(15))";
+			+ "IDChar VARCHAR(1), " + "Phone VARCHAR(15))";
 	String sqlUpdate = "DROP TABLE IF EXISTS Customer";
 
 	public CustomerTable() {
