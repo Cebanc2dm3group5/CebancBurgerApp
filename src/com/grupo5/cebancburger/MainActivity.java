@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.model.Cliente;
 import com.grupo5.cebancburger.model.Pedido;
 
@@ -24,9 +25,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		DDBBSQLite.initDDBB("DDBBBurgerApp", this);
 
 		alert = new AlertDialog.Builder(this);
-
+		
 		edtName = (EditText) findViewById(R.id.edtName);
 		edtAddress = (EditText) findViewById(R.id.edtAddress);
 		edtPhone = (EditText) findViewById(R.id.edtPhone);
