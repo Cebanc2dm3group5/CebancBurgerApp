@@ -2,8 +2,13 @@ package com.grupo5.cebancburger.model;
 
 import java.io.Serializable;
 
+import android.app.Activity;
+import android.content.ContentValues;
+
+import com.grupo5.cebancburger.interfaces.DDBBObject;
+
 @SuppressWarnings("serial")
-public class Cliente implements Serializable {
+public class Cliente implements Serializable, DDBBObject {
 
 	private String nombre, direccion, telefono;
 
@@ -32,5 +37,23 @@ public class Cliente implements Serializable {
 	}
 	public String getTelefono(){
 		return telefono;
+	}
+
+	@Override
+	public void save(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ContentValues getContentValue(Activity activity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

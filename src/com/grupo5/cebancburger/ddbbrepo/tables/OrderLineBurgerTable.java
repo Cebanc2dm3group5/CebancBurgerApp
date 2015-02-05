@@ -1,6 +1,10 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
-public class OrderLineBurgerTable {
+import android.app.Activity;
+
+import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
+
+public class OrderLineBurgerTable implements DDBBObjectTable {
 
 	String sqlCreate = "CREATE TABLE OrderLineBurger (OrderLineBurgerID INTEGER NOT NULL, "
 			+ "BurgerTypeID INTEGER NOT NULL, "
@@ -32,6 +36,18 @@ public class OrderLineBurgerTable {
 
 	public void setSqlUpdate(String sqlUpdate) {
 		this.sqlUpdate = sqlUpdate;
+	}
+
+	@Override
+	public void initData(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Activity activity, int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -36,8 +36,7 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(orderTable.getSqlCreate());
 		db.execSQL(orderLineBurgerTable.getSqlCreate());
 		db.execSQL(orderLineDrinkTable.getSqlCreate());
-		
-		
+
 	}
 
 	@Override
@@ -54,15 +53,7 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(orderLineDrinkTable.getSqlUpdate());
 
 		// Se crea la nueva versión de la tabla
-		db.execSQL(userTable.getSqlCreate());
-		db.execSQL(customerTable.getSqlCreate());
-		db.execSQL(burgerTypeTable.getSqlCreate());
-		db.execSQL(burgerSizeTable.getSqlCreate());
-		db.execSQL(burgerMeatTable.getSqlCreate());
-		db.execSQL(drinkTypeTable.getSqlCreate());
-		db.execSQL(orderTable.getSqlCreate());
-		db.execSQL(orderLineBurgerTable.getSqlCreate());
-		db.execSQL(orderLineDrinkTable.getSqlCreate());
+		onCreate(db);
 	}
 
 }

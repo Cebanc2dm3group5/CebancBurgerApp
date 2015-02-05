@@ -1,5 +1,7 @@
 package com.grupo5.cebancburger.model;
 
+import java.io.Serializable;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -7,16 +9,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
+import com.grupo5.cebancburger.interfaces.DDBBObject;
 
-public class User {
+@SuppressWarnings("serial")
+public class User implements Serializable, DDBBObject{
 	private int userID = -1;
 	private String username, password;
 	private boolean admin;
 
-	public User(int id) {
-		UserTable ut = new UserTable();
-		// TODO - GET USER
-	}
 
 	public User(String username, String password, boolean admin) {
 		this.setUsername(username);
@@ -55,15 +55,19 @@ public class User {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-	
-	
-	public void save(Activity activity){
+
+	public void save(Activity activity) {
 		UserTable ut = new UserTable();
-		if (this.userID != -1){
-			 ut.insert(this, activity);
-		}else{
-			//ut.edit(this, activity);
+		if (this.userID != -1) {
+			ut.insert(this, activity);
+		} else {
+			ut.edit(this, activity);
 		}
+	}
+	
+	public void delete(Activity activity){
+		UserTable ut = new UserTable();
+		ut.delete(activity, this.getUserID());
 	}
 
 	public ContentValues getContentValue(Activity activity) {
@@ -78,12 +82,14 @@ public class User {
 	private static int getNextID(Activity activity) {
 		String query = "SELECT UserID FROM User ORDER BY UserID DESC LIMIT 1";
 		int lastID = 0;
-		SQLiteDatabase db = DDBBSQLite.getDDBB("DDBBBurgerApp", activity);
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
-		if (c.moveToFirst()){
+		if (c.moveToFirst()) {
 			lastID = c.getInt(0);
 		}
-		return lastID+1;
+		return lastID + 1;
 	}
+
+	
 
 }

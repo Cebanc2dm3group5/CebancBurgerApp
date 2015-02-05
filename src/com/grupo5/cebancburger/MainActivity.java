@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.model.Cliente;
+import com.grupo5.cebancburger.model.Options;
 import com.grupo5.cebancburger.model.Pedido;
 
 public class MainActivity extends Activity {
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		DDBBSQLite.initDDBB("DDBBBurgerApp", this);
+		DDBBSQLite.initDDBB(Options.getDDBBName(), this);
 
 		alert = new AlertDialog.Builder(this);
 		

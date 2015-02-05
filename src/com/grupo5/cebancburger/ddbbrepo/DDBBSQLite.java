@@ -1,19 +1,22 @@
 package com.grupo5.cebancburger.ddbbrepo;
 
+import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
+
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 public class DDBBSQLite {
-	public static boolean initDDBB(String dbName, Activity activ) {
+	public static boolean initDDBB(String dbName, Activity activity) {
 		boolean success = false;
 		// Abrimos la base de datos 'BurgerAppDDBB' en modo escritura
-		SQLiteDatabase db = getDDBB(dbName, activ);
+		SQLiteDatabase db = getDDBB(dbName, activity);
 
 		// Si hemos abierto correctamente la base de datos
 		if (db != null) {
 			success = true;
-			Toast.makeText(activ.getApplicationContext(), "DDBB Created",
+			initData(activity);
+			Toast.makeText(activity.getApplicationContext(), "DDBB Created",
 					Toast.LENGTH_SHORT).show();
 			// Cerramos la base de datos
 			db.close();
@@ -28,6 +31,11 @@ public class DDBBSQLite {
 				dbName, null, 13);
 		return dbHelper.getWritableDatabase();
 
+	}
+	
+	public static void initData(Activity activity){
+		UserTable ut = new UserTable();
+		ut.initData(activity);
 	}
 
 }

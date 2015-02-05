@@ -3,8 +3,13 @@ package com.grupo5.cebancburger.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import android.app.Activity;
+import android.content.ContentValues;
+
+import com.grupo5.cebancburger.interfaces.DDBBObject;
+
 @SuppressWarnings("serial")
-public class Burger implements Serializable {
+public class Burger implements Serializable, DDBBObject {
 
 	private final String TAMANO_NORMAL = "Normal";
 	private final String TAMANO_WHOPPER = "Whopper";
@@ -106,6 +111,24 @@ public class Burger implements Serializable {
 			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
 					BigDecimal.ROUND_CEILING);
 		}
+	}
+
+	@Override
+	public void save(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ContentValues getContentValue(Activity activity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

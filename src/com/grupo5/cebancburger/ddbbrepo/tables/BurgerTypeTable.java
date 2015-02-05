@@ -1,6 +1,10 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
-public class BurgerTypeTable {
+import android.app.Activity;
+
+import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
+
+public class BurgerTypeTable implements DDBBObjectTable {
 	String sqlCreate = "CREATE TABLE BurgerType (BurgerTypeID INTEGER NOT NULL, "
 			+ "Description VARCHAR(20), " + "Price DECIMAL(4,2))";
 	String sqlUpdate = "DROP TABLE IF EXISTS BurgerType";
@@ -21,6 +25,18 @@ public class BurgerTypeTable {
 
 	public void setSqlUpdate(String sqlUpdate) {
 		this.sqlUpdate = sqlUpdate;
+	}
+
+	@Override
+	public void initData(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Activity activity, int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

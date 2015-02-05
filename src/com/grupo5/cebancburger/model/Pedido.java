@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class Pedido implements Serializable {
+import android.app.Activity;
+import android.content.ContentValues;
+
+import com.grupo5.cebancburger.interfaces.DDBBObject;
+
+public class Pedido implements Serializable, DDBBObject {
 
 	private static final long serialVersionUID = 1L;
 	private Cliente cliente = null;
@@ -97,6 +102,24 @@ public class Pedido implements Serializable {
 			return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals,
 					BigDecimal.ROUND_CEILING);
 		}
+	}
+
+	@Override
+	public void save(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Activity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ContentValues getContentValue(Activity activity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
