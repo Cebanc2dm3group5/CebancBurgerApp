@@ -7,9 +7,9 @@ import android.widget.Toast;
 public class DDBBSQLite {
 	public static boolean initDDBB(String dbName, Activity activ) {
 		boolean success = false;
-		// Abrimos la base de datos 'DBUsuarios' en modo escritura
+		// Abrimos la base de datos 'BurgerAppDDBB' en modo escritura
 		BurgerAppSQLiteHelper dbHelper = new BurgerAppSQLiteHelper(activ,
-				"DBUsuarios", null, 13);
+				"BurgerAppDDBB", null, 13);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 		// Si hemos abierto correctamente la base de datos
