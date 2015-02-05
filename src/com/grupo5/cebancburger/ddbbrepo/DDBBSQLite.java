@@ -8,9 +8,7 @@ public class DDBBSQLite {
 	public static boolean initDDBB(String dbName, Activity activ) {
 		boolean success = false;
 		// Abrimos la base de datos 'BurgerAppDDBB' en modo escritura
-		BurgerAppSQLiteHelper dbHelper = new BurgerAppSQLiteHelper(activ,
-				"BurgerAppDDBB", null, 13);
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		SQLiteDatabase db = getDDBB(dbName, activ);
 
 		// Si hemos abierto correctamente la base de datos
 		if (db != null) {
@@ -22,6 +20,14 @@ public class DDBBSQLite {
 		}
 
 		return success;
+	}
+
+	public static SQLiteDatabase getDDBB(String dbName, Activity activity) {
+		// Abrimos la base de datos 'BurgerAppDDBB' en modo escritura
+		BurgerAppSQLiteHelper dbHelper = new BurgerAppSQLiteHelper(activity,
+				dbName, null, 13);
+		return dbHelper.getWritableDatabase();
+
 	}
 
 }

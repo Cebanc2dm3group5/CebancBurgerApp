@@ -26,6 +26,7 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		// Se crean las tablas
 		db.execSQL(userTable.getSqlCreate());
 		db.execSQL(customerTable.getSqlCreate());
 		db.execSQL(burgerTypeTable.getSqlCreate());
@@ -35,6 +36,8 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(orderTable.getSqlCreate());
 		db.execSQL(orderLineBurgerTable.getSqlCreate());
 		db.execSQL(orderLineDrinkTable.getSqlCreate());
+		
+		
 	}
 
 	@Override
