@@ -18,7 +18,7 @@ import com.grupo5.cebancburger.model.Pedido;
 
 public class MainActivity extends Activity {
 
-	Button btnNext, btnExit;
+	Button btnNext, btnExit, btnAdmin;
 	EditText edtName, edtAddress, edtPhone;
 	AlertDialog.Builder alert;
 
@@ -80,8 +80,23 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-	}
+		
+		btnAdmin = (Button) findViewById(R.id.btnAdmin);
+		btnAdmin.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// create intent
+				Intent intent = new Intent(getApplicationContext(),
+						AdminExpandableLayoutActivity.class);
+
+				// start activity
+				startActivityForResult(intent, 1);
+			}
+		});
+		
+	}
+	
 	@Override
 	public void onBackPressed() {
 	}

@@ -42,6 +42,11 @@
             android:name=".FinalActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".AdminExpandableLayoutActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
     </application>
 
 </manifest>

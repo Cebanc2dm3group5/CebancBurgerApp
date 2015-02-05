@@ -22,11 +22,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:text="@string/titulo_cliente"
+            android:text="@string/titulo_login"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/edtName"
+            android:id="@+id/edtUsername"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="@string/escribe_nombre"
+            android:hint="@string/username"
             android:inputType="textPersonName" >
 
             <requestFocus android:layout_width="wrap_content" />
@@ -42,7 +42,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/edtAddress"
+            android:id="@+id/edtPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -50,26 +50,8 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="@string/escribe_direccion"
-            android:inputType="textPostalAddress" />
-
-        <EditText
-            android:id="@+id/edtPhone"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:hint="@string/escribe_telefono"
-            android:inputType="phone" />
-
-        <Button
-            android:id="@+id/btnAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:hint="@string/password"
+            android:inputType="textPassword" />
 
     </LinearLayout>
 
@@ -91,7 +73,7 @@
             android:layout_marginTop="5dp" >
 
             <Button
-                android:id="@+id/btnExit"
+                android:id="@+id/btnExitLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -100,7 +82,7 @@
                 android:text="@string/salir" />
 
             <Button
-                android:id="@+id/btnNext"
+                android:id="@+id/btnNextLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

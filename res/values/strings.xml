@@ -22,6 +22,9 @@
     <string name="enviar">Enviar pedido</string>
     <string name="logo_des">App logo</string>
     <string name="delete_instructions">Mantén pulsada una tarjeta para eliminarla del pedido.</string>
+    <string name="titulo_login">¿Quién eres?</string>
+    <string name="username">Nombre de usuario&#8230;</string>
+    <string name="password">&#8230;y contraseña</string>
 
     <string-array name="tipo_bebida">
         <item>Cola</item>
