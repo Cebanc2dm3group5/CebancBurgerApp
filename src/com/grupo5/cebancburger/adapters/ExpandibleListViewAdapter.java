@@ -44,7 +44,6 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		final String children = (String) getChild(groupPosition, childPosition);
 		TextView textvw = null;
-		TextView txtItem = null;
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.expandable_layout_subitem, null);
 		}
