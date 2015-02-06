@@ -1,4 +1,4 @@
-package com.grupo5.cebancburger.model;
+package com.grupo5.cebancburger.config;
 
 public class Options {
 	final static String DDBBName = "DDBBBurgerApp";

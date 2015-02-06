@@ -20,12 +20,12 @@ import android.widget.Toast;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
-import com.grupo5.cebancburger.model.Bebida;
-import com.grupo5.cebancburger.model.Pedido;
+import com.grupo5.cebancburger.model.Drink;
+import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class BebidaSelectActivity extends Activity {
-	Pedido pedido;
+	Order pedido;
 	Button btnNext, btnExit, btnAddBebida;
 	EditText edtBebidaNum;
 	private int tipo_bebida = 0;
@@ -35,7 +35,7 @@ public class BebidaSelectActivity extends Activity {
 	
 	ArrayAdapter<String> adaptadorTipoBebida;
 
-	ArrayList<Bebida> arrBebida;
+	ArrayList<Drink> arrBebida;
 
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
@@ -47,7 +47,7 @@ public class BebidaSelectActivity extends Activity {
 		setContentView(R.layout.bebida_select_layout);
 		// recogemos datos del intent
 		Intent intent = getIntent();
-		pedido = (Pedido) intent.getSerializableExtra("pedido");
+		pedido = (Order) intent.getSerializableExtra("pedido");
 		
 		// llenamos el array con la información de las bebidas
 		arrTiposBebida = DrinkTypeTable.getDrinkTypes(this);
@@ -88,7 +88,7 @@ public class BebidaSelectActivity extends Activity {
 						int cantidad = Integer.parseInt(edtBebidaNum.getText()
 								.toString());
 
-						Bebida bebida = new Bebida(tipo_bebida, cantidad, precio_bebida);
+						Drink bebida = new Drink(tipo_bebida, cantidad, precio_bebida);
 						pedido.setBebida(bebida);
 
 						Toast.makeText(getApplicationContext(),

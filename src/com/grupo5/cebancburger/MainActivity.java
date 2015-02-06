@@ -11,10 +11,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
-import com.grupo5.cebancburger.model.Cliente;
-import com.grupo5.cebancburger.model.Options;
-import com.grupo5.cebancburger.model.Pedido;
+import com.grupo5.cebancburger.model.Customer;
+import com.grupo5.cebancburger.model.Order;
 
 public class MainActivity extends Activity {
 
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// get data
-				Pedido pedido = new Pedido();
+				Order pedido = new Order();
 
 				String name = edtName.getText().toString();
 				String address = edtAddress.getText().toString();
@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 										}
 									}).show();
 				} else {
-					Cliente cliente = new Cliente(name, address, phone);
+					Customer cliente = new Customer(name, address, phone);
 					pedido.setCliente(cliente);
 					// create intent
 					Intent intent = new Intent(getApplicationContext(),

@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
@@ -22,6 +23,14 @@ public class User implements Serializable, DDBBObject{
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setAdmin(admin);
+	}
+	
+	public User(int id, Activity activity){
+		User user = UserTable.getUser(activity, id);
+		this.setUserID(user.getUserID());
+		this.setUsername(user.getUsername());
+		this.setPassword(user.getPassword());
+		this.setAdmin(user.isAdmin());
 	}
 
 	public int getUserID() {

@@ -4,43 +4,24 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @SuppressWarnings("serial")
-public class Burger implements Serializable {
+public class Drink implements Serializable {
 
-	private String tamano, tipo_carne, tipo_burger;
+	private int tipo;
 	private int cantidad;
 	private double precio;
 
-	public Burger(String tamano, String tipo_carne, String tipo_burger,
-			int cantidad) {
-		this.tamano = tamano;
-		this.tipo_carne = tipo_carne;
-		this.tipo_burger = tipo_burger;
-		this.cantidad = cantidad;
-		setPrecio();
+	public Drink(int tipo, int cantidad, double precio) {
+		setTipo(tipo);
+		setCantidad(cantidad);
+		setPrecio(precio);
 	}
 
-	public void setTamano(String tamano) {
-		this.tamano = tamano;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
-	public String getTamano() {
-		return tamano;
-	}
-
-	public void setTipoCarne(String tipo_carne) {
-		this.tipo_carne = tipo_carne;
-	}
-
-	public String getTipoCarne() {
-		return tipo_carne;
-	}
-
-	public void setTipoBurger(String tipo_burger) {
-		this.tipo_burger = tipo_burger;
-	}
-
-	public String getTipoBurger() {
-		return tipo_burger;
+	public int getTipo() {
+		return tipo;
 	}
 
 	public void setCantidad(int cantidad) {
@@ -51,7 +32,7 @@ public class Burger implements Serializable {
 		return cantidad;
 	}
 
-	public void setPrecio() {
+	public void setPrecio(double precio) {
 		this.precio = precio * this.cantidad;
 	}
 
@@ -68,5 +49,6 @@ public class Burger implements Serializable {
 					BigDecimal.ROUND_CEILING);
 		}
 	}
+
 
 }

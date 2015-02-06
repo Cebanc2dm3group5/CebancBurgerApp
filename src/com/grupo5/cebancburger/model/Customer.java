@@ -8,11 +8,11 @@ import android.content.ContentValues;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
 @SuppressWarnings("serial")
-public class Cliente implements Serializable, DDBBObject {
+public class Customer implements Serializable, DDBBObject {
 
 	private String nombre, direccion, telefono;
 
-	public Cliente(String nombre, String direccion, String telefono){
+	public Customer(String nombre, String direccion, String telefono){
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;

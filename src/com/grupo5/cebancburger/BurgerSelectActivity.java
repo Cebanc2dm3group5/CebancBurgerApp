@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.model.Burger;
-import com.grupo5.cebancburger.model.Pedido;
+import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class BurgerSelectActivity extends Activity {
@@ -33,7 +33,7 @@ public class BurgerSelectActivity extends Activity {
 			tipo_burger = "Clásica";
 	ArrayAdapter<CharSequence> adaptadorTamanoBurger, adaptadorTipoCarne,
 			adaptadorTipoBurger;
-	Pedido pedido;
+	Order pedido;
 	ArrayList<Burger> arrBurger;
 
 	private CardArrayAdapter cardArrayAdapter;
@@ -49,7 +49,7 @@ public class BurgerSelectActivity extends Activity {
 
 		// recogemos datos del intent
 		Intent intent = getIntent();
-		pedido = (Pedido) intent.getSerializableExtra("pedido");
+		pedido = (Order) intent.getSerializableExtra("pedido");
 		lblTitleBurger.setText("Hola " + pedido.getCliente().getNombre()
 				+ ", ¿qué te apetece?");
 		edtBurgerNum = (EditText) findViewById(R.id.edtBurgerNumber);

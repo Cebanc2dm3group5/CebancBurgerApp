@@ -7,9 +7,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
-import com.grupo5.cebancburger.model.Options;
 import com.grupo5.cebancburger.model.User;
 
 public class UserTable implements DDBBObjectTable {
@@ -46,7 +46,7 @@ public class UserTable implements DDBBObjectTable {
 	public void edit(User user, Activity activity) {
 		ContentValues reg = user.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
-		db.update("User", reg, "UserID='" + user.getUserID() + "'", null);
+		db.update("User", reg, "UserID=" + user.getUserID(), null);
 
 	}
 

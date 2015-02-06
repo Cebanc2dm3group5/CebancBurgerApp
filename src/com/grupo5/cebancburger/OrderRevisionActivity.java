@@ -16,16 +16,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
-import com.grupo5.cebancburger.model.Bebida;
+import com.grupo5.cebancburger.model.Drink;
 import com.grupo5.cebancburger.model.Burger;
-import com.grupo5.cebancburger.model.Pedido;
+import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 
 public class OrderRevisionActivity extends Activity {
 	Button btnExit, btnSend;
-	Pedido pedido;
+	Order pedido;
 	ArrayList<Burger> arrBurger;
-	ArrayList<Bebida> arrBebida;
+	ArrayList<Drink> arrBebida;
 	TextView lblPrecio, lblRegalo;
 	boolean modified = false;
 
@@ -40,7 +40,7 @@ public class OrderRevisionActivity extends Activity {
 
 		// recogemos datos del intent
 		Intent intent = getIntent();
-		pedido = (Pedido) intent.getSerializableExtra("pedido");
+		pedido = (Order) intent.getSerializableExtra("pedido");
 
 		lblPrecio = (TextView) findViewById(R.id.lblPrecio);
 		String precioText = String.valueOf(pedido.getPrecio());

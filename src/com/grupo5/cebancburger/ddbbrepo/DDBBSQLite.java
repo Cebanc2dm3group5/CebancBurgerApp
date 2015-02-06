@@ -1,7 +1,7 @@
 package com.grupo5.cebancburger.ddbbrepo;
 
+import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
-import com.grupo5.cebancburger.model.Options;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
