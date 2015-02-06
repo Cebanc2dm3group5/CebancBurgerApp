@@ -25,7 +25,20 @@
     <string name="titulo_login">¿Quién eres?</string>
     <string name="username">Nombre de usuario&#8230;</string>
     <string name="password">&#8230;y contraseña</string>
-    <string name="titulo_mantenimiento">Mantenimiento</string>
+    <string name="tituloMantenimiento">Mantenimiento</string>
+    <string name="name">Nombre</string>
+    <string name="price">Precio</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="userAddTitle">Usuario</string>
+    <string name="userAddUsername">Nombre de usuario</string>
+    <string name="userAddPassword">Contraseña</string>
+    <string name="admin">Administrador</string>
+    <string name="customerAddTitle">Cliente</string>
+    <string name="customerAddName">Nombre</string>
+    <string name="customerAddIDChar">Letra DNI</string>
+    <string name="customerAddAddress">Dirección</string>
+    <string name="viewPedidoTitle">Pedidos</string>
 
     <string-array name="tipo_bebida">
         <item>Cola</item>

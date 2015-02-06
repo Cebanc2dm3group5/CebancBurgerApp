@@ -46,6 +46,30 @@
             android:name=".AdminExpandableLayoutActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".BurgerDrinkAddDataActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CustomerAddDataActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SelectRegistroActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".UserAddDataActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ViewPedidoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         
     </application>
 

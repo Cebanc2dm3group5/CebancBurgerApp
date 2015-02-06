@@ -47,7 +47,7 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.expandable_layout_subitem, null);
 		}
-		textvw = (TextView) convertView.findViewById(R.id.textView1);
+		textvw = (TextView) convertView.findViewById(R.id.txtTitleSelReg);
 		textvw.setText(children); 
 		switch (groupPosition){
 		case 0:

@@ -8,38 +8,50 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.grupo5.cebancburger.FinalActivity" >
+    tools:context="com.grupo5.cebancburger.activities.MainActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
         android:orientation="vertical" >
-    <TextView
-        android:id="@+id/lblTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:text="@string/final_title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/txtTitleSelReg"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/final_subtitle" />
+        <TextView
+            android:id="@+id/lblBurDriTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/logo_des"
-        android:src="@drawable/cebancburger_logo" />
-    
+        <EditText
+            android:id="@+id/edtBurDriName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/name"
+            android:inputType="textPersonName" >
+
+            <requestFocus android:layout_width="wrap_content" />
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtBurDriPrice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/price"
+            android:inputType="textPassword" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -60,22 +72,22 @@
             android:layout_marginTop="5dp" >
 
             <Button
-                android:id="@+id/btnExit"
+                android:id="@+id/btnBurDriCancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="0.5"
                 android:background="?android:attr/selectableItemBackground"
-                android:text="@string/salir" />
+                android:text="@string/cancel" />
 
             <Button
-                android:id="@+id/btnNuevo"
+                android:id="@+id/btnBurDriSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="0.5"
                 android:background="?android:attr/selectableItemBackground"
-                android:text="@string/nuevo_pedido" />
+                android:text="@string/save" />
         </LinearLayout>
     </LinearLayout>
 
