@@ -25,6 +25,7 @@
     <string name="titulo_login">¿Quién eres?</string>
     <string name="username">Nombre de usuario&#8230;</string>
     <string name="password">&#8230;y contraseña</string>
+    <string name="titulo_mantenimiento">Mantenimiento</string>
 
     <string-array name="tipo_bebida">
         <item>Cola</item>
