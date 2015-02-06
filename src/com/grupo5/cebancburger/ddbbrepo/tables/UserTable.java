@@ -72,6 +72,29 @@ public class UserTable implements DDBBObjectTable {
 		}
 		return arrUsers;
 	}
+	
+	public static ArrayList<User> getUsers(Activity activity, String condition) {
+		ArrayList<User> arrUsers = new ArrayList<User>();
+		String query = "SELECT * FROM User WHERE "+condition;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			do {
+				int userId = c.getInt(0);
+				String username = c.getString(1);
+				String password = c.getString(2);
+				int isAdminInt = c.getInt(3);
+				boolean isAdmin = false;
+				if (isAdminInt == 1) {
+					isAdmin = true;
+				}
+				User u = new User(username, password, isAdmin);
+				u.setUserID(userId);
+				arrUsers.add(u);
+			} while (c.moveToNext());
+		}
+		return arrUsers;
+	}
 
 	public static User getUser(Activity activity, int id) {
 		User user = null;

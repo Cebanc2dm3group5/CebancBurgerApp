@@ -5,34 +5,30 @@ import java.math.BigDecimal;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
 @SuppressWarnings("serial")
 public class Bebida implements Serializable, DDBBObject {
 
-	private final String TIPO_COLA = "Cola";
-	private final String TIPO_LIMON = "Limón";
-	private final String TIPO_NARANJA = "Naranja";
-	private final String TIPO_NESTEA = "Nestea";
-	private final String TIPO_CERVEZA = "Cerveza";
-	private final String TIPO_AGUA = "Agua";
-
-	private String tipo;
+	private int tipo;
 	private int cantidad;
 	private double precio;
 
-	public Bebida(String tipo, int cantidad) {
-		this.tipo = tipo;
-		this.cantidad = cantidad;
-		setPrecio();
+	public Bebida(int tipo, int cantidad, double precio) {
+		setTipo(tipo);
+		setCantidad(cantidad);
+		setPrecio(precio);
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
@@ -44,18 +40,8 @@ public class Bebida implements Serializable, DDBBObject {
 		return cantidad;
 	}
 
-	public void setPrecio() {
-		precio = 0;
-		for (int i = 0; i < this.cantidad; i++) {
-			if (tipo.equalsIgnoreCase(TIPO_COLA)
-					|| tipo.equalsIgnoreCase(TIPO_LIMON)
-					|| tipo.equalsIgnoreCase(TIPO_NARANJA)
-					|| tipo.equalsIgnoreCase(TIPO_NESTEA)
-					|| tipo.equalsIgnoreCase(TIPO_CERVEZA))
-				precio += 1.50;
-			else if (tipo.equalsIgnoreCase(TIPO_AGUA))
-				precio += 1.00;
-		}
+	public void setPrecio(double precio) {
+		this.precio = precio * this.cantidad;
 	}
 
 	public double getPrecio() {
@@ -75,19 +61,32 @@ public class Bebida implements Serializable, DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Activity activity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public ContentValues getContentValue(Activity activity) {
-		// TODO Auto-generated method stub
-		return null;
+		ContentValues nr = new ContentValues();
+		nr.put("OrderLineDrinkID", getNextID(activity));
+		nr.put("DrinkTypeID", getNextID(activity));
+		return nr;
+	}
+	
+	private static int getNextID(Activity activity) {
+		String query = "SELECT OrderLineDrinkID FROM OrderLineDrink ORDER BY OrderLineDrinkID DESC LIMIT 1";
+		int lastID = 0;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
 	}
 
 }

@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
+import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.model.Bebida;
 import com.grupo5.cebancburger.model.Pedido;
 import com.grupo5.cebancburger.viewmodels.Card;
@@ -27,8 +28,12 @@ public class BebidaSelectActivity extends Activity {
 	Pedido pedido;
 	Button btnNext, btnExit, btnAddBebida;
 	EditText edtBebidaNum;
-	private String tipo_bebida = "Cola";
-	ArrayAdapter<CharSequence> adaptadorTipoBebida;
+	private int tipo_bebida = 0;
+	private double precio_bebida = 0;
+	
+	ArrayList<ArrayList<String>> arrTiposBebida = new ArrayList<ArrayList<String>>();
+	
+	ArrayAdapter<String> adaptadorTipoBebida;
 
 	ArrayList<Bebida> arrBebida;
 
@@ -43,6 +48,9 @@ public class BebidaSelectActivity extends Activity {
 		// recogemos datos del intent
 		Intent intent = getIntent();
 		pedido = (Pedido) intent.getSerializableExtra("pedido");
+		
+		// llenamos el array con la información de las bebidas
+		arrTiposBebida = DrinkTypeTable.getDrinkTypes(this);
 
 		edtBebidaNum = (EditText) findViewById(R.id.edtBebidaNumber);
 		edtBebidaNum.setText("1");
@@ -80,7 +88,7 @@ public class BebidaSelectActivity extends Activity {
 						int cantidad = Integer.parseInt(edtBebidaNum.getText()
 								.toString());
 
-						Bebida bebida = new Bebida(tipo_bebida, cantidad);
+						Bebida bebida = new Bebida(tipo_bebida, cantidad, precio_bebida);
 						pedido.setBebida(bebida);
 
 						Toast.makeText(getApplicationContext(),
@@ -140,9 +148,14 @@ public class BebidaSelectActivity extends Activity {
 				}
 			}
 		});
-
-		adaptadorTipoBebida = ArrayAdapter.createFromResource(this,
-				R.array.tipo_bebida, android.R.layout.simple_spinner_item);
+		
+		String[] arrDescBebida = {};
+		for (int i=0; i<arrTiposBebida.get(1).size(); i++){
+			arrDescBebida[i] = arrTiposBebida.get(1).get(i);
+		}
+//		adaptadorTipoBebida = ArrayAdapter.createFromResource(this,
+//				android.R.layout.simple_spinner_item, arrTiposBebida);
+		adaptadorTipoBebida = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrTiposBebida.get(1));
 		Spinner spnTipoBebida = (Spinner) findViewById(R.id.spnBebidaType);
 
 		adaptadorTipoBebida
@@ -153,8 +166,7 @@ public class BebidaSelectActivity extends Activity {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							android.view.View v, int position, long id) {
-						tipo_bebida = adaptadorTipoBebida.getItem(position)
-								.toString();
+						tipo_bebida = position;
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {

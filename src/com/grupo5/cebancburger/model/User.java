@@ -69,6 +69,8 @@ public class User implements Serializable, DDBBObject{
 		UserTable ut = new UserTable();
 		ut.delete(activity, this.getUserID());
 	}
+	
+	
 
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
