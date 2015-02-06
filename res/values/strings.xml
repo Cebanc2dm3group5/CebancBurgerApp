@@ -39,6 +39,7 @@
     <string name="customerAddIDChar">Letra DNI</string>
     <string name="customerAddAddress">Dirección</string>
     <string name="viewPedidoTitle">Pedidos</string>
+    <string name="aceptar">Aceptar</string>
 
     <string-array name="tipo_bebida">
         <item>Cola</item>

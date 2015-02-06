@@ -34,6 +34,9 @@ public class AdminExpandableLayoutActivity extends Activity{
 		ExpandibleListview grupo2 = new ExpandibleListview("Bebida");
 		grupo2.children.add("Tipo de Bebida");
 		grupos.append(2, grupo2);
+		ExpandibleListview grupo3 = new ExpandibleListview("Pedido");
+		grupo3.children.add("Pedido");
+		grupos.append(3, grupo3);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
