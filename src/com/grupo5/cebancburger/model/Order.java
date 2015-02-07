@@ -23,11 +23,42 @@ public class Order implements Serializable, DDBBObject {
 	private ArrayList<Drink> alBebida = null;
 	private String regalo = "";
 	private double precio;
-	private int orderID, userID, customerID;
+	private int orderID, userID;
+	private Date date;
+	private java.sql.Time time;
 
 	public Order() {
 		alBurger = new ArrayList<Burger>();
 		alBebida = new ArrayList<Drink>();
+	}
+
+	public Order(Customer cliente, ArrayList<Burger> alBurger,
+			ArrayList<Drink> alBebida, int orderID, int userID, Date date,
+			java.sql.Time time2) {
+		super();
+		this.cliente = cliente;
+		this.alBurger = alBurger;
+		this.alBebida = alBebida;
+		this.orderID = orderID;
+		this.userID = userID;
+		this.date = date;
+		this.time = time2;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public java.sql.Time getTime() {
+		return time;
+	}
+
+	public void setTime(java.sql.Time time) {
+		this.time = time;
 	}
 
 	public int getUserID() {
@@ -38,13 +69,7 @@ public class Order implements Serializable, DDBBObject {
 		this.userID = userID;
 	}
 
-	public int getCustomerID() {
-		return customerID;
-	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
-	}
 
 	public int getOrderID() {
 		return this.orderID;
@@ -67,7 +92,7 @@ public class Order implements Serializable, DDBBObject {
 	}
 
 	public void setBurger(Burger burger) {
-
+		burger.setOrderID(this.orderID);
 		alBurger.add(burger);
 
 	}
@@ -79,7 +104,7 @@ public class Order implements Serializable, DDBBObject {
 	}
 
 	public void setBebida(Drink bebida) {
-
+		bebida.setOrderID(this.orderID);
 		alBebida.add(bebida);
 
 	}
@@ -155,15 +180,14 @@ public class Order implements Serializable, DDBBObject {
 		ContentValues nr = new ContentValues();
 		nr.put("OrderID", getNextID(activity));
 		nr.put("UserID", this.getUserID());
-		nr.put("CustomerID", this.getCustomerID());
+		nr.put("CustomerID", this.getCliente().getId());
 		Date date = new Date();
 		nr.put("Date", date.getDate());
 		nr.put("Time", date.getTime());
 		nr.put("Price", this.getFinalPrecio());
 		return nr;
 	}
-	
-	
+
 	private static int getNextID(Activity activity) {
 		String query = "SELECT OrderID FROM Orders ORDER BY OrderID DESC LIMIT 1";
 		int lastID = 0;

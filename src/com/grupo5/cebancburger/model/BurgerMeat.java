@@ -16,6 +16,11 @@ public class BurgerMeat implements DDBBObject {
 	double price;
 	int id;
 
+	public BurgerMeat(int id, String description, double price) {
+		setId(id);
+		setDescription(description);
+		setPrice(price);
+	}
 	public BurgerMeat(String description, double price) {
 		setDescription(description);
 		setPrice(price);

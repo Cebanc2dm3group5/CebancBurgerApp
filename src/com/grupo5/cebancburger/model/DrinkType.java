@@ -15,6 +15,12 @@ public class DrinkType implements DDBBObject {
 	double price;
 	int id;
 
+	public DrinkType(int id, String description, double price) {
+		setId(id);
+		setDescription(description);
+		setPrice(price);
+	}
+	
 	public DrinkType(String description, double price) {
 		setDescription(description);
 		setPrice(price);

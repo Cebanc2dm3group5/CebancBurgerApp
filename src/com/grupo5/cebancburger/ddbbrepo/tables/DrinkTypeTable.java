@@ -75,11 +75,29 @@ public class DrinkTypeTable implements DDBBObjectTable {
 		}
 		return arrDrinkTypes;
 	}
+	
+	public static DrinkType getDrinkType(Activity activity, int id) {
+		DrinkType type = null;
+		String query = "SELECT * FROM DrinkType WHERE DrinkTypeID=" + id;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			int typeID = c.getInt(0);
+			String description = c.getString(1);
+			double price = c.getDouble(2);
+			type = new DrinkType(typeID, description, price);
+		}
+		return type;
+	}
 
 	@Override
 	public void initData(Activity activity) {
-		// TODO Auto-generated method stub
-
+		this.insert(new DrinkType("Cola", 1.5), activity);
+		this.insert(new DrinkType("Limón", 1.5), activity);
+		this.insert(new DrinkType("Naranja", 1.5), activity);
+		this.insert(new DrinkType("Nestea", 1.5), activity);
+		this.insert(new DrinkType("Cerveza", 1.5), activity);
+		this.insert(new DrinkType("Agua", 1), activity);
 	}
 
 	@Override

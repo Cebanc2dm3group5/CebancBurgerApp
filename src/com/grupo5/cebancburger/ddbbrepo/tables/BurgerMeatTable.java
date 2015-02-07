@@ -38,8 +38,9 @@ public class BurgerMeatTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		// TODO Auto-generated method stub
-
+		this.insert(new BurgerMeat("Buey", 1.5), activity);
+		this.insert(new BurgerMeat("Pollo", 0.8), activity);
+		this.insert(new BurgerMeat("Ternera", 1), activity);
 	}
 
 	@Override
@@ -75,16 +76,30 @@ public class BurgerMeatTable implements DDBBObjectTable {
 		return arrBurgerMeats;
 	}
 
+	public static BurgerMeat getBurgerMeat(Activity activity, int id) {
+		BurgerMeat meat = null;
+		String query = "SELECT * FROM BurgerMeat WHERE BurgerMeatID=" + id;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			int meatID = c.getInt(0);
+			String description = c.getString(1);
+			double price = c.getDouble(2);
+			meat = new BurgerMeat(meatID, description, price);
+		}
+		return meat;
+	}
+
 	public void insert(BurgerMeat burgerMeat, Activity activity) {
 		ContentValues nuevoRegistro = burgerMeat.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
-		db.insert("DrinkType", null, nuevoRegistro);
+		db.insert("BurgerMeat", null, nuevoRegistro);
 	}
 
 	public void edit(BurgerMeat burgerMeat, Activity activity) {
 		ContentValues reg = burgerMeat.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
-		db.update("DrinkType", reg, "DrinkTypeID=" + burgerMeat.getId(), null);
+		db.update("BurgerMeat", reg, "BurgerMeatID=" + burgerMeat.getId(), null);
 	}
 
 }

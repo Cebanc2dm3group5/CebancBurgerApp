@@ -1,6 +1,10 @@
 package com.grupo5.cebancburger.ddbbrepo;
 
 import com.grupo5.cebancburger.config.Options;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerMeatTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerSizeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerTypeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 
 import android.app.Activity;
@@ -37,6 +41,18 @@ public class DDBBSQLite {
 	public static void initData(Activity activity){
 		UserTable ut = new UserTable();
 		ut.initData(activity);
+		
+		DrinkTypeTable dtt = new DrinkTypeTable();
+		dtt.initData(activity);
+		
+		BurgerTypeTable btt = new BurgerTypeTable();
+		btt.initData(activity);
+		
+		BurgerMeatTable bmt = new BurgerMeatTable();
+		bmt.initData(activity);
+		
+		BurgerSizeTable bst = new BurgerSizeTable();
+		bst.initData(activity);
 	}
 
 }

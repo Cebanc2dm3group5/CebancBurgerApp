@@ -38,8 +38,11 @@ public class BurgerSizeTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		// TODO Auto-generated method stub
-
+		this.insert(new BurgerSize("Clásica", 1), activity);
+		this.insert(new BurgerSize("Clásica con queso", 1.2), activity);
+		this.insert(new BurgerSize("Doble con queso", 2.5), activity);
+		this.insert(new BurgerSize("Vegetal", 1), activity);
+		this.insert(new BurgerSize("Especial", 2), activity);
 	}
 	
 	public static ArrayList<ArrayList<String>> getBurgerSizes(Activity activity) {
@@ -67,6 +70,20 @@ public class BurgerSizeTable implements DDBBObjectTable {
 			} while (c.moveToNext());
 		}
 		return arrBurgerSizes;
+	}
+	
+	public static BurgerSize getBurgerSize(Activity activity, int id) {
+		BurgerSize size = null;
+		String query = "SELECT * FROM BurgerSize WHERE BurgerSizeID=" + id;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			int sizeID = c.getInt(0);
+			String description = c.getString(1);
+			double price = c.getDouble(2);
+			size = new BurgerSize(sizeID, description, price);
+		}
+		return size;
 	}
 
 	@Override

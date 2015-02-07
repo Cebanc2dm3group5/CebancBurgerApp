@@ -37,8 +37,8 @@ public class BurgerTypeTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		// TODO Auto-generated method stub
-		
+		this.insert(new BurgerType("Whooper", 5.00), activity);
+		this.insert(new BurgerType("Normal", 4.50), activity);
 	}
 
 	@Override
@@ -61,31 +61,45 @@ public class BurgerTypeTable implements DDBBObjectTable {
 	}
 	
 	
-	public static ArrayList<ArrayList<String>> getDrinkTypes(Activity activity) {
-		ArrayList<ArrayList<String>> arrDrinkTypes = new ArrayList<ArrayList<String>>();
+	public static ArrayList<ArrayList<String>> getBurgerTypes(Activity activity) {
+		ArrayList<ArrayList<String>> arrBurgerTypes = new ArrayList<ArrayList<String>>();
 		// id
-		arrDrinkTypes.add(new ArrayList<String>());
+		arrBurgerTypes.add(new ArrayList<String>());
 		// description
-		arrDrinkTypes.add(new ArrayList<String>());
+		arrBurgerTypes.add(new ArrayList<String>());
 		// price
-		arrDrinkTypes.add(new ArrayList<String>());
-		String query = "SELECT * FROM DrinkType";
+		arrBurgerTypes.add(new ArrayList<String>());
+		String query = "SELECT * FROM BurgerType";
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			do {
 				int drinkTypeID = c.getInt(0);
-				arrDrinkTypes.get(0).add(Integer.toString(drinkTypeID));
+				arrBurgerTypes.get(0).add(Integer.toString(drinkTypeID));
 
 				String description = c.getString(1);
-				arrDrinkTypes.get(0).add(description);
+				arrBurgerTypes.get(0).add(description);
 
 				double price = c.getInt(2);
-				arrDrinkTypes.get(0).add(Double.toString(price));
+				arrBurgerTypes.get(0).add(Double.toString(price));
 
 			} while (c.moveToNext());
 		}
-		return arrDrinkTypes;
+		return arrBurgerTypes;
+	}
+	
+	public static BurgerType getBurgerMeat(Activity activity, int id) {
+		BurgerType type = null;
+		String query = "SELECT * FROM BurgerType WHERE BurgerTypeID=" + id;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			int typeID = c.getInt(0);
+			String description = c.getString(1);
+			double price = c.getDouble(2);
+			type = new BurgerType(typeID, description, price);
+		}
+		return type;
 	}
 
 }

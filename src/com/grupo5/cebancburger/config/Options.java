@@ -2,7 +2,7 @@ package com.grupo5.cebancburger.config;
 
 public class Options {
 	final static String DDBBName = "DDBBBurgerApp";
-	final static int version = 16;
+	final static int version = 19;
 
 	public static String getDDBBName() {
 		return DDBBName;
