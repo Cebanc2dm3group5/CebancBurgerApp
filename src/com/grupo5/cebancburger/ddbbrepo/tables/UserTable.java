@@ -44,7 +44,7 @@ public class UserTable implements DDBBObjectTable {
 	}
 
 	public void edit(User user, Activity activity) {
-		ContentValues reg = user.getContentValue(activity);
+		ContentValues reg = user.getContentValueForEdit(activity,user.getUserID());
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("User", reg, "UserID=" + user.getUserID(), null);
 

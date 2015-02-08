@@ -143,6 +143,16 @@ public class Burger implements Serializable, DDBBObject {
 		nr.put("Amount", this.getCantidad());
 		return nr;
 	}
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("OrderLineBurgerID", id);
+		nr.put("BurgerTypeID", this.getType().getId());
+		nr.put("BurgerMeatID", this.getMeat().getId());
+		nr.put("BurgerSize", this.getSize().getId());
+		nr.put("OrderID", this.getOrderID());
+		nr.put("Amount", this.getCantidad());
+		return nr;
+	}
 
 	private static int getNextID(Activity activity) {
 		String query = "SELECT OrderLineBurgerID FROM OrderLineBurger ORDER BY OrderLineBurgerID DESC LIMIT 1";
@@ -158,7 +168,7 @@ public class Burger implements Serializable, DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		OrderLineBurgerTable olbt = new OrderLineBurgerTable();
-		if (this.burgerLineID != -1) {
+		if (this.burgerLineID == -1) {
 			olbt.insert(this, activity);
 		} else {
 			olbt.edit(this, activity);

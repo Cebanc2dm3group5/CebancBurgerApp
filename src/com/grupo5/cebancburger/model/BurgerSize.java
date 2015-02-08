@@ -53,7 +53,7 @@ public class BurgerSize implements DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		BurgerSizeTable bst = new BurgerSizeTable();
-		if (this.id != -1) {
+		if (this.id == -1) {
 			bst.insert(this, activity);
 		} else {
 			bst.edit(this, activity);
@@ -62,8 +62,8 @@ public class BurgerSize implements DDBBObject {
 
 	@Override
 	public void delete(Activity activity) {
-		DrinkTypeTable dtt = new DrinkTypeTable();
-		dtt.delete(activity, this.getId());
+		BurgerSizeTable bst = new BurgerSizeTable();
+		bst.delete(activity, this.getId());
 	}
 
 	@Override
@@ -75,6 +75,13 @@ public class BurgerSize implements DDBBObject {
 		return nr;
 	}
 
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("BurgerSizeID", id);
+		nr.put("Description", this.getDescription());
+		nr.put("Price", this.getPrice());
+		return nr;
+	}
 	private static int getNextID(Activity activity) {
 		String query = "SELECT BurgerSizeID FROM BurgerSize ORDER BY BurgerSizeID DESC LIMIT 1";
 		int lastID = 0;

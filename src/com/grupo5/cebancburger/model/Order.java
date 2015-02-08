@@ -161,7 +161,7 @@ public class Order implements Serializable, DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		OrderTable ot = new OrderTable();
-		if (this.orderID != -1) {
+		if (this.orderID == -1) {
 			ot.insert(this, activity);
 		} else {
 			ot.edit(this, activity);
@@ -179,6 +179,17 @@ public class Order implements Serializable, DDBBObject {
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
 		nr.put("OrderID", getNextID(activity));
+		nr.put("UserID", this.getUserID());
+		nr.put("CustomerID", this.getCliente().getId());
+		Date date = new Date();
+		nr.put("Date", date.getDate());
+		nr.put("Time", date.getTime());
+		nr.put("Price", this.getFinalPrecio());
+		return nr;
+	}
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("OrderID", id);
 		nr.put("UserID", this.getUserID());
 		nr.put("CustomerID", this.getCliente().getId());
 		Date date = new Date();

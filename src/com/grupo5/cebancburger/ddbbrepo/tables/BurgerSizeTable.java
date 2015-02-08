@@ -62,10 +62,10 @@ public class BurgerSizeTable implements DDBBObjectTable {
 				arrBurgerSizes.get(0).add(Integer.toString(burgerMeatID));
 
 				String description = c.getString(1);
-				arrBurgerSizes.get(0).add(description);
+				arrBurgerSizes.get(1).add(description);
 
 				double price = c.getInt(2);
-				arrBurgerSizes.get(0).add(Double.toString(price));
+				arrBurgerSizes.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());
 		}

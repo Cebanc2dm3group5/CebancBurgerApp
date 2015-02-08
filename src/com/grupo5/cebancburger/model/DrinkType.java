@@ -1,5 +1,7 @@
 package com.grupo5.cebancburger.model;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -54,7 +56,7 @@ public class DrinkType implements DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		DrinkTypeTable dtt = new DrinkTypeTable();
-		if (this.id != -1) {
+		if (this.id == -1) {
 			dtt.insert(this, activity);
 		} else {
 			dtt.edit(this, activity);
@@ -71,6 +73,14 @@ public class DrinkType implements DDBBObject {
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
 		nr.put("DrinkTypeID", getNextID(activity));
+		nr.put("Description", this.getDescription());
+		nr.put("Price", this.getPrice());
+		return nr;
+	}
+	
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("DrinkTypeID", id);
 		nr.put("Description", this.getDescription());
 		nr.put("Price", this.getPrice());
 		return nr;

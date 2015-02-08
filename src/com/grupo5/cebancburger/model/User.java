@@ -67,7 +67,7 @@ public class User implements Serializable, DDBBObject{
 
 	public void save(Activity activity) {
 		UserTable ut = new UserTable();
-		if (this.userID != -1) {
+		if (this.userID == -1) {
 			ut.insert(this, activity);
 		} else {
 			ut.edit(this, activity);
@@ -79,7 +79,14 @@ public class User implements Serializable, DDBBObject{
 		ut.delete(activity, this.getUserID());
 	}
 	
-	
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("UserID", id);
+		nr.put("UserName", this.getUsername());
+		nr.put("Password", this.getPassword());
+		nr.put("Admin", this.isAdmin());
+		return nr;
+	}
 
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();

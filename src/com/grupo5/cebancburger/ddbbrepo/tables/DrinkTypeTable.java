@@ -66,10 +66,10 @@ public class DrinkTypeTable implements DDBBObjectTable {
 				arrDrinkTypes.get(0).add(Integer.toString(drinkTypeID));
 
 				String description = c.getString(1);
-				arrDrinkTypes.get(0).add(description);
+				arrDrinkTypes.get(1).add(description);
 
 				double price = c.getInt(2);
-				arrDrinkTypes.get(0).add(Double.toString(price));
+				arrDrinkTypes.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());
 		}

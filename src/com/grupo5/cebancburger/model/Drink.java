@@ -94,7 +94,7 @@ public class Drink implements Serializable, DDBBObject {
 
 	public void save(Activity activity) {
 		OrderLineDrinkTable oldt = new OrderLineDrinkTable();
-		if (this.drinkLineID != -1) {
+		if (this.drinkLineID == -1) {
 			oldt.insert(this, activity);
 		} else {
 			oldt.edit(this, activity);
@@ -110,7 +110,14 @@ public class Drink implements Serializable, DDBBObject {
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
 		nr.put("OrderLineDrinkID", getNextID(activity));
-		nr.put("OrderLineDrinkID", getNextID(activity));
+		nr.put("OrderID", this.getOrderID());
+		nr.put("Amount", this.getCantidad());
+		return nr;
+	}
+	
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("OrderLineDrinkID", id);
 		nr.put("OrderID", this.getOrderID());
 		nr.put("Amount", this.getCantidad());
 		return nr;

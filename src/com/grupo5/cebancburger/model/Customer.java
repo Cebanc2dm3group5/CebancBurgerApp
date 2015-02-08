@@ -70,7 +70,7 @@ public class Customer implements Serializable, DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		CustomerTable ct = new CustomerTable();
-		if (this.id != -1) {
+		if (this.id == -1) {
 			ct.insert(this, activity);
 		} else {
 //			ct.edit(this, activity);
@@ -86,6 +86,9 @@ public class Customer implements Serializable, DDBBObject {
 	@Override
 	public ContentValues getContentValue(Activity activity) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	public ContentValues getContentValueForEdit(Activity activity, int id){
 		return null;
 	}
 }

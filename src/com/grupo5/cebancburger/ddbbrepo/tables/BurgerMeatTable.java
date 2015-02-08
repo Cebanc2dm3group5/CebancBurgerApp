@@ -66,10 +66,10 @@ public class BurgerMeatTable implements DDBBObjectTable {
 				arrBurgerMeats.get(0).add(Integer.toString(burgerMeatID));
 
 				String description = c.getString(1);
-				arrBurgerMeats.get(0).add(description);
+				arrBurgerMeats.get(1).add(description);
 
 				double price = c.getInt(2);
-				arrBurgerMeats.get(0).add(Double.toString(price));
+				arrBurgerMeats.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());
 		}
@@ -97,7 +97,7 @@ public class BurgerMeatTable implements DDBBObjectTable {
 	}
 
 	public void edit(BurgerMeat burgerMeat, Activity activity) {
-		ContentValues reg = burgerMeat.getContentValue(activity);
+		ContentValues reg = burgerMeat.getContentValueForEdit(activity,burgerMeat.getId());
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("BurgerMeat", reg, "BurgerMeatID=" + burgerMeat.getId(), null);
 	}

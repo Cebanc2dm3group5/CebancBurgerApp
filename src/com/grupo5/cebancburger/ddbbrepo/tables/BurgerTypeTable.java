@@ -78,17 +78,17 @@ public class BurgerTypeTable implements DDBBObjectTable {
 				arrBurgerTypes.get(0).add(Integer.toString(drinkTypeID));
 
 				String description = c.getString(1);
-				arrBurgerTypes.get(0).add(description);
+				arrBurgerTypes.get(1).add(description);
 
 				double price = c.getInt(2);
-				arrBurgerTypes.get(0).add(Double.toString(price));
+				arrBurgerTypes.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());
 		}
 		return arrBurgerTypes;
 	}
 	
-	public static BurgerType getBurgerMeat(Activity activity, int id) {
+	public static BurgerType getBurgerType(Activity activity, int id) {
 		BurgerType type = null;
 		String query = "SELECT * FROM BurgerType WHERE BurgerTypeID=" + id;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);

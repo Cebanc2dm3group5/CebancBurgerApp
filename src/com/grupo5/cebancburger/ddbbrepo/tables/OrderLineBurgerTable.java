@@ -64,7 +64,7 @@ public class OrderLineBurgerTable implements DDBBObjectTable {
 				int meatID = c.getInt(2);
 				int sizeID = c.getInt(3);
 				int amount = c.getInt(5);
-				Burger b = new Burger(BurgerSizeTable.getBurgerSize(activity, sizeID), BurgerMeatTable.getBurgerMeat(activity, meatID), BurgerTypeTable.getBurgerMeat(activity, typeID), amount);
+				Burger b = new Burger(BurgerSizeTable.getBurgerSize(activity, sizeID), BurgerMeatTable.getBurgerMeat(activity, meatID), BurgerTypeTable.getBurgerType(activity, typeID), amount);
 				b.setBurgerLineID(id);
 				b.setOrderID(orderID);
 				arrBurgers.add(b);

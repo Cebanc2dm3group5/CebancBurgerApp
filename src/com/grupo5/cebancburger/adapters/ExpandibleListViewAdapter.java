@@ -1,6 +1,7 @@
 package com.grupo5.cebancburger.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.grupo5.cebancburger.*;
 import com.grupo5.cebancburger.R;
 import com.grupo5.cebancburger.viewmodels.ExpandibleListview;
 
@@ -80,7 +82,17 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 		convertView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(activity, children, Toast.LENGTH_SHORT).show();
+				if (children.equals("Pedido")){
+					Intent intent = new Intent(activity,
+							ViewPedidoActivity.class);
+					activity.startActivityForResult(intent,10);
+					
+				}else{
+					Intent intent = new Intent(activity,
+							SelectRegistroActivity.class);
+					intent.putExtra("titulo", children);
+					activity.startActivityForResult(intent,10);
+				}
 			}
 		});
 		return convertView;

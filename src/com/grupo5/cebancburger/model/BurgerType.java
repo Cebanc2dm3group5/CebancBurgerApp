@@ -55,7 +55,7 @@ public class BurgerType implements DDBBObject {
 	@Override
 	public void save(Activity activity) {
 		BurgerTypeTable dtt = new BurgerTypeTable();
-		if (this.id != -1) {
+		if (this.id == -1) {
 			dtt.insert(this, activity);
 		} else {
 			dtt.edit(this, activity);
@@ -64,14 +64,21 @@ public class BurgerType implements DDBBObject {
 
 	@Override
 	public void delete(Activity activity) {
-		DrinkTypeTable dtt = new DrinkTypeTable();
-		dtt.delete(activity, this.getId());
+		BurgerTypeTable btt = new BurgerTypeTable();
+		btt.delete(activity, this.getId());
 	}
 
 	@Override
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
 		nr.put("BurgerTypeID", getNextID(activity));
+		nr.put("Description", this.getDescription());
+		nr.put("Price", this.getPrice());
+		return nr;
+	}
+	public ContentValues getContentValueForEdit(Activity activity, int id){
+		ContentValues nr = new ContentValues();
+		nr.put("BurgerTypeID", id);
 		nr.put("Description", this.getDescription());
 		nr.put("Price", this.getPrice());
 		return nr;
