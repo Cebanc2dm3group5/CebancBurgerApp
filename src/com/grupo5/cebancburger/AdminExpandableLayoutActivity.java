@@ -3,7 +3,6 @@ package com.grupo5.cebancburger;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.Menu;
 import android.widget.ExpandableListView;
 
 import com.grupo5.cebancburger.adapters.ExpandibleListViewAdapter;
@@ -38,10 +37,5 @@ public class AdminExpandableLayoutActivity extends Activity{
 		grupo3.children.add("Pedido");
 		grupos.append(3, grupo3);
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+
 }

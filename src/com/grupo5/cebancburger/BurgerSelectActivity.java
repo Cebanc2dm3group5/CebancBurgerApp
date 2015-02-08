@@ -87,6 +87,7 @@ public class BurgerSelectActivity extends Activity {
 						int cantidad = Integer.parseInt(edtBurgerNum.getText()
 								.toString());
 
+						// TODO - use BurgerType objects
 						Burger burger = new Burger(tamano, tipo_carne,
 								tipo_burger, cantidad);
 

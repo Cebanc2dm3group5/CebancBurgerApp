@@ -86,8 +86,9 @@ public class OrderLineBurgerTable implements DDBBObjectTable {
 	}
 
 	public void edit(Burger burger, Activity activity) {
-		// TODO Auto-generated method stub
-		
+		ContentValues nuevoRegistro = burger.getContentValue(activity);
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.update("OrderLineBurger", nuevoRegistro, "OrderID=" + burger.getBurgerLineID(), null);
 	}
 
 }

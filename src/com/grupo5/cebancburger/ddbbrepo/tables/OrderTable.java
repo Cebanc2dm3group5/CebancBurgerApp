@@ -49,24 +49,24 @@ public class OrderTable implements DDBBObjectTable {
 	@Override
 	public void initData(Activity activity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Activity activity, int id) {
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
-		db.delete("Orders", "OrderID="+id, null);		
+		db.delete("Orders", "OrderID=" + id, null);
 	}
 
 	public void insert(Order order, Activity activity) {
 		ContentValues nuevoRegistro = order.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("Orders", null, nuevoRegistro);
-		
-		for (int i=0; i<order.getBurger().size(); i++){
+
+		for (int i = 0; i < order.getBurger().size(); i++) {
 			order.getBurger().get(i).save(activity);
 		}
-		for (int i=0; i<order.getBebida().size(); i++){
+		for (int i = 0; i < order.getBebida().size(); i++) {
 			order.getBebida().get(i).save(activity);
 		}
 	}
@@ -76,9 +76,15 @@ public class OrderTable implements DDBBObjectTable {
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("Orders", reg, "OrderID=" + order.getOrderID(), null);
 		
+		for (int i = 0; i < order.getBurger().size(); i++) {
+			order.getBurger().get(i).save(activity);
+		}
+		for (int i = 0; i < order.getBebida().size(); i++) {
+			order.getBebida().get(i).save(activity);
+		}
+
 	}
-	
-	
+
 	public static ArrayList<Order> getAllOrders(Activity activity) {
 		ArrayList<Order> arrOrders = new ArrayList<Order>();
 		String query = "SELECT * FROM Orders";
@@ -91,41 +97,48 @@ public class OrderTable implements DDBBObjectTable {
 				int customerId = c.getInt(2);
 				Date date = new Date(c.getInt(3));
 				Time time = new Time(c.getInt(4));
-				
+
 				Customer cust = CustomerTable.getCustomer(activity, customerId);
-				ArrayList<Burger> alBurger = OrderLineBurgerTable.getOrderBurgers(activity, orderId);
-				ArrayList<Drink> alBebida = OrderLineDrinkTable.getOrderDrinks(activity, orderId);
-				Order order = new Order(cust, alBurger, alBebida, orderId, userId, date, time);
+				ArrayList<Burger> alBurger = OrderLineBurgerTable
+						.getOrderBurgers(activity, orderId);
+				ArrayList<Drink> alBebida = OrderLineDrinkTable.getOrderDrinks(
+						activity, orderId);
+				Order order = new Order(cust, alBurger, alBebida, orderId,
+						userId, date, time);
 				order.setUserID(userId);
 				arrOrders.add(order);
 			} while (c.moveToNext());
 		}
 		return arrOrders;
 	}
-//	
-//	public static ArrayList<User> getOrders(Activity activity, String condition) {
-//		ArrayList<User> arrUsers = new ArrayList<User>();
-//		String query = "SELECT * FROM Orders WHERE "+condition;
-//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
-//		Cursor c = db.rawQuery(query, null);
-//		if (c.moveToFirst()) {
-//			do {
-//				int userId = c.getInt(0);
-//				String username = c.getString(1);
-//				String password = c.getString(2);
-//				int isAdminInt = c.getInt(3);
-//				boolean isAdmin = false;
-//				if (isAdminInt == 1) {
-//					isAdmin = true;
-//				}
-//				User u = new User(username, password, isAdmin);
-//				u.setUserID(userId);
-//				arrUsers.add(u);
-//			} while (c.moveToNext());
-//		}
-//		return arrUsers;
-//	}
-//
+
+	public static ArrayList<Order> getOrders(Activity activity, String condition) {
+		ArrayList<Order> arrOrders = new ArrayList<Order>();
+		String query = "SELECT * FROM Orders WHERE " + condition;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			do {
+				int orderId = c.getInt(0);
+				int userId = c.getInt(1);
+				int customerId = c.getInt(2);
+				Date date = new Date(c.getInt(3));
+				Time time = new Time(c.getInt(4));
+
+				Customer cust = CustomerTable.getCustomer(activity, customerId);
+				ArrayList<Burger> alBurger = OrderLineBurgerTable
+						.getOrderBurgers(activity, orderId);
+				ArrayList<Drink> alBebida = OrderLineDrinkTable.getOrderDrinks(
+						activity, orderId);
+				Order order = new Order(cust, alBurger, alBebida, orderId,
+						userId, date, time);
+				order.setUserID(userId);
+				arrOrders.add(order);
+			} while (c.moveToNext());
+		}
+		return arrOrders;
+	}
+
 	public static Order getOrder(Activity activity, int id) {
 		Order order = null;
 		String query = "SELECT * FROM Orders WHERE OrderID=" + id;
@@ -138,11 +151,14 @@ public class OrderTable implements DDBBObjectTable {
 			int customerId = c.getInt(2);
 			Date date = new Date(c.getInt(3));
 			Time time = new Time(c.getInt(4));
-			
+
 			Customer cust = CustomerTable.getCustomer(activity, customerId);
-			ArrayList<Burger> alBurger = OrderLineBurgerTable.getOrderBurgers(activity, orderId);
-			ArrayList<Drink> alBebida = OrderLineDrinkTable.getOrderDrinks(activity, orderId);
-			order = new Order(cust, alBurger, alBebida, orderId, userId, date, time);
+			ArrayList<Burger> alBurger = OrderLineBurgerTable.getOrderBurgers(
+					activity, orderId);
+			ArrayList<Drink> alBebida = OrderLineDrinkTable.getOrderDrinks(
+					activity, orderId);
+			order = new Order(cust, alBurger, alBebida, orderId, userId, date,
+					time);
 			order.setUserID(userId);
 		}
 		return order;

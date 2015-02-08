@@ -3,6 +3,7 @@ package com.grupo5.cebancburger.ddbbrepo.tables;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -42,13 +43,15 @@ public class OrderLineDrinkTable implements DDBBObjectTable {
 	}
 
 	public void insert(Drink drink, Activity activity) {
-		// TODO Auto-generated method stub
-		
+		ContentValues nuevoRegistro = drink.getContentValue(activity);
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.insert("OrderLineDrink", null, nuevoRegistro);		
 	}
 
 	public void edit(Drink drink, Activity activity) {
-		// TODO Auto-generated method stub
-		
+		ContentValues nuevoRegistro = drink.getContentValue(activity);
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.update("OrderLineDrink", nuevoRegistro, "OrderLineDrinkID=" + drink.getDrinkLineID(), null);		
 	}
 
 	@Override
@@ -59,7 +62,8 @@ public class OrderLineDrinkTable implements DDBBObjectTable {
 
 	@Override
 	public void delete(Activity activity, int id) {
-		
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.delete("OrderLineDrink", "OrderLineDrinkID="+id, null);	
 	}
 	
 	public static ArrayList<Drink> getOrderDrinks(Activity activity, int orderID) {

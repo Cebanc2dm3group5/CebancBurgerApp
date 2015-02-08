@@ -1,11 +1,20 @@
 package com.grupo5.cebancburger.ddbbrepo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.grupo5.cebancburger.ddbbrepo.tables.*;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerMeatTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerSizeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerTypeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.CustomerTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.OrderLineBurgerTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.OrderLineDrinkTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.OrderTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 
 public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 
@@ -18,10 +27,12 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 	OrderTable orderTable = new OrderTable();
 	OrderLineBurgerTable orderLineBurgerTable = new OrderLineBurgerTable();
 	OrderLineDrinkTable orderLineDrinkTable = new OrderLineDrinkTable();
+	Activity context;
 
 	public BurgerAppSQLiteHelper(Context context, String name,
 			CursorFactory factory, int version) {
 		super(context, name, factory, version);
+		this.context = (Activity) context;
 	}
 
 	@Override
@@ -36,6 +47,8 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(orderTable.getSqlCreate());
 		db.execSQL(orderLineBurgerTable.getSqlCreate());
 		db.execSQL(orderLineDrinkTable.getSqlCreate());
+		
+		DDBBSQLite.initData(this.context);
 
 	}
 

@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.grupo5.cebancburger.config.Options;
+import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.CustomerTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
@@ -15,7 +19,7 @@ public class Customer implements Serializable, DDBBObject {
 	private int id;
 	private char idLet;
 
-	public Customer(String nombre, String direccion, String telefono){
+	public Customer(String nombre, String direccion, String telefono) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
@@ -46,24 +50,27 @@ public class Customer implements Serializable, DDBBObject {
 		this.idLet = idLet;
 	}
 
-	public void setNombre(String nombre){
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getNombre(){
+
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setDireccion(String direccion){
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getDireccion(){
+
+	public String getDireccion() {
 		return direccion;
 	}
 
-	public void setTelefono(String telefono){
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getTelefono(){
+
+	public String getTelefono() {
 		return telefono;
 	}
 
@@ -73,22 +80,45 @@ public class Customer implements Serializable, DDBBObject {
 		if (this.id == -1) {
 			ct.insert(this, activity);
 		} else {
-//			ct.edit(this, activity);
-		}		
+			 ct.edit(this, activity);
+		}
 	}
 
 	@Override
 	public void delete(Activity activity) {
 		CustomerTable ct = new CustomerTable();
-		ct.delete(activity, this.getId());		
+		ct.delete(activity, this.getId());
 	}
 
 	@Override
 	public ContentValues getContentValue(Activity activity) {
-		// TODO Auto-generated method stub
-		return null;
+		ContentValues nr = new ContentValues();
+		nr.put("CustomerID", getNextID(activity));
+		nr.put("Name", this.getNombre());
+		nr.put("Address", this.getDireccion());
+		nr.put("IDChar", String.valueOf(this.getIdLet()));
+		nr.put("Phone", this.getTelefono());
+		return nr;
 	}
-	public ContentValues getContentValueForEdit(Activity activity, int id){
-		return null;
+
+	public ContentValues getContentValueForEdit(Activity activity, int id) {
+		ContentValues nr = new ContentValues();
+		nr.put("CustomerID", this.getId());
+		nr.put("Name", this.getNombre());
+		nr.put("Address", this.getDireccion());
+		nr.put("IDChar", String.valueOf(this.getIdLet()));
+		nr.put("Phone", this.getTelefono());
+		return nr;
+	}
+
+	private static int getNextID(Activity activity) {
+		String query = "SELECT CustomerID FROM Customer ORDER BY CustomerID DESC LIMIT 1";
+		int lastID = 0;
+		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
 	}
 }

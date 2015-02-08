@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
-import com.grupo5.cebancburger.model.BurgerSize;
 import com.grupo5.cebancburger.model.BurgerType;
 
 public class BurgerTypeTable implements DDBBObjectTable {

@@ -20,7 +20,6 @@ public class DDBBSQLite {
 		// Si hemos abierto correctamente la base de datos
 		if (db != null) {
 			success = true;
-			initData(activity);
 			Toast.makeText(activity.getApplicationContext(), "DDBB Created",
 					Toast.LENGTH_SHORT).show();
 			// Cerramos la base de datos
