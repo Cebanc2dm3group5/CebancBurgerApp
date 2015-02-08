@@ -43,7 +43,7 @@ public class DrinkTypeTable implements DDBBObjectTable {
 	}
 
 	public void edit(DrinkType drinkType, Activity activity) {
-		ContentValues reg = drinkType.getContentValue(activity);
+		ContentValues reg = drinkType.getContentValueForEdit(activity,drinkType.getId());
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("DrinkType", reg, "DrinkTypeID=" + drinkType.getId(), null);
 

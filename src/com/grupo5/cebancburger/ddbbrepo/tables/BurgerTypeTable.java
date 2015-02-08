@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
+import com.grupo5.cebancburger.model.BurgerSize;
 import com.grupo5.cebancburger.model.BurgerType;
 
 public class BurgerTypeTable implements DDBBObjectTable {
@@ -37,8 +38,11 @@ public class BurgerTypeTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		this.insert(new BurgerType("Whooper", 5.00), activity);
-		this.insert(new BurgerType("Normal", 4.50), activity);
+		this.insert(new BurgerType("Clásica", 1), activity);
+		this.insert(new BurgerType("Clásica con queso", 1.2), activity);
+		this.insert(new BurgerType("Doble con queso", 2.5), activity);
+		this.insert(new BurgerType("Vegetal", 1), activity);
+		this.insert(new BurgerType("Especial", 2), activity);
 	}
 
 	@Override
@@ -54,7 +58,7 @@ public class BurgerTypeTable implements DDBBObjectTable {
 	}
 
 	public void edit(BurgerType burgerType, Activity activity) {
-		ContentValues reg = burgerType.getContentValue(activity);
+		ContentValues reg = burgerType.getContentValueForEdit(activity,burgerType.getId());
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("BurgerType", reg, "BurgerTypeID=" + burgerType.getId(), null);
 		

@@ -11,6 +11,7 @@ import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
 import com.grupo5.cebancburger.model.BurgerSize;
+import com.grupo5.cebancburger.model.BurgerType;
 
 public class BurgerSizeTable implements DDBBObjectTable {
 	String sqlCreate = "CREATE TABLE BurgerSize (BurgerSizeID INTEGER NOT NULL, "
@@ -38,11 +39,8 @@ public class BurgerSizeTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		this.insert(new BurgerSize("Clásica", 1), activity);
-		this.insert(new BurgerSize("Clásica con queso", 1.2), activity);
-		this.insert(new BurgerSize("Doble con queso", 2.5), activity);
-		this.insert(new BurgerSize("Vegetal", 1), activity);
-		this.insert(new BurgerSize("Especial", 2), activity);
+		this.insert(new BurgerSize("Whooper", 5.00), activity);
+		this.insert(new BurgerSize("Normal", 4.50), activity);
 	}
 	
 	public static ArrayList<ArrayList<String>> getBurgerSizes(Activity activity) {
@@ -99,7 +97,7 @@ public class BurgerSizeTable implements DDBBObjectTable {
 	}
 
 	public void edit(BurgerSize burgerSize, Activity activity) {
-		ContentValues reg = burgerSize.getContentValue(activity);
+		ContentValues reg = burgerSize.getContentValueForEdit(activity,burgerSize.getId());
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("BurgerSize", reg, "BurgerSizeID=" + burgerSize.getId(), null);
 	}

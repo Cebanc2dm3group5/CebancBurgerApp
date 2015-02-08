@@ -85,7 +85,7 @@ public class SelectRegistroActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				setAction(position);
+				setAction(position - 1);
 				return false;
 			}
 		});
@@ -213,7 +213,7 @@ public class SelectRegistroActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,
 					int which) {
-				getId(position - 1);
+				getId(position);
 				openAddData();
 
 			}
@@ -222,7 +222,7 @@ public class SelectRegistroActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,
 					int which) {
-				getId(position - 1);
+				getId(position);
 				setCardYesNo();
 
 			}

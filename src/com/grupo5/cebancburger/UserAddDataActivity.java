@@ -40,10 +40,7 @@ public class UserAddDataActivity extends Activity{
 		btnCancelar = (Button) findViewById(R.id.btnUserAddCancel);
 		
 		if (nId != -1){
-			user = new User(nId,this);
-			txtUserName.setText(user.getUsername());
-			txtPassword.setText(user.getPassword());
-			cbAdmin.setChecked(user.isAdmin());
+			loadUserData();
 		}
 
 		btnGuardar.setOnClickListener(new OnClickListener() {
@@ -81,4 +78,12 @@ public class UserAddDataActivity extends Activity{
 
 	}
 
+	private void loadUserData(){
+
+		user = new User(nId,this);
+		txtUserName.setText(user.getUsername());
+		txtPassword.setText(user.getPassword());
+		cbAdmin.setChecked(user.isAdmin());
+	}
+	
 }
