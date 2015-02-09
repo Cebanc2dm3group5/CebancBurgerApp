@@ -173,7 +173,7 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 		}
 
 		Toast.makeText(getApplicationContext(),
-				"Usuario guardado", Toast.LENGTH_SHORT)
+				 sTitle + " guardado", Toast.LENGTH_SHORT)
 				.show();
 	}
 	

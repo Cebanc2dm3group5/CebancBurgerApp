@@ -84,7 +84,7 @@ public class CustomerAddDataActivity  extends Activity{
 		customer = new Customer(nId,this);
 		txtNombre.setText(customer.getNombre());
 		txtDireccion.setText(customer.getDireccion());
-		txtLetraDNI.setText(customer.getIdLet());
+		txtLetraDNI.setText(Character.toString(customer.getIdLet()));
 		txtTelefono.setText(customer.getTelefono());
 	}
 

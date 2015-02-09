@@ -13,7 +13,7 @@ import com.grupo5.cebancburger.interfaces.DDBBObject;
 public class BurgerSize implements DDBBObject {
 	String description;
 	double price;
-	int id;
+	int id = -1;
 
 	public BurgerSize(int id, String description, double price) {
 		setDescription(description);

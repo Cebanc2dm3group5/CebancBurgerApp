@@ -17,23 +17,23 @@ import com.grupo5.cebancburger.interfaces.DDBBObject;
 public class Customer implements Serializable, DDBBObject {
 
 	private String nombre, direccion, telefono;
-	private int id;
+	private int id = -1;
 	private char idLet;
 
 	public Customer(String nombre, String direccion, String telefono, char letraID) {
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.idLet = letraID;
+		this.setNombre(nombre);
+		this.setDireccion(direccion);
+		this.setTelefono(telefono);
+		this.setIdLet(letraID);
 	}
 
 	public Customer(String nombre, String direccion, String telefono, int id,
 			char idLet) {
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.id = id;
-		this.idLet = idLet;
+		this.setNombre(nombre);
+		this.setDireccion(direccion);
+		this.setTelefono(telefono);
+		this.setIdLet(idLet);
+		this.setId(id);
 	}
 	
 	public Customer(int id, Activity activity){
