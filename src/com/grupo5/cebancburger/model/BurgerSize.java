@@ -1,5 +1,7 @@
 package com.grupo5.cebancburger.model;
 
+import java.io.Serializable;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -10,7 +12,8 @@ import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.BurgerSizeTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
-public class BurgerSize implements DDBBObject {
+@SuppressWarnings("serial")
+public class BurgerSize implements Serializable, DDBBObject {
 	String description;
 	double price;
 	int id;

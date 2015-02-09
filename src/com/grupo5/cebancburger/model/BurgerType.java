@@ -1,5 +1,7 @@
 package com.grupo5.cebancburger.model;
 
+import java.io.Serializable;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -8,10 +10,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.BurgerTypeTable;
-import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
-public class BurgerType implements DDBBObject {
+@SuppressWarnings("serial")
+public class BurgerType implements Serializable, DDBBObject {
 	String description;
 	double price;
 	int id;

@@ -11,7 +11,6 @@ import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
 import com.grupo5.cebancburger.model.Customer;
-import com.grupo5.cebancburger.model.User;
 
 public class CustomerTable implements DDBBObjectTable {
 	String sqlCreate = "CREATE TABLE Customer (CustomerID INTEGER NOT NULL PRIMARY KEY, "

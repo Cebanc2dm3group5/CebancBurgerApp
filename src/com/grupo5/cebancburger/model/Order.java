@@ -186,6 +186,7 @@ public class Order implements Serializable, DDBBObject {
 		nr.put("Price", this.getFinalPrecio());
 		return nr;
 	}
+	@SuppressWarnings("deprecation")
 	public ContentValues getContentValueForEdit(Activity activity, int id){
 		ContentValues nr = new ContentValues();
 		nr.put("OrderID", id);

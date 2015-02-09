@@ -54,8 +54,8 @@ public class Drink implements Serializable, DDBBObject {
 		this.tipo = tipo;
 	}
 
-	public int getTipo() {
-		return tipo;
+	public String getTipo() {
+		return type.getDescription();
 	}
 
 	public void setCantidad(int cantidad) {

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.model.Drink;
+import com.grupo5.cebancburger.model.DrinkType;
 import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 
@@ -30,6 +31,7 @@ public class BebidaSelectActivity extends Activity {
 	EditText edtBebidaNum;
 	private int tipo_bebida = 0;
 	private double precio_bebida = 0;
+	DrinkType dt = null;
 	
 	ArrayList<ArrayList<String>> arrTiposBebida = new ArrayList<ArrayList<String>>();
 	
@@ -88,7 +90,8 @@ public class BebidaSelectActivity extends Activity {
 						int cantidad = Integer.parseInt(edtBebidaNum.getText()
 								.toString());
 
-						Drink bebida = new Drink(tipo_bebida, cantidad, precio_bebida);
+//						Drink bebida = new Drink(tipo_bebida, cantidad, precio_bebida);
+						Drink bebida = new Drink(dt, cantidad);
 						pedido.setBebida(bebida);
 
 						Toast.makeText(getApplicationContext(),
@@ -149,10 +152,7 @@ public class BebidaSelectActivity extends Activity {
 			}
 		});
 		
-		String[] arrDescBebida = {};
-		for (int i=0; i<arrTiposBebida.get(1).size(); i++){
-			arrDescBebida[i] = arrTiposBebida.get(1).get(i);
-		}
+
 //		adaptadorTipoBebida = ArrayAdapter.createFromResource(this,
 //				android.R.layout.simple_spinner_item, arrTiposBebida);
 		adaptadorTipoBebida = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrTiposBebida.get(1));
@@ -166,7 +166,7 @@ public class BebidaSelectActivity extends Activity {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							android.view.View v, int position, long id) {
-						tipo_bebida = position;
+						dt = new DrinkType(Integer.valueOf(arrTiposBebida.get(0).get(position)), arrTiposBebida.get(1).get(position), Double.valueOf(arrTiposBebida.get(2).get(position)));
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {

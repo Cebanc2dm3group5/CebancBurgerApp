@@ -87,7 +87,7 @@ public class Burger implements Serializable, DDBBObject {
 	}
 
 	public String getTamano() {
-		return tamano;
+		return size.getDescription();
 	}
 
 	public void setTipoCarne(String tipo_carne) {
@@ -95,7 +95,7 @@ public class Burger implements Serializable, DDBBObject {
 	}
 
 	public String getTipoCarne() {
-		return tipo_carne;
+		return meat.getDescription();
 	}
 
 	public void setTipoBurger(String tipo_burger) {
@@ -103,7 +103,7 @@ public class Burger implements Serializable, DDBBObject {
 	}
 
 	public String getTipoBurger() {
-		return tipo_burger;
+		return type.getDescription();
 	}
 
 	public void setCantidad(int cantidad) {

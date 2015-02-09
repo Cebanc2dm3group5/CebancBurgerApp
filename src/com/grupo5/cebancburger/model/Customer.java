@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.CustomerTable;
-import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
 @SuppressWarnings("serial")

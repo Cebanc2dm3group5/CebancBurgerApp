@@ -1,5 +1,6 @@
 package com.grupo5.cebancburger.ddbbrepo.tables;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -12,7 +13,8 @@ import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
 import com.grupo5.cebancburger.model.BurgerSize;
 
-public class BurgerSizeTable implements DDBBObjectTable {
+@SuppressWarnings("serial")
+public class BurgerSizeTable implements Serializable, DDBBObjectTable {
 	String sqlCreate = "CREATE TABLE BurgerSize (BurgerSizeID INTEGER NOT NULL, "
 			+ "Description VARCHAR(20), " + "Price DECIMAL(4,2))";
 	String sqlUpdate = "DROP TABLE IF EXISTS BurgerSize";
@@ -66,7 +68,7 @@ public class BurgerSizeTable implements DDBBObjectTable {
 				String description = c.getString(1);
 				arrBurgerSizes.get(1).add(description);
 
-				double price = c.getInt(2);
+				double price = c.getDouble(2);
 				arrBurgerSizes.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());

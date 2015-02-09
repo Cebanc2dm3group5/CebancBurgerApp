@@ -20,7 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerMeatTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerSizeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.BurgerTypeTable;
 import com.grupo5.cebancburger.model.Burger;
+import com.grupo5.cebancburger.model.BurgerMeat;
+import com.grupo5.cebancburger.model.BurgerSize;
+import com.grupo5.cebancburger.model.BurgerType;
 import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 
@@ -29,10 +35,18 @@ public class BurgerSelectActivity extends Activity {
 	EditText edtBurgerNum;
 	TextView lblTitleBurger;
 
+	ArrayList<ArrayList<String>> arrTiposBurger = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> arrCarneBurger = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> arrTamanoBurger = new ArrayList<ArrayList<String>>();
+
 	private String tamano = "Normal", tipo_carne = "Buey",
 			tipo_burger = "Clásica";
-	ArrayAdapter<CharSequence> adaptadorTamanoBurger, adaptadorTipoCarne,
-			adaptadorTipoBurger;
+	private BurgerType bt;
+	private BurgerMeat bm;
+	private BurgerSize bs;
+	ArrayAdapter<String> adaptadorTamanoBurger;
+	ArrayAdapter<String> adaptadorTipoCarne;
+	ArrayAdapter<String> adaptadorTipoBurger;
 	Order pedido;
 	ArrayList<Burger> arrBurger;
 
@@ -61,6 +75,11 @@ public class BurgerSelectActivity extends Activity {
 		listView.addHeaderView(new View(this));
 		listView.addFooterView(new View(this));
 
+		// llenamos el array con la información de las bebidas
+		arrTiposBurger = BurgerTypeTable.getBurgerTypes(this);
+		arrCarneBurger = BurgerMeatTable.getBurgerMeats(this);
+		arrTamanoBurger = BurgerSizeTable.getBurgerSizes(this);
+
 		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
 				R.layout.list_item_card);
 
@@ -82,14 +101,16 @@ public class BurgerSelectActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (!(edtBurgerNum.getText().toString().equals("")) && (!(edtBurgerNum.getText().toString().equals("0")))) {
+				if (!(edtBurgerNum.getText().toString().equals(""))
+						&& (!(edtBurgerNum.getText().toString().equals("0")))) {
 					try {
 						int cantidad = Integer.parseInt(edtBurgerNum.getText()
 								.toString());
 
 						// TODO - use BurgerType objects
-						Burger burger = new Burger(tamano, tipo_carne,
-								tipo_burger, cantidad);
+//						Burger burger = new Burger(tamano, tipo_carne,
+//								tipo_burger, cantidad);
+						Burger burger = new Burger(bs, bm, bt, cantidad);
 
 						pedido.setBurger(burger);
 
@@ -155,8 +176,10 @@ public class BurgerSelectActivity extends Activity {
 			}
 		});
 
-		adaptadorTamanoBurger = ArrayAdapter.createFromResource(this,
-				R.array.tamano_burger, android.R.layout.simple_spinner_item);
+		// adaptadorTamanoBurger = ArrayAdapter.createFromResource(this,
+		// R.array.tamano_burger, android.R.layout.simple_spinner_item);
+		adaptadorTamanoBurger = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, arrTamanoBurger.get(1));
 		Spinner spnTamano = (Spinner) findViewById(R.id.spnBurgerSize);
 
 		adaptadorTamanoBurger
@@ -167,16 +190,20 @@ public class BurgerSelectActivity extends Activity {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							android.view.View v, int position, long id) {
-						tamano = adaptadorTamanoBurger.getItem(position)
-								.toString();
+						bs = new BurgerSize(Integer.valueOf(arrTamanoBurger
+								.get(0).get(position)), arrTamanoBurger.get(1)
+								.get(position), Double.valueOf(arrTamanoBurger
+								.get(2).get(position)));
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
 					}
 				});
 
-		adaptadorTipoCarne = ArrayAdapter.createFromResource(this,
-				R.array.tipo_carne, android.R.layout.simple_spinner_item);
+		// adaptadorTipoCarne = ArrayAdapter.createFromResource(this,
+		// R.array.tipo_carne, android.R.layout.simple_spinner_item);
+		adaptadorTipoCarne = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, arrCarneBurger.get(1));
 		Spinner spnTipoCarne = (Spinner) findViewById(R.id.spnMeatType);
 
 		adaptadorTipoCarne
@@ -187,16 +214,28 @@ public class BurgerSelectActivity extends Activity {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							android.view.View v, int position, long id) {
-						tipo_carne = adaptadorTipoCarne.getItem(position)
-								.toString();
+						bm = new BurgerMeat(Integer.valueOf(arrCarneBurger.get(
+								0).get(position)), arrCarneBurger.get(1).get(
+								position), Double.valueOf(arrCarneBurger.get(2)
+								.get(position)));
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {
 					}
 				});
 
-		adaptadorTipoBurger = ArrayAdapter.createFromResource(this,
-				R.array.tipo_burger, android.R.layout.simple_spinner_item);
+		// String[] arrDescTiposBurger = new
+		// String[arrTiposBurger.get(1).size()];
+		// for (int i = 0; i < arrTiposBurger.get(1).size(); i++) {
+		// arrDescTiposBurger[i] = arrTiposBurger.get(1).get(i);
+		// }
+
+		// adaptadorTipoBurger = ArrayAdapter.createFromResource(this,
+		// R.array.tipo_burger, android.R.layout.simple_spinner_item);
+
+		adaptadorTipoBurger = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, arrTiposBurger.get(1));
+
 		Spinner spnTipoBurger = (Spinner) findViewById(R.id.spnBurgerType);
 
 		adaptadorTipoBurger
@@ -207,8 +246,11 @@ public class BurgerSelectActivity extends Activity {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							android.view.View v, int position, long id) {
-						tipo_burger = adaptadorTipoBurger.getItem(position)
-								.toString();
+
+						bt = new BurgerType(Integer.valueOf(arrTiposBurger.get(
+								0).get(position)), arrTiposBurger.get(1).get(
+								position), Double.valueOf(arrTiposBurger.get(2)
+								.get(position)));
 					}
 
 					public void onNothingSelected(AdapterView<?> parent) {

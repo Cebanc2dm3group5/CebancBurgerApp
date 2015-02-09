@@ -97,7 +97,7 @@ public class BurgerTypeTable implements DDBBObjectTable {
 				String description = c.getString(1);
 				arrBurgerTypes.get(1).add(description);
 
-				double price = c.getInt(2);
+				double price = c.getDouble(2);
 				arrBurgerTypes.get(2).add(Double.toString(price));
 
 			} while (c.moveToNext());

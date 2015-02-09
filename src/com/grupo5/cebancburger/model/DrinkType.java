@@ -1,6 +1,6 @@
 package com.grupo5.cebancburger.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -12,7 +12,8 @@ import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
-public class DrinkType implements DDBBObject {
+@SuppressWarnings("serial")
+public class DrinkType implements Serializable, DDBBObject {
 	String description;
 	double price;
 	int id;
