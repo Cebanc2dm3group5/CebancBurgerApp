@@ -204,7 +204,7 @@ public class SelectRegistroActivity extends Activity {
 	}
 
 	private void setAction(final int position) {
-
+		
 		newBuilder();
 		builder.setTitle("¿Que deseas hacer?")
 				.setMessage("Selecciona una acción")
@@ -242,7 +242,7 @@ public class SelectRegistroActivity extends Activity {
 
 		} else {
 
-			nId = Integer.parseInt(arrTypeSize.get(position).get(0));
+			nId = Integer.parseInt(arrTypeSize.get(0).get(position));
 
 		}
 
