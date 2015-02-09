@@ -16,7 +16,7 @@ import com.grupo5.cebancburger.interfaces.DDBBObject;
 public class BurgerMeat implements Serializable, DDBBObject {
 	String description;
 	double price;
-	int id;
+	int id = -1;
 
 	public BurgerMeat(int id, String description, double price) {
 		setId(id);
