@@ -42,6 +42,10 @@ public class CustomerTable implements DDBBObjectTable {
 	public void initData(Activity activity) {
 		this.insert(this.customerInit, activity);
 	}
+	
+	public void initData(Activity activity, SQLiteDatabase db) {
+		this.insert(this.customerInit, activity, db);
+	}
 
 	@Override
 	public void delete(Activity activity, int id) {
@@ -111,6 +115,12 @@ public class CustomerTable implements DDBBObjectTable {
 	public void insert(Customer customer, Activity activity) {
 		ContentValues nuevoRegistro = customer.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.insert("Customer", null, nuevoRegistro);
+	}
+	
+	public void insert(Customer customer, Activity activity, SQLiteDatabase db) {
+		ContentValues nuevoRegistro = customer.getContentValue(activity, db);
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("Customer", null, nuevoRegistro);
 	}
 	

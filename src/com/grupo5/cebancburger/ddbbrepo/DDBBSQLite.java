@@ -4,6 +4,7 @@ import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.tables.BurgerMeatTable;
 import com.grupo5.cebancburger.ddbbrepo.tables.BurgerSizeTable;
 import com.grupo5.cebancburger.ddbbrepo.tables.BurgerTypeTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.CustomerTable;
 import com.grupo5.cebancburger.ddbbrepo.tables.DrinkTypeTable;
 import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 
@@ -36,22 +37,25 @@ public class DDBBSQLite {
 		return dbHelper.getWritableDatabase();
 
 	}
-	
-	public static void initData(Activity activity, SQLiteDatabase db){
+
+	public static void initData(Activity activity, SQLiteDatabase db) {
 		UserTable ut = new UserTable();
 		ut.initData(activity, db);
-		
-//		DrinkTypeTable dtt = new DrinkTypeTable();
-//		dtt.initData(activity);
-//		
-//		BurgerTypeTable btt = new BurgerTypeTable();
-//		btt.initData(activity);
-//		
-//		BurgerMeatTable bmt = new BurgerMeatTable();
-//		bmt.initData(activity);
-//		
-//		BurgerSizeTable bst = new BurgerSizeTable();
-//		bst.initData(activity);
+
+		DrinkTypeTable dtt = new DrinkTypeTable();
+		dtt.initData(activity, db);
+
+		BurgerTypeTable btt = new BurgerTypeTable();
+		btt.initData(activity, db);
+
+		BurgerMeatTable bmt = new BurgerMeatTable();
+		bmt.initData(activity, db);
+
+		BurgerSizeTable bst = new BurgerSizeTable();
+		bst.initData(activity, db);
+
+		CustomerTable ct = new CustomerTable();
+		ct.initData(activity, db);
 	}
 
 }

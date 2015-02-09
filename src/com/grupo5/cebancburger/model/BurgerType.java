@@ -76,6 +76,14 @@ public class BurgerType implements DDBBObject {
 		nr.put("Price", this.getPrice());
 		return nr;
 	}
+	
+	public ContentValues getContentValue(Activity activity, SQLiteDatabase db) {
+		ContentValues nr = new ContentValues();
+		nr.put("BurgerTypeID", getNextID(activity, db));
+		nr.put("Description", this.getDescription());
+		nr.put("Price", this.getPrice());
+		return nr;
+	}
 	public ContentValues getContentValueForEdit(Activity activity, int id){
 		ContentValues nr = new ContentValues();
 		nr.put("BurgerTypeID", id);
@@ -88,6 +96,17 @@ public class BurgerType implements DDBBObject {
 		String query = "SELECT BurgerTypeID FROM BurgerType ORDER BY BurgerTypeID DESC LIMIT 1";
 		int lastID = 0;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
+	}
+	
+	private static int getNextID(Activity activity, SQLiteDatabase db) {
+		String query = "SELECT BurgerTypeID FROM BurgerType ORDER BY BurgerTypeID DESC LIMIT 1";
+		int lastID = 0;
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			lastID = c.getInt(0);

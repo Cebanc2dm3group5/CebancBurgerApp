@@ -41,6 +41,12 @@ public class DrinkTypeTable implements DDBBObjectTable {
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("DrinkType", null, nuevoRegistro);
 	}
+	
+	public void insert(DrinkType drinkType, Activity activity, SQLiteDatabase db) {
+		ContentValues nuevoRegistro = drinkType.getContentValue(activity, db);
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.insert("DrinkType", null, nuevoRegistro);
+	}
 
 	public void edit(DrinkType drinkType, Activity activity) {
 		ContentValues reg = drinkType.getContentValueForEdit(activity,drinkType.getId());
@@ -98,6 +104,15 @@ public class DrinkTypeTable implements DDBBObjectTable {
 		this.insert(new DrinkType("Nestea", 1.5), activity);
 		this.insert(new DrinkType("Cerveza", 1.5), activity);
 		this.insert(new DrinkType("Agua", 1), activity);
+	}
+	
+	public void initData(Activity activity, SQLiteDatabase db) {
+		this.insert(new DrinkType("Cola", 1.5), activity, db);
+		this.insert(new DrinkType("Limón", 1.5), activity, db);
+		this.insert(new DrinkType("Naranja", 1.5), activity, db);
+		this.insert(new DrinkType("Nestea", 1.5), activity, db);
+		this.insert(new DrinkType("Cerveza", 1.5), activity, db);
+		this.insert(new DrinkType("Agua", 1), activity, db);
 	}
 
 	@Override

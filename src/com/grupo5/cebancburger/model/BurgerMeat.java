@@ -21,6 +21,7 @@ public class BurgerMeat implements DDBBObject {
 		setDescription(description);
 		setPrice(price);
 	}
+
 	public BurgerMeat(String description, double price) {
 		setDescription(description);
 		setPrice(price);
@@ -74,7 +75,16 @@ public class BurgerMeat implements DDBBObject {
 		nr.put("Price", this.getPrice());
 		return nr;
 	}
-	public ContentValues getContentValueForEdit(Activity activity, int id){
+
+	public ContentValues getContentValue(Activity activity, SQLiteDatabase db) {
+		ContentValues nr = new ContentValues();
+		nr.put("BurgerMeatID", getNextID(activity, db));
+		nr.put("Description", this.getDescription());
+		nr.put("Price", this.getPrice());
+		return nr;
+	}
+
+	public ContentValues getContentValueForEdit(Activity activity, int id) {
 		ContentValues nr = new ContentValues();
 		nr.put("BurgerMeatID", id);
 		nr.put("Description", this.getDescription());
@@ -86,6 +96,17 @@ public class BurgerMeat implements DDBBObject {
 		String query = "SELECT BurgerMeatID FROM BurgerMeat ORDER BY BurgerMeatID DESC LIMIT 1";
 		int lastID = 0;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
+	}
+
+	private static int getNextID(Activity activity, SQLiteDatabase db) {
+		String query = "SELECT BurgerMeatID FROM BurgerMeat ORDER BY BurgerMeatID DESC LIMIT 1";
+		int lastID = 0;
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			lastID = c.getInt(0);

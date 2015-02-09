@@ -42,6 +42,11 @@ public class BurgerSizeTable implements DDBBObjectTable {
 		this.insert(new BurgerSize("Normal", 4.50), activity);
 	}
 	
+	public void initData(Activity activity, SQLiteDatabase db) {
+		this.insert(new BurgerSize("Whooper", 5.00), activity, db);
+		this.insert(new BurgerSize("Normal", 4.50), activity, db);
+	}
+	
 	public static ArrayList<ArrayList<String>> getBurgerSizes(Activity activity) {
 		ArrayList<ArrayList<String>> arrBurgerSizes = new ArrayList<ArrayList<String>>();
 		// id
@@ -92,6 +97,12 @@ public class BurgerSizeTable implements DDBBObjectTable {
 	public void insert(BurgerSize burgerSize, Activity activity) {
 		ContentValues nuevoRegistro = burgerSize.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.insert("BurgerSize", null, nuevoRegistro);
+	}
+	
+	public void insert(BurgerSize burgerSize, Activity activity, SQLiteDatabase db) {
+		ContentValues nuevoRegistro = burgerSize.getContentValue(activity, db);
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("BurgerSize", null, nuevoRegistro);
 	}
 

@@ -110,6 +110,16 @@ public class Customer implements Serializable, DDBBObject {
 		nr.put("Phone", this.getTelefono());
 		return nr;
 	}
+	
+	public ContentValues getContentValue(Activity activity, SQLiteDatabase db) {
+		ContentValues nr = new ContentValues();
+		nr.put("CustomerID", getNextID(activity, db));
+		nr.put("Name", this.getNombre());
+		nr.put("Address", this.getDireccion());
+		nr.put("IDChar", String.valueOf(this.getIdLet()));
+		nr.put("Phone", this.getTelefono());
+		return nr;
+	}
 
 	public ContentValues getContentValueForEdit(Activity activity, int id) {
 		ContentValues nr = new ContentValues();
@@ -125,6 +135,17 @@ public class Customer implements Serializable, DDBBObject {
 		String query = "SELECT CustomerID FROM Customer ORDER BY CustomerID DESC LIMIT 1";
 		int lastID = 0;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
+	}
+	
+	private static int getNextID(Activity activity, SQLiteDatabase db) {
+		String query = "SELECT CustomerID FROM Customer ORDER BY CustomerID DESC LIMIT 1";
+		int lastID = 0;
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			lastID = c.getInt(0);

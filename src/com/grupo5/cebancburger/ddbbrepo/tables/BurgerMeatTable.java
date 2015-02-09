@@ -42,6 +42,12 @@ public class BurgerMeatTable implements DDBBObjectTable {
 		this.insert(new BurgerMeat("Pollo", 0.8), activity);
 		this.insert(new BurgerMeat("Ternera", 1), activity);
 	}
+	
+	public void initData(Activity activity, SQLiteDatabase db) {
+		this.insert(new BurgerMeat("Buey", 1.5), activity, db);
+		this.insert(new BurgerMeat("Pollo", 0.8), activity, db);
+		this.insert(new BurgerMeat("Ternera", 1), activity, db);
+	}
 
 	@Override
 	public void delete(Activity activity, int id) {
@@ -93,6 +99,12 @@ public class BurgerMeatTable implements DDBBObjectTable {
 	public void insert(BurgerMeat burgerMeat, Activity activity) {
 		ContentValues nuevoRegistro = burgerMeat.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		db.insert("BurgerMeat", null, nuevoRegistro);
+	}
+	
+	public void insert(BurgerMeat burgerMeat, Activity activity, SQLiteDatabase db) {
+		ContentValues nuevoRegistro = burgerMeat.getContentValue(activity, db);
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("BurgerMeat", null, nuevoRegistro);
 	}
 
