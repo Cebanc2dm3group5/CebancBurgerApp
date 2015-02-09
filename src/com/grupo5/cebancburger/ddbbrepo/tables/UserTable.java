@@ -42,6 +42,12 @@ public class UserTable implements DDBBObjectTable {
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.insert("User", null, nuevoRegistro);
 	}
+	
+	public void insert(User user, Activity activity, SQLiteDatabase db) {
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		ContentValues nuevoRegistro = user.getContentValue(activity, db);
+		db.insert("User", null, nuevoRegistro);
+	}
 
 	public void edit(User user, Activity activity) {
 		ContentValues reg = user.getContentValueForEdit(activity,user.getUserID());
@@ -119,6 +125,10 @@ public class UserTable implements DDBBObjectTable {
 
 	public void initData(Activity activity) {
 		this.insert(this.userInit, activity);
+	}
+	
+	public void initData(Activity activity, SQLiteDatabase db) {
+		this.insert(this.userInit, activity, db);
 	}
 
 	public void delete(Activity activity, int id) {

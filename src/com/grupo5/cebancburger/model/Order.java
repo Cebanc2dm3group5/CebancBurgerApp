@@ -175,7 +175,6 @@ public class Order implements Serializable, DDBBObject {
 	}
 
 	@SuppressWarnings("deprecation")
-	@Override
 	public ContentValues getContentValue(Activity activity) {
 		ContentValues nr = new ContentValues();
 		nr.put("OrderID", getNextID(activity));

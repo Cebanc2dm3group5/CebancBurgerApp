@@ -37,21 +37,21 @@ public class DDBBSQLite {
 
 	}
 	
-	public static void initData(Activity activity){
+	public static void initData(Activity activity, SQLiteDatabase db){
 		UserTable ut = new UserTable();
-		ut.initData(activity);
+		ut.initData(activity, db);
 		
-		DrinkTypeTable dtt = new DrinkTypeTable();
-		dtt.initData(activity);
-		
-		BurgerTypeTable btt = new BurgerTypeTable();
-		btt.initData(activity);
-		
-		BurgerMeatTable bmt = new BurgerMeatTable();
-		bmt.initData(activity);
-		
-		BurgerSizeTable bst = new BurgerSizeTable();
-		bst.initData(activity);
+//		DrinkTypeTable dtt = new DrinkTypeTable();
+//		dtt.initData(activity);
+//		
+//		BurgerTypeTable btt = new BurgerTypeTable();
+//		btt.initData(activity);
+//		
+//		BurgerMeatTable bmt = new BurgerMeatTable();
+//		bmt.initData(activity);
+//		
+//		BurgerSizeTable bst = new BurgerSizeTable();
+//		bst.initData(activity);
 	}
 
 }

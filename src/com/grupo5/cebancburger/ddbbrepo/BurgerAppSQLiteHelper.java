@@ -48,7 +48,7 @@ public class BurgerAppSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(orderLineBurgerTable.getSqlCreate());
 		db.execSQL(orderLineDrinkTable.getSqlCreate());
 		
-		DDBBSQLite.initData(this.context);
+		DDBBSQLite.initData(this.context, db);
 
 	}
 

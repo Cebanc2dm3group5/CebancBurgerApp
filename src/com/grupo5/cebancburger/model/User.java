@@ -96,11 +96,31 @@ public class User implements Serializable, DDBBObject{
 		nr.put("Admin", this.isAdmin());
 		return nr;
 	}
+	
+	public ContentValues getContentValue(Activity activity, SQLiteDatabase db) {
+		ContentValues nr = new ContentValues();
+		nr.put("UserID", getNextID(activity, db));
+		nr.put("UserName", this.getUsername());
+		nr.put("Password", this.getPassword());
+		nr.put("Admin", this.isAdmin());
+		return nr;
+	}
 
 	private static int getNextID(Activity activity) {
 		String query = "SELECT UserID FROM User ORDER BY UserID DESC LIMIT 1";
 		int lastID = 0;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			lastID = c.getInt(0);
+		}
+		return lastID + 1;
+	}
+	
+	private static int getNextID(Activity activity, SQLiteDatabase db) {
+		String query = "SELECT UserID FROM User ORDER BY UserID DESC LIMIT 1";
+		int lastID = 0;
+//		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			lastID = c.getInt(0);
