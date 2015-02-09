@@ -11,10 +11,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.grupo5.cebancburger.config.Options;
-import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.model.Customer;
 import com.grupo5.cebancburger.model.Order;
+import com.grupo5.cebancburger.model.User;
 
 public class MainActivity extends Activity {
 
@@ -22,29 +21,41 @@ public class MainActivity extends Activity {
 	EditText edtName, edtAddress, edtPhone;
 	AlertDialog.Builder alert;
 
+	private Activity activity = this;
+
+	private int UserID;
+
+	private AlertDialog.Builder builder;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		DDBBSQLite.initDDBB(Options.getDDBBName(), this);
 
-		alert = new AlertDialog.Builder(this);
-		
+		Intent intent = getIntent();
+		UserID = intent.getIntExtra("id",-1);
+
 		edtName = (EditText) findViewById(R.id.edtName);
 		edtAddress = (EditText) findViewById(R.id.edtAddress);
 		edtPhone = (EditText) findViewById(R.id.edtPhone);
-
 		btnExit = (Button) findViewById(R.id.btnExit);
+		btnNext = (Button) findViewById(R.id.btnNext);
+		btnAdmin = (Button) findViewById(R.id.btnAdmin);
+
+		if (!new User(UserID,activity).isAdmin())
+			btnAdmin.setVisibility(View.GONE);
+
+		alert = new AlertDialog.Builder(this);
+
 		btnExit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				closeApp();
+				goBack();
 			}
+
 		});
 
-		btnNext = (Button) findViewById(R.id.btnNext);
 		btnNext.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -60,14 +71,14 @@ public class MainActivity extends Activity {
 				if (name.equals("") || address.equals("") || phone.equals("")) {
 
 					alert.setTitle("¡CUIDADO!")
-							.setMessage("Introduce todos tus datos")
-							.setPositiveButton("OK",
-									new DialogInterface.OnClickListener() {
-										public void onClick(
-												DialogInterface dialog, int id) {
-											// do things
-										}
-									}).show();
+					.setMessage("Introduce todos tus datos")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+						public void onClick(
+								DialogInterface dialog, int id) {
+							// do things
+						}
+					}).show();
 				} else {
 					Customer cliente = new Customer(name, address, phone,IDChar);
 					pedido.setCliente(cliente);
@@ -82,8 +93,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		
-		btnAdmin = (Button) findViewById(R.id.btnAdmin);
+
 		btnAdmin.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -96,15 +106,22 @@ public class MainActivity extends Activity {
 				startActivityForResult(intent, 1);
 			}
 		});
-		
+
 	}
-	
+
 	@Override
 	public void onBackPressed() {
+		goBack();
 	}
-	
-	private void closeApp(){
-		ActivityCompat.finishAffinity(this);
+
+	public void goBack() {
+		Intent returnIntent = new Intent();
+		setResult(RESULT_CANCELED, returnIntent);
+		finish();
+	}
+
+	public void newBuilder() {
+		builder = new AlertDialog.Builder(this);
 	}
 
 }

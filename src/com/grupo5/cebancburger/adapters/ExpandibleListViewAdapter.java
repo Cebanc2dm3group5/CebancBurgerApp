@@ -55,7 +55,7 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 		case 0:
 			switch (childPosition){
 			case 0:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
 				break;
 			case 1:
 				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
@@ -65,18 +65,18 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 		case 1:
 			switch (childPosition){
 			case 0:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
 				break;
 			case 1:
 				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
 				break;
 			case 2:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
 				break;
 			}
 			break;
 		case 2:
-			textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+			textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
 			break;
 		}
 		convertView.setOnClickListener(new OnClickListener() {
