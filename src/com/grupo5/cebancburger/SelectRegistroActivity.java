@@ -141,7 +141,6 @@ public class SelectRegistroActivity extends Activity {
 
 		} else if (sTitle.equals("Cliente")) {
 
-			// TODO
 			arrCustomer = CustomerTable.getAllCustomers(this);
 
 			cardArrayAdapter.clear();
@@ -231,7 +230,7 @@ public class SelectRegistroActivity extends Activity {
 
 	}
 
-	private void getId(int position) {
+	private void getId(final int position) {
 
 		if (sTitle.equals("Usuario")) {
 
@@ -258,7 +257,7 @@ public class SelectRegistroActivity extends Activity {
 
 		} else if (sTitle.equals("Cliente")) {
 
-			// new Customer(nId,activity).delete(activity);
+			new Customer(nId,activity).delete(activity);
 
 		} else if (sTitle.equals("Tipo de Burger")) {
 

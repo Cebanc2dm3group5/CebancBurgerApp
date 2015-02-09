@@ -64,6 +64,18 @@
             android:gravity="center_horizontal"
             android:hint="@string/customerAddAddress" />
 
+        <EditText
+            android:id="@+id/edtCustomerAddTel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/telefono"
+            android:inputType="phone" />
+
     </LinearLayout>
 
     <LinearLayout

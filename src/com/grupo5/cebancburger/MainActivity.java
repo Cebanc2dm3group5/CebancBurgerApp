@@ -54,6 +54,8 @@ public class MainActivity extends Activity {
 				String name = edtName.getText().toString();
 				String address = edtAddress.getText().toString();
 				String phone = edtPhone.getText().toString();
+				//TODO Letra DNI
+				char IDChar = 'a';
 
 				if (name.equals("") || address.equals("") || phone.equals("")) {
 
@@ -67,7 +69,7 @@ public class MainActivity extends Activity {
 										}
 									}).show();
 				} else {
-					Customer cliente = new Customer(name, address, phone);
+					Customer cliente = new Customer(name, address, phone,IDChar);
 					pedido.setCliente(cliente);
 					// create intent
 					Intent intent = new Intent(getApplicationContext(),

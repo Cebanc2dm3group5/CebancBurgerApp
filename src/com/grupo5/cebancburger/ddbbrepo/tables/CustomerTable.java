@@ -11,13 +11,14 @@ import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.interfaces.DDBBObjectTable;
 import com.grupo5.cebancburger.model.Customer;
+import com.grupo5.cebancburger.model.User;
 
 public class CustomerTable implements DDBBObjectTable {
 	String sqlCreate = "CREATE TABLE Customer (CustomerID INTEGER NOT NULL PRIMARY KEY, "
 			+ "Name VARCHAR(20), " + "Address VARCHAR(20), "
 			+ "IDChar VARCHAR(1), " + "Phone VARCHAR(15))";
 	String sqlUpdate = "DROP TABLE IF EXISTS Customer";
-
+	Customer customerInit = new Customer("prueba","prueba","54654665",'A');
 	public CustomerTable() {
 	}
 
@@ -39,7 +40,7 @@ public class CustomerTable implements DDBBObjectTable {
 
 	@Override
 	public void initData(Activity activity) {
-		
+		this.insert(this.customerInit, activity);
 	}
 
 	@Override
@@ -65,6 +66,7 @@ public class CustomerTable implements DDBBObjectTable {
 
 		}
 		return cust;
+		
 	}
 	
 	public static ArrayList<Customer> getAllCustomers(Activity activity) {

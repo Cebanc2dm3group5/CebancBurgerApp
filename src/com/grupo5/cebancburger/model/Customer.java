@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.grupo5.cebancburger.config.Options;
 import com.grupo5.cebancburger.ddbbrepo.DDBBSQLite;
 import com.grupo5.cebancburger.ddbbrepo.tables.CustomerTable;
+import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 import com.grupo5.cebancburger.interfaces.DDBBObject;
 
 @SuppressWarnings("serial")
@@ -19,10 +20,11 @@ public class Customer implements Serializable, DDBBObject {
 	private int id;
 	private char idLet;
 
-	public Customer(String nombre, String direccion, String telefono) {
+	public Customer(String nombre, String direccion, String telefono, char letraID) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.idLet = letraID;
 	}
 
 	public Customer(String nombre, String direccion, String telefono, int id,
@@ -32,6 +34,14 @@ public class Customer implements Serializable, DDBBObject {
 		this.telefono = telefono;
 		this.id = id;
 		this.idLet = idLet;
+	}
+	
+	public Customer(int id, Activity activity){
+		Customer customer = CustomerTable.getCustomer(activity, id);
+		this.setDireccion(customer.getDireccion());
+		this.setIdLet(customer.getIdLet());
+		this.setNombre(customer.getNombre());
+		this.setTelefono(customer.getTelefono());
 	}
 
 	public int getId() {
