@@ -24,7 +24,7 @@ public class DDBBSQLite {
 			Toast.makeText(activity.getApplicationContext(), "DDBB Created",
 					Toast.LENGTH_SHORT).show();
 			// Cerramos la base de datos
-			db.close();
+//			db.close();
 		}
 
 		return success;
@@ -58,7 +58,7 @@ public class DDBBSQLite {
 
 		CustomerTable ct = new CustomerTable();
 		ct.initData(activity, db);
-		db.close();
+//		db.close();
 	}
 
 }

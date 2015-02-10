@@ -99,7 +99,7 @@ public class UserTable implements DDBBObjectTable {
 				arrUsers.add(u);
 			} while (c.moveToNext());
 		}
-		db.close();
+//		db.close();
 		return arrUsers;
 	}
 
@@ -121,7 +121,7 @@ public class UserTable implements DDBBObjectTable {
 			user = new User(username, password, isAdmin);
 			user.setUserID(userId);
 		}
-		db.close();
+//		db.close();
 		return user;
 	}
 
