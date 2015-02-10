@@ -55,28 +55,31 @@ public class ExpandibleListViewAdapter extends BaseExpandableListAdapter{
 		case 0:
 			switch (childPosition){
 			case 0:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.usuario, 0, 0, 0);
 				break;
 			case 1:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.clientes, 0, 0, 0);
 				break;
 			}
 			break;
 		case 1:
 			switch (childPosition){
 			case 0:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tipoburger, 0, 0, 0);
 				break;
 			case 1:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.subgrupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tipocarne, 0, 0, 0);
 				break;
 			case 2:
-				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
+				textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tamanoburger, 0, 0, 0);
 				break;
 			}
 			break;
 		case 2:
-			textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.grupo, 0, 0, 0);
+			textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tipobebida, 0, 0, 0);
+			break;
+		case 3:
+			textvw.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pedidos, 0, 0, 0);
 			break;
 		}
 		convertView.setOnClickListener(new OnClickListener() {
