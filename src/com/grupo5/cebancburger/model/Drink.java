@@ -21,7 +21,7 @@ public class Drink implements Serializable, DDBBObject {
 //	private int tipo;
 	private int cantidad;
 	private double precio;
-	private int drinkLineID;
+	private int drinkLineID = -1;
 
 //	public Drink(int tipo, int cantidad, double precio) {
 //		setTipo(tipo);

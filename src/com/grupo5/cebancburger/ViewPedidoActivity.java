@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.grupo5.cebancburger.adapters.CardArrayAdapter;
 import com.grupo5.cebancburger.ddbbrepo.tables.OrderTable;
-import com.grupo5.cebancburger.ddbbrepo.tables.UserTable;
 import com.grupo5.cebancburger.model.Order;
 import com.grupo5.cebancburger.viewmodels.Card;
 

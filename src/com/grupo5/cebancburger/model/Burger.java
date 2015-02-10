@@ -23,7 +23,7 @@ public class Burger implements Serializable, DDBBObject {
 	private BurgerType type;
 	private int cantidad;
 	private double precio;
-	private int burgerLineID;
+	private int burgerLineID = -1;
 
 //	public Burger(String tamano, String tipo_carne, String tipo_burger,
 //			int cantidad) {
@@ -138,7 +138,7 @@ public class Burger implements Serializable, DDBBObject {
 		nr.put("OrderLineBurgerID", getNextID(activity));
 		nr.put("BurgerTypeID", this.getType().getId());
 		nr.put("BurgerMeatID", this.getMeat().getId());
-		nr.put("BurgerSize", this.getSize().getId());
+		nr.put("BurgerSizeID", this.getSize().getId());
 		nr.put("OrderID", this.getOrderID());
 		nr.put("Amount", this.getCantidad());
 		return nr;

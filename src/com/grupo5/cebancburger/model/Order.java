@@ -2,6 +2,7 @@ package com.grupo5.cebancburger.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class Order implements Serializable, DDBBObject {
 	private ArrayList<Drink> alBebida = null;
 	private String regalo = "";
 	private double precio;
-	private int orderID, userID;
+	private int orderID = -1, userID;
 	private Date date;
 	private java.sql.Time time;
 
@@ -68,8 +69,6 @@ public class Order implements Serializable, DDBBObject {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-
-
 
 	public int getOrderID() {
 		return this.orderID;
@@ -186,15 +185,14 @@ public class Order implements Serializable, DDBBObject {
 		nr.put("Price", this.getFinalPrecio());
 		return nr;
 	}
-	@SuppressWarnings("deprecation")
-	public ContentValues getContentValueForEdit(Activity activity, int id){
+
+	public ContentValues getContentValueForEdit(Activity activity, int id) {
 		ContentValues nr = new ContentValues();
 		nr.put("OrderID", id);
 		nr.put("UserID", this.getUserID());
 		nr.put("CustomerID", this.getCliente().getId());
-		Date date = new Date();
-		nr.put("Date", date.getDate());
-		nr.put("Time", date.getTime());
+		nr.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		nr.put("Time", new SimpleDateFormat("HH:mm:ss").format(new Date()));
 		nr.put("Price", this.getFinalPrecio());
 		return nr;
 	}
