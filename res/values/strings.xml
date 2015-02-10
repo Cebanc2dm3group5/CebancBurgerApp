@@ -45,6 +45,8 @@
     <string name="filtrar">Filtrar</string>
     <string name="fecha1">Fecha 1</string>
     <string name="fecha2">Fecha 2</string>
+    <string name="listarPedidos">Listar Pedidos</string>
+    
 
     <string-array name="tipo_bebida">
         <item>Cola</item>

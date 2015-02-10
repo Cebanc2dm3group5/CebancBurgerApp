@@ -33,10 +33,9 @@ public class FinalActivity extends Activity {
 			public void onClick(View v) {
 				// create intent
 				Intent intent = new Intent(getApplicationContext(),
-						MainActivity.class);
-
-				// start activity
-				startActivity(intent);
+						CustomerAddDataActivity.class);
+				// add data to intent
+				startActivityForResult(intent, 50);
 			}
 		});
 	}

@@ -135,7 +135,7 @@ public class SelectRegistroActivity extends Activity {
 			for (int i = 0; i < arrUser.size(); i++) {
 				Card card = new Card("Nombre Usuario: "
 						+ arrUser.get(i).getUsername(), "Contraseña: "
-						+ arrUser.get(i).getPassword(), 0);
+								+ arrUser.get(i).getPassword(), 0);
 				cardArrayAdapter.add(card);
 			}
 
@@ -204,29 +204,29 @@ public class SelectRegistroActivity extends Activity {
 	}
 
 	private void setAction(final int position) {
-		
+
 		newBuilder();
 		builder.setTitle("¿Que deseas hacer?")
-				.setMessage("Selecciona una acción")
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setPositiveButton("Editar",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								getId(position);
-								openAddData();
+		.setMessage("Selecciona una acción")
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setPositiveButton("Editar",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,
+					int which) {
+				getId(position);
+				openAddData();
 
-							}
-						})
-				.setNegativeButton("Borrar",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								getId(position);
-								setCardYesNo();
+			}
+		})
+		.setNegativeButton("Borrar",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,
+					int which) {
+				getId(position);
+				setCardYesNo();
 
-							}
-						}).show();
+			}
+		}).show();
 
 	}
 
@@ -248,7 +248,7 @@ public class SelectRegistroActivity extends Activity {
 
 	}
 
-	private void setCardYesNo() {
+	private void deleteRegistro() {
 		// Put up the Yes/No message box
 
 		if (sTitle.equals("Usuario")) {
@@ -257,7 +257,7 @@ public class SelectRegistroActivity extends Activity {
 
 		} else if (sTitle.equals("Cliente")) {
 
-			new Customer(nId,activity).delete(activity);
+			CustomerTable.getCustomer(activity, nId).delete(activity);
 
 		} else if (sTitle.equals("Tipo de Burger")) {
 
@@ -277,23 +277,40 @@ public class SelectRegistroActivity extends Activity {
 
 		}
 
-		/*
-		 * newBuilder(); builder.setTitle("Eliminar item")
-		 * .setMessage("¿Estás seguro?")
-		 * .setIcon(android.R.drawable.ic_dialog_alert)
-		 * .setPositiveButton("Eliminar", new DialogInterface.OnClickListener()
-		 * { public void onClick(DialogInterface dialog, int which) { // Yes
-		 * button clicked, do something if (position <= arrBurger.size()) {
-		 * pedido.getBurger().remove(position - 1); }
-		 * 
-		 * loadCardListData(); cardArrayAdapter.notifyDataSetChanged();
-		 * 
-		 * } }).setNegativeButton("No", null) // Do nothing on no .show();
-		 */
+	}
+
+	private void setCardYesNo(){
+
+		newBuilder();
+		builder.setTitle("Eliminar item")
+		.setMessage("¿Estás seguro?")
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setPositiveButton("Eliminar",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,
+					int which) {
+				// Yes button clicked, do something
+
+				deleteRegistro();
+				loadCardListData();
+				cardArrayAdapter.notifyDataSetChanged();
+
+			}
+		}).setNegativeButton("No", null) // Do nothing on no
+		.show();
+
 	}
 
 	public void newBuilder() {
 		builder = new AlertDialog.Builder(this);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		loadCardListData();
+		cardArrayAdapter.notifyDataSetChanged();
+		
 	}
 
 }

@@ -75,7 +75,7 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="0.5"
                 android:background="?android:attr/selectableItemBackground"
-                android:text="@string/nuevo_pedido" />
+                android:text="@string/listarPedidos" />
         </LinearLayout>
     </LinearLayout>
 

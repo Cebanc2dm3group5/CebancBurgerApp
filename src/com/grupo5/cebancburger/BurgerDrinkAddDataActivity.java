@@ -3,6 +3,8 @@ package com.grupo5.cebancburger;
 import java.text.NumberFormat;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +37,8 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 
 	private final Activity activity = this;
 
+	private AlertDialog.Builder builder;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.burger_drink_add_data_layout);
@@ -48,7 +52,7 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 
 		txtName = (TextView) findViewById(R.id.edtBurDriName);
 		txtPrice = (TextView) findViewById(R.id.edtBurDriPrice);
-		
+
 		btnGuardar = (Button) findViewById(R.id.btnBurDriSave);
 		btnCancelar = (Button) findViewById(R.id.btnBurDriCancel);
 
@@ -60,8 +64,51 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 
 			@Override
 			public void onClick(View v) {
-				
-				saveData();
+
+				if (txtName.getText().toString().equals("") || txtPrice.getText().toString().equals("")){
+
+					newBuilder();
+					builder.setTitle("¡CUIDADO!")
+					.setMessage("Introduzca todos los datos")
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+
+
+						}
+					})
+					.show();
+				}else{
+					if (saveData())
+						goBack();
+						
+					else
+						showToast("Introudce el número correctamente");
+				}
+
+			}
+		});
+
+		btnCancelar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				newBuilder();
+				builder.setTitle("Salir sin guardar")
+				.setMessage("¿Estás seguro?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton("Sí",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// Yes button clicked, do something
+						goBack();
+
+					}
+				}).setNegativeButton("No", null) // Do nothing on no
+				.show();
 
 			}
 		});
@@ -81,7 +128,7 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 			burgerMeat = BurgerMeatTable.getBurgerMeat(activity, nId);
 			txtName.setText(burgerMeat.getDescription());
 			txtPrice.setText(NumberFormat.getNumberInstance().format(burgerMeat.getPrice()));
-			
+
 		} else if (sTitle.equals("Tamaño de Burger")) {
 
 			burgerSize = BurgerSizeTable.getBurgerSize(activity, nId);
@@ -96,85 +143,113 @@ public class BurgerDrinkAddDataActivity  extends Activity{
 
 		}
 	}
-	
-	private void saveData(){
+
+	private boolean saveData(){
 
 		String name = txtName.getText().toString();
-		double price = Double.parseDouble(txtPrice.getText().toString());
-		
-		if (sTitle.equals("Tipo de Burger")) {
+		double price;
+		try{
+			price = Double.parseDouble(txtPrice.getText().toString());
+
+
+			if (sTitle.equals("Tipo de Burger")) {
+
+				if (nId == -1){
+
+					burgerType = new BurgerType(name,price);
+					burgerType.save(activity);
+
+				}else{
+
+					burgerType.setId(nId);
+					burgerType.setDescription(name);
+					burgerType.setPrice(price);
+
+					burgerType.save(activity);
+
+				}
+
+			} else if (sTitle.equals("Tipo de Carne")) {
+
+				if (nId == -1){
+
+					burgerMeat = new BurgerMeat(name,price);
+					burgerMeat.save(activity);
+
+				}else{
+
+					burgerMeat.setId(nId);
+					burgerMeat.setDescription(name);
+					burgerMeat.setPrice(price);
+
+					burgerMeat.save(activity);
+
+				}
+
+			} else if (sTitle.equals("Tamaño de Burger")) {
+
+				if (nId == -1){
+
+					burgerSize = new BurgerSize(name,price);
+					burgerSize.save(activity);
+
+				}else{
+
+					burgerSize.setId(nId);
+					burgerSize.setDescription(name);
+					burgerSize.setPrice(price);
+
+					burgerSize.save(activity);
+
+				}
+
+			} else if (sTitle.equals("Tipo de Bebida")) {
+
+				if (nId == -1){
+
+					drinkType = new DrinkType(name,price);
+					drinkType.save(activity);
+
+				}else{
+
+					drinkType.setId(nId);
+					drinkType.setDescription(name);
+					drinkType.setPrice(price);
+
+					drinkType.save(activity);
+
+				}
+
+			}
+
+			showToast(sTitle + " guardado");
 			
-			if (nId == -1){
+			return true;
 
-				burgerType = new BurgerType(name,price);
-				burgerType.save(activity);
-
-			}else{
-
-				burgerType.setId(nId);
-				burgerType.setDescription(name);
-				burgerType.setPrice(price);
-
-				burgerType.save(activity);
-
-			}
-
-		} else if (sTitle.equals("Tipo de Carne")) {
-
-			if (nId == -1){
-
-				burgerMeat = new BurgerMeat(name,price);
-				burgerMeat.save(activity);
-
-			}else{
-
-				burgerMeat.setId(nId);
-				burgerMeat.setDescription(name);
-				burgerMeat.setPrice(price);
-
-				burgerMeat.save(activity);
-
-			}
-			
-		} else if (sTitle.equals("Tamaño de Burger")) {
-
-			if (nId == -1){
-
-				burgerSize = new BurgerSize(name,price);
-				burgerSize.save(activity);
-
-			}else{
-
-				burgerSize.setId(nId);
-				burgerSize.setDescription(name);
-				burgerSize.setPrice(price);
-
-				burgerSize.save(activity);
-
-			}
-
-		} else if (sTitle.equals("Tipo de Bebida")) {
-
-			if (nId == -1){
-
-				drinkType = new DrinkType(name,price);
-				drinkType.save(activity);
-
-			}else{
-
-				drinkType.setId(nId);
-				drinkType.setDescription(name);
-				drinkType.setPrice(price);
-
-				drinkType.save(activity);
-
-			}
-
+		}catch (Exception e){
+			return false;
 		}
+	}
 
+	public void goBack() {
+		Intent returnIntent = new Intent();
+		setResult(RESULT_CANCELED, returnIntent);
+		finish();
+	}
+
+	@Override
+	public void onBackPressed() {
+		goBack();
+	}
+	public void newBuilder() {
+		builder = new AlertDialog.Builder(this);
+
+	}
+
+	public void showToast(String mensaje){
 		Toast.makeText(getApplicationContext(),
-				 sTitle + " guardado", Toast.LENGTH_SHORT)
+				mensaje, Toast.LENGTH_SHORT)
 				.show();
 	}
-	
+
 }
