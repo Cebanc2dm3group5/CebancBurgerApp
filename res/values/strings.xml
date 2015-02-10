@@ -41,6 +41,10 @@
     <string name="viewPedidoTitle">Pedidos</string>
     <string name="aceptar">Aceptar</string>
     <string name="telefono">Telefono</string>
+    <string name="borrarSeleccion">Borrar Selección</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="fecha1">Fecha 1</string>
+    <string name="fecha2">Fecha 2</string>
 
     <string-array name="tipo_bebida">
         <item>Cola</item>
