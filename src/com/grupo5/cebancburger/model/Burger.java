@@ -16,7 +16,7 @@ import com.grupo5.cebancburger.interfaces.DDBBObject;
 @SuppressWarnings("serial")
 public class Burger implements Serializable, DDBBObject {
 
-	private String tamano, tipo_carne, tipo_burger;
+//	private String tamano, tipo_carne, tipo_burger;
 	private int orderID;
 	private BurgerSize size;
 	private BurgerMeat meat;
@@ -25,14 +25,14 @@ public class Burger implements Serializable, DDBBObject {
 	private double precio;
 	private int burgerLineID;
 
-	public Burger(String tamano, String tipo_carne, String tipo_burger,
-			int cantidad) {
-		this.tamano = tamano;
-		this.tipo_carne = tipo_carne;
-		this.tipo_burger = tipo_burger;
-		this.cantidad = cantidad;
-		setPrecio();
-	}
+//	public Burger(String tamano, String tipo_carne, String tipo_burger,
+//			int cantidad) {
+//		this.tamano = tamano;
+//		this.tipo_carne = tipo_carne;
+//		this.tipo_burger = tipo_burger;
+//		this.cantidad = cantidad;
+//		setPrecio();
+//	}
 
 	public Burger(BurgerSize size, BurgerMeat meat, BurgerType type, int cantidad) {
 		setSize(size);
@@ -82,25 +82,25 @@ public class Burger implements Serializable, DDBBObject {
 		this.type = type;
 	}
 
-	public void setTamano(String tamano) {
-		this.tamano = tamano;
-	}
+//	public void setTamano(String tamano) {
+//		this.tamano = tamano;
+//	}
 
 	public String getTamano() {
 		return size.getDescription();
 	}
 
-	public void setTipoCarne(String tipo_carne) {
-		this.tipo_carne = tipo_carne;
-	}
+//	public void setTipoCarne(String tipo_carne) {
+//		this.tipo_carne = tipo_carne;
+//	}
 
 	public String getTipoCarne() {
 		return meat.getDescription();
 	}
 
-	public void setTipoBurger(String tipo_burger) {
-		this.tipo_burger = tipo_burger;
-	}
+//	public void setTipoBurger(String tipo_burger) {
+//		this.tipo_burger = tipo_burger;
+//	}
 
 	public String getTipoBurger() {
 		return type.getDescription();

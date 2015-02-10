@@ -111,9 +111,27 @@ public class CustomerTable implements DDBBObjectTable {
 		return arrCustomers;
 	}
 	
+	public static ArrayList<Customer> getCustomers(Activity activity, String condition, SQLiteDatabase db) {
+		ArrayList<Customer> arrCustomers = new ArrayList<Customer>();
+		String query = "SELECT * FROM Customer WHERE " + condition;
+		Cursor c = db.rawQuery(query, null);
+		if (c.moveToFirst()) {
+			do {
+				int customerID = c.getInt(0);
+				String name = c.getString(1);
+				String address = c.getString(2);
+				char idchar = c.getString(3).charAt(0);
+				String phone = c.getString(4);
+				Customer cust = new Customer(name, address, phone, customerID, idchar);
+				arrCustomers.add(cust);
+			} while (c.moveToNext());
+		}
+		return arrCustomers;
+	}
+	
 	public void insert(Customer customer, Activity activity) {
-		ContentValues nuevoRegistro = customer.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
+		ContentValues nuevoRegistro = customer.getContentValue(activity);
 		db.insert("Customer", null, nuevoRegistro);
 	}
 	
