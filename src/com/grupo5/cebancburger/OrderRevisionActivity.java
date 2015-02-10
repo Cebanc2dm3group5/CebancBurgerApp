@@ -28,6 +28,7 @@ public class OrderRevisionActivity extends Activity {
 	ArrayList<Drink> arrBebida;
 	TextView lblPrecio, lblRegalo;
 	boolean modified = false;
+	private Activity activity;
 
 	private CardArrayAdapter cardArrayAdapter;
 	private ListView listView;
@@ -37,7 +38,8 @@ public class OrderRevisionActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.order_final_layout);
-
+		
+		activity = this;
 		// recogemos datos del intent
 		Intent intent = getIntent();
 		pedido = (Order) intent.getSerializableExtra("pedido");
@@ -160,6 +162,7 @@ public class OrderRevisionActivity extends Activity {
 									// Yes button clicked, do something
 									pedido.setFinalPrice();
 									// TODO - Send the order to REST API
+									pedido.save(activity);
 
 									// open last activity
 									Intent intent = new Intent(
