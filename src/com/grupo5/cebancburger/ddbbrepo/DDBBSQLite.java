@@ -37,6 +37,8 @@ public class DDBBSQLite {
 		return dbHelper.getWritableDatabase();
 
 	}
+	
+
 
 	public static void initData(Activity activity, SQLiteDatabase db) {
 		UserTable ut = new UserTable();
@@ -56,6 +58,7 @@ public class DDBBSQLite {
 
 		CustomerTable ct = new CustomerTable();
 		ct.initData(activity, db);
+		db.close();
 	}
 
 }

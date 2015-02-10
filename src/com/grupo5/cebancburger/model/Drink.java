@@ -18,15 +18,15 @@ public class Drink implements Serializable, DDBBObject {
 
 	private DrinkType type;
 	private int orderID;
-	private int tipo;
+//	private int tipo;
 	private int cantidad;
 	private double precio;
 	private int drinkLineID;
 
-	public Drink(int tipo, int cantidad, double precio) {
-		setTipo(tipo);
-		setCantidad(cantidad);
-	}
+//	public Drink(int tipo, int cantidad, double precio) {
+//		setTipo(tipo);
+//		setCantidad(cantidad);
+//	}
 
 	public Drink(DrinkType type, int cantidad) {
 		setType(type);
@@ -50,9 +50,9 @@ public class Drink implements Serializable, DDBBObject {
 		this.type = type;
 	}
 
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
+//	public void setTipo(int tipo) {
+//		this.tipo = tipo;
+//	}
 
 	public String getTipo() {
 		return type.getDescription();
