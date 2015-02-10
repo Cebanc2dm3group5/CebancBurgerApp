@@ -197,7 +197,7 @@ public class Order implements Serializable, DDBBObject {
 		return nr;
 	}
 
-	private static int getNextID(Activity activity) {
+	public static int getNextID(Activity activity) {
 		String query = "SELECT OrderID FROM Orders ORDER BY OrderID DESC LIMIT 1";
 		int lastID = 0;
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
