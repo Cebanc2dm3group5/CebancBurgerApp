@@ -64,9 +64,11 @@ public class OrderTable implements DDBBObjectTable {
 		db.insert("Orders", null, nuevoRegistro);
 
 		for (int i = 0; i < order.getBurger().size(); i++) {
+			order.getBurger().get(i).setOrderID(order.getOrderID());
 			order.getBurger().get(i).save(activity);
 		}
 		for (int i = 0; i < order.getBebida().size(); i++) {
+			order.getBebida().get(i).setOrderID(order.getOrderID());
 			order.getBebida().get(i).save(activity);
 		}
 	}
@@ -75,7 +77,7 @@ public class OrderTable implements DDBBObjectTable {
 		ContentValues reg = order.getContentValue(activity);
 		SQLiteDatabase db = DDBBSQLite.getDDBB(Options.getDDBBName(), activity);
 		db.update("Orders", reg, "OrderID=" + order.getOrderID(), null);
-		
+
 		for (int i = 0; i < order.getBurger().size(); i++) {
 			order.getBurger().get(i).save(activity);
 		}

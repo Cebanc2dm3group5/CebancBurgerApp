@@ -29,8 +29,12 @@ public class ViewPedidoActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_pedido_layout);
 		
-		loadCardListData();
+		listView = (ListView) findViewById(R.id.card_sel_ped_listView);
+		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
+				R.layout.list_item_card);
 		listView.setAdapter(cardArrayAdapter);
+		loadCardListData();
+
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -58,8 +62,9 @@ public class ViewPedidoActivity extends Activity{
 			cardArrayAdapter.clear();
 
 			for (int i = 0; i < arrOrder.size(); i++) {
+				arrOrder.get(i).setFinalPrice();
 				Card card = new Card(arrOrder.get(i).getDate().toString(),
-						arrOrder.get(i).getTime().toString(),arrOrder.get(i).getPrecio());
+						arrOrder.get(i).getTime().toString(),arrOrder.get(i).getFinalPrecio());
 				cardArrayAdapter.add(card);
 			}
 		

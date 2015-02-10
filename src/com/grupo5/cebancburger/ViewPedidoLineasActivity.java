@@ -37,7 +37,7 @@ public class ViewPedidoLineasActivity extends Activity{
 
 		Intent intent = getIntent();
 		orderID = intent.getIntExtra("id", -1);
-		
+		listView = (ListView) findViewById(R.id.card_ped_lin_listView);
 		loadCardListData();
 		listView.setAdapter(cardArrayAdapter);
 		
