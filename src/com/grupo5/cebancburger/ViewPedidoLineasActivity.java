@@ -17,16 +17,16 @@ import com.grupo5.cebancburger.model.Burger;
 import com.grupo5.cebancburger.model.Drink;
 import com.grupo5.cebancburger.viewmodels.Card;
 
-public class ViewPedidoLineasActivity extends Activity{
+public class ViewPedidoLineasActivity extends Activity {
 
 	private ListView listView;
-	
+
 	private Button btnAceptar;
 
 	private CardArrayAdapter cardArrayAdapter;
-	
+
 	private int orderID;
-	
+
 	private ArrayList<Burger> arrBurger;
 	private ArrayList<Drink> arrDrink;
 
@@ -38,11 +38,13 @@ public class ViewPedidoLineasActivity extends Activity{
 		Intent intent = getIntent();
 		orderID = intent.getIntExtra("id", -1);
 		listView = (ListView) findViewById(R.id.card_ped_lin_listView);
-		loadCardListData();
+		cardArrayAdapter = new CardArrayAdapter(getApplicationContext(),
+				R.layout.list_item_card);
 		listView.setAdapter(cardArrayAdapter);
-		
+		loadCardListData();
+
 		btnAceptar = (Button) findViewById(R.id.btnAceptarLinea);
-		
+
 		btnAceptar.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -57,7 +59,7 @@ public class ViewPedidoLineasActivity extends Activity{
 
 		arrBurger = OrderLineBurgerTable.getOrderBurgers(this, orderID);
 		arrDrink = OrderLineDrinkTable.getOrderDrinks(this, orderID);
-		
+
 		cardArrayAdapter.clear();
 
 		for (int i = 0; i < arrBurger.size(); i++) {
@@ -76,13 +78,13 @@ public class ViewPedidoLineasActivity extends Activity{
 		}
 
 	}
-	
+
 	public void goBack() {
 		Intent returnIntent = new Intent();
 		setResult(RESULT_CANCELED, returnIntent);
 		finish();
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		goBack();
