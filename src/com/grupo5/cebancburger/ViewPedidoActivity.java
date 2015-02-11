@@ -42,7 +42,7 @@ public class ViewPedidoActivity extends Activity{
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				nID = arrOrder.get(position - 1).getOrderID();
+				nID = arrOrder.get(position).getOrderID();
 				
 				Intent intent = new Intent(getApplicationContext(),
 						ViewPedidoLineasActivity.class);
