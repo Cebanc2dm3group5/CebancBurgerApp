@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String name = edtName.getText().toString();
-				String letraIDStr = edtIDChar.getText().toString();
+				String letraIDStr = edtIDChar.getText().toString().toUpperCase();
 				if (letraIDStr.length() > 0) {
 					char letraID = letraIDStr.charAt(0);
 					ArrayList<Customer> arrCust = CustomerTable.getCustomers(
@@ -150,12 +150,15 @@ public class MainActivity extends Activity {
 				String name = edtName.getText().toString();
 				String address = edtAddress.getText().toString();
 				String phone = edtPhone.getText().toString();
-				char letraID = edtIDChar.getText().toString().charAt(0);
+				char letraID = '0';
+				if (!edtIDChar.getText().toString().equals("")){
+					letraID = edtIDChar.getText().toString().toUpperCase().charAt(0);
+				}
 
-				if (name.equals("") || address.equals("") || phone.equals("")) {
+				if (name.equals("") || address.equals("") || phone.equals("") || letraID < 'A' || letraID > 'Z') {
 
 					alert.setTitle("¡CUIDADO!")
-							.setMessage("Introduce todos tus datos")
+							.setMessage("Introduce todos tus datos correctamente")
 							.setPositiveButton("OK",
 									new DialogInterface.OnClickListener() {
 										public void onClick(
